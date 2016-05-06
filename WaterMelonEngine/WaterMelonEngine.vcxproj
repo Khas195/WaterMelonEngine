@@ -153,14 +153,20 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="DefaultScene.cpp" />
     <ClCompile Include="IGameObject.cpp" />
+    <ClCompile Include="INode.cpp" />
+    <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.h" />
+    <ClInclude Include="DefaultScene.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="INode.h" />
+    <ClInclude Include="IScene.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="WaterMelonEngine.h" />

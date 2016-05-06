@@ -19,6 +19,9 @@
     <Filter Include="GameObject">
       <UniqueIdentifier>{294aead3-8f0c-4a5c-bc98-87677cc01d98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Node">
+      <UniqueIdentifier>{dd1cd8d7-a9d7-41a9-b478-1ec285e1ab36}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -33,8 +36,17 @@
     <ClCompile Include="Circle.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="INode.cpp">
+      <Filter>Node</Filter>
+    </ClCompile>
+    <ClCompile Include="IScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="IGameObject.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,8 +62,17 @@
     <ClInclude Include="Circle.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="INode.h">
+      <Filter>Node</Filter>
+    </ClInclude>
+    <ClInclude Include="IScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="IGameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
