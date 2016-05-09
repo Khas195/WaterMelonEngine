@@ -157,6 +157,8 @@
     <ClCompile Include="IGameObject.cpp" />
     <ClCompile Include="INode.cpp" />
     <ClCompile Include="IScene.cpp" />
+    <ClCompile Include="Package\Package.cpp" />
+    <ClCompile Include="Package\PackageManager.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
@@ -168,6 +170,8 @@
     <ClInclude Include="INode.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="IState.h" />
+    <ClInclude Include="Package\Package.h" />
+    <ClInclude Include="Package\PackageManager.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="WaterMelonEngine.h" />
   </ItemGroup>
