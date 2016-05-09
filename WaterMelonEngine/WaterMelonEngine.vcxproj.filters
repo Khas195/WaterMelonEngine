@@ -22,6 +22,9 @@
     <Filter Include="Node">
       <UniqueIdentifier>{dd1cd8d7-a9d7-41a9-b478-1ec285e1ab36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Package">
+      <UniqueIdentifier>{f85cff51-5c1b-4221-a2eb-abbfe8d55664}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -48,6 +51,12 @@
     <ClCompile Include="IGameObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Package\Package.cpp">
+      <Filter>Package</Filter>
+    </ClCompile>
+    <ClCompile Include="Package\PackageManager.cpp">
+      <Filter>Package</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WaterMelonEngine.h">
@@ -73,6 +82,12 @@
     </ClInclude>
     <ClInclude Include="IGameObject.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Package\Package.h">
+      <Filter>Package</Filter>
+    </ClInclude>
+    <ClInclude Include="Package\PackageManager.h">
+      <Filter>Package</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
