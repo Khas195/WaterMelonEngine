@@ -1,4 +1,6 @@
 #include"PostOffice.h"
+#include"IObserver.h"
+#include"Package\Package.h"
 #include<iostream>
 #include<algorithm>
 
@@ -28,7 +30,7 @@ void PostOffice::remove(IObserver * observer)
 	}
 }
 
-void PostOffice::notifyAllObserver(IPackage * package)
+void PostOffice::notifyAllObserver(Package * package)
 {
 	for (int i = 0; i < observerList.size();i++)
 	{
