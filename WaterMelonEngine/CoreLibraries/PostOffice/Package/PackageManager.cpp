@@ -12,6 +12,7 @@ PackageManager::~PackageManager()
 		delete this->packages.back();
 		this->packages.pop_back();
 	}
+	delete instance;
 }
 
 PackageManager* PackageManager::getInstance()

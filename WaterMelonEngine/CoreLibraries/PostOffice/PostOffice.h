@@ -1,7 +1,7 @@
 #pragma once
 #include<vector>
 
-class IPackage;
+class Package;
 class IObserver;
 class PostOffice
 {
@@ -12,5 +12,5 @@ public:
 	~PostOffice();
 
 	void add(IObserver* observer);
-	void notifyAllObserver(IPackage* package);
+	void notifyAllObserver(Package* package);
 };

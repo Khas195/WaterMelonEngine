@@ -1,5 +1,5 @@
 #include "WaterMelonEngine.h"
-void main()
+void	main()
 {
 	WaterMelonEngine engine;
 	engine.loop();

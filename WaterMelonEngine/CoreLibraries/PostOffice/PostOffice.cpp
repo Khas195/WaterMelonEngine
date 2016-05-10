@@ -1,7 +1,7 @@
 #include"PostOffice.h"
-#include"IPackage.h"
-#include"IObserver.h"
 #include<iostream>
+#include"Package/Package.h"
+#include"IObserver.h"
 
 
 PostOffice::PostOffice()
@@ -20,7 +20,7 @@ void PostOffice::add(IObserver * observer)
 	this->observerList.push_back(observer);
 }
 
-void PostOffice::notifyAllObserver(IPackage * package)
+void PostOffice::notifyAllObserver(Package * package)
 {
 	for (int i = 0; i < observerList.size();i++)
 	{

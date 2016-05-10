@@ -1,7 +1,7 @@
 #pragma once
 
 class PostOffice;
-class IPackage;
+class Package;
 class IObserver
 {
 protected:
@@ -9,7 +9,7 @@ protected:
 public:
 	virtual ~IObserver() = default;
 
-	virtual void receiveMessage(IPackage* package) = 0;
+	virtual void receiveMessage(Package* package) = 0;
 	void setPostOffice(PostOffice* office);
 };
 

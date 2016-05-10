@@ -1,4 +1,5 @@
 #pragma once
+#include <iostream>
 #include <map>
 #include <string>
 #include <assert.h>
@@ -21,11 +22,18 @@ public:
 	template <typename T>
 	T* get(std::string key)
 	{
-		if (this->items.count(key))
+		try
 		{
-			return static_cast<T*>(this->items[key]);
+			if (this->items.count(key))
+			{
+				return static_cast<T*>(this->items[key]);
+			}
+			else return nullptr;
 		}
-		else return nullptr;
+		catch (...)
+		{
+			std::cout << "Error returning value for Package" << std::endl;
+		}
 	}
 
 	void reset();
