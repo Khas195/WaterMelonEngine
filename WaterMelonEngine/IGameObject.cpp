@@ -1,24 +1,17 @@
 #include "IGameObject.h"
 
 
-void IGameObject::setEnabled(bool enable)
-{
-	if (this->enabled != enable)
-		if (enable)
-			this->onAwake();
-		else 
-			this->onDisable();
 
-	this->enabled = enable;
+IGameObject::IGameObject()
+{
 }
 
-void IGameObject::setAwake(bool awake)
-{
-	if (this->awake != awake)
-		if (awake)
-			this->onAwake();
-		else
-			this->onSleep();
 
-	this->awake = awake;
+IGameObject::~IGameObject()
+{
+}
+
+std::string IGameObject::getName()
+{
+	return "GameObject";
 }

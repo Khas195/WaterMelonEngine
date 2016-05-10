@@ -1,6 +1,4 @@
 #include"PostOffice.h"
-#include"IPackage.h"
-#include"IObserver.h"
 #include<iostream>
 #include<algorithm>
 
