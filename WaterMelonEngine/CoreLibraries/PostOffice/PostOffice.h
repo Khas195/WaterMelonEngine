@@ -12,5 +12,6 @@ public:
 	~PostOffice();
 
 	void add(IObserver* observer);
+	void remove(IObserver* observer);
 	void notifyAllObserver(IPackage* package);
 };
