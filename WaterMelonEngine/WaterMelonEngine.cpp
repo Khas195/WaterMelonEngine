@@ -7,15 +7,10 @@ WaterMelonEngine::WaterMelonEngine()
 {
 	sf::VideoMode destopMode = sf::VideoMode::getDesktopMode();
 	window.create(sf::VideoMode(destopMode.width / 2, destopMode.height / 2), "Window Name", sf::Style::Default);
-	//window.create(sf::VideoMode(destopMode.width, destopMode.height), "Window Name", sf::Style::Fullscreen);// Fullscreen mode.
-	window.setFramerateLimit(144.0f); // 144.0f framerate per limit
-	this->gameObject = new Circle();
-	this->gameObject->init();
+	window.setFramerateLimit(144); // 144.0f framerate per limit
 }
-
 WaterMelonEngine::~WaterMelonEngine()
 {
-	delete this->gameObject;
 }
 void WaterMelonEngine::loop()
 {
@@ -29,7 +24,6 @@ void WaterMelonEngine::loop()
 
 void WaterMelonEngine::update()
 {
-	this->gameObject->update();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		window.close();
@@ -39,6 +33,5 @@ void WaterMelonEngine::update()
 void WaterMelonEngine::render()
 {
 	window.clear();
-	this->gameObject->render(this->window);
 	window.display();
 }

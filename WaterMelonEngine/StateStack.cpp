@@ -1,6 +1,4 @@
 #include "StateStack.h"
-#include <assert.h>
-using namespace std;
 
 StateStack::StateStack()
 {
@@ -9,7 +7,7 @@ StateStack::~StateStack()
 {
 }
 
-void StateStack::push(IState* state)
+void StateStack::push(std::shared_ptr<IState> state)
 {
 	assert(state != nullptr);
 	if (!states.empty())
@@ -19,19 +17,26 @@ void StateStack::push(IState* state)
 	state->onPushed();
 	states.push(state);
 }
-
-IState* StateStack::pop()
+bool StateStack::isEmpty()
 {
+	return states.empty();
+}
+
+std::shared_ptr<IState> StateStack::pop()
+{
+	assert(!states.empty());
+	std::shared_ptr<IState> poppedState = states.top();
+	poppedState->onPoped();
+	states.pop();
 	if (!states.empty())
 	{
-		IState* poppedState = states.top();
-		poppedState->onPoped();
-		states.pop();
-		if (!states.empty())
-		{
-			states.top()->onReturnToTop();
-		}
-		return poppedState;
+		states.top()->onReturnToTop();
 	}
-	return nullptr;
+	return poppedState;
+}
+
+std::shared_ptr<IState> StateStack::getTop()
+{
+	assert(!states.empty());
+	return states.top();
 }
