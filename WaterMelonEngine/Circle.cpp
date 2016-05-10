@@ -38,8 +38,6 @@ void Circle::init()
 
 void Circle::update()
 {
-	if (!enabled || !awake)
-		return;
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
@@ -61,8 +59,6 @@ void Circle::update()
 
 void Circle::render(sf::RenderWindow& window)
 {
-	if (!enabled)
-		return;
 	window.draw(this->circle);
 }
 

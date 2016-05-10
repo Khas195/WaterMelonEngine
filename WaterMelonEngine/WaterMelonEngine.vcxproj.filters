@@ -1,87 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="StateStack">
-      <UniqueIdentifier>{bdb8850e-8358-4101-abfc-257089c4f144}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{294aead3-8f0c-4a5c-bc98-87677cc01d98}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="PostOffice">
-      <UniqueIdentifier>{08cdc6c7-009c-4208-8816-68acb5ce2379}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Package">
-      <UniqueIdentifier>{4656d2e0-d0e1-4154-900f-1138e1c62462}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Source.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="WaterMelonEngine.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="StateStack.cpp">
-      <Filter>StateStack</Filter>
-    </ClCompile>
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="Circle.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
     <ClCompile Include="IGameObject.cpp">
-      <Filter>GameObject</Filter>
+      <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="include\CoreLibraries\PostOffice\IObserver.cpp">
-      <Filter>PostOffice</Filter>
+    <ClCompile Include="INode.cpp">
+      <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="include\CoreLibraries\PostOffice\IPackage.cpp">
-      <Filter>PostOffice</Filter>
+    <ClCompile Include="IScene.cpp">
+      <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="include\CoreLibraries\PostOffice\PostOffice.cpp">
-      <Filter>PostOffice</Filter>
+    <ClCompile Include="WaterMelonEngine.cpp">
+      <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="include\CoreLibraries\PostOffice\testObserver.cpp">
-      <Filter>PostOffice</Filter>
+    <ClCompile Include="CoreLibraries\PostOffice\IObserver.cpp">
+      <Filter>CoreLibraries\PostOffice</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLibraries\PostOffice\PostOffice.cpp">
+      <Filter>CoreLibraries\PostOffice</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLibraries\PostOffice\Package\Package.cpp">
+      <Filter>CoreLibraries\PostOffice\Package</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLibraries\PostOffice\Package\PackageManager.cpp">
+      <Filter>CoreLibraries\PostOffice\Package</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WaterMelonEngine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="StateStack.h">
-      <Filter>StateStack</Filter>
-    </ClInclude>
-    <ClInclude Include="IState.h">
-      <Filter>StateStack</Filter>
-    </ClInclude>
+    <ClInclude Include="IState.h" />
+    <ClInclude Include="StateStack.h" />
     <ClInclude Include="Circle.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
     <ClInclude Include="IGameObject.h">
-      <Filter>GameObject</Filter>
+      <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="include\CoreLibraries\PostOffice\IObserver.h">
-      <Filter>PostOffice</Filter>
+    <ClInclude Include="INode.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="include\CoreLibraries\PostOffice\IPackage.h">
-      <Filter>PostOffice</Filter>
+    <ClInclude Include="WaterMelonEngine.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="include\CoreLibraries\PostOffice\PostOffice.h">
-      <Filter>PostOffice</Filter>
+    <ClInclude Include="IScene.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="include\CoreLibraries\PostOffice\testObserver.h">
-      <Filter>PostOffice</Filter>
+    <ClInclude Include="CoreLibraries\PostOffice\IObserver.h">
+      <Filter>CoreLibraries\PostOffice</Filter>
     </ClInclude>
+    <ClInclude Include="CoreLibraries\PostOffice\PostOffice.h">
+      <Filter>CoreLibraries\PostOffice</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreLibraries\PostOffice\Package\Package.h">
+      <Filter>CoreLibraries\PostOffice\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreLibraries\PostOffice\Package\PackageManager.h">
+      <Filter>CoreLibraries\PostOffice\Package</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{6ecd6fb9-d4eb-48a5-9fec-f6bb7a2b5242}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{14d0695b-6d39-4bf9-8c19-a49455de1638}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{ec665bd4-412c-4125-908c-ae22019e54da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreLibraries">
+      <UniqueIdentifier>{74e84c90-6f41-4008-b192-eed25d70b02e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreLibraries\PostOffice">
+      <UniqueIdentifier>{7b6ea10f-babb-45b3-a0fa-541f94b47251}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreLibraries\PostOffice\Package">
+      <UniqueIdentifier>{df0555aa-b4c4-4445-b2c5-faac0573505e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>
