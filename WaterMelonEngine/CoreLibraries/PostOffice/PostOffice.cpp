@@ -19,6 +19,7 @@ PostOffice::~PostOffice()
 void PostOffice::add(IObserver * observer)
 {
 	this->observerList.push_back(observer);
+	observer->setPostOffice(this);
 }
 
 void PostOffice::remove(IObserver * observer)

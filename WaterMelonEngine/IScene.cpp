@@ -1,4 +1,5 @@
 #include "IScene.h"
+#include "IComponent.h"
 #include <assert.h>
 
 
@@ -11,20 +12,21 @@ IScene::~IScene()
 {
 }
 
-void IScene::addGameObject(IGameObject* newGameObject)
+void IScene::addGameObject(IComponent* newGameObject)
 {
 	assert(newGameObject != nullptr);
-	/*std::unique_ptr<IGameObject> gameObject;
-
-	this->gameObjects.push_back(gameObject);*/
+	this->gameObjects.push_back(newGameObject);
 }
 
-void IScene::removeGameObject(IGameObject* target)
+void IScene::removeGameObject(IComponent* target)
 {
 	assert(target != nullptr);
-}
-
-std::string IScene::getName()
-{
-	return "Scene";
+	for (register int i = 0; i < gameObjects.size(); ++i)
+	{
+		if (gameObjects[i] == target)
+		{
+			gameObjects.erase(gameObjects.begin() + i);
+			return;
+		}
+	}
 }
