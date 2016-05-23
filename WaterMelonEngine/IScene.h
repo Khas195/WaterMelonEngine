@@ -4,18 +4,15 @@
 #include <vector>
 #include <memory>
 
-#include "INode.h"
-#include "IGameObject.h"
-
-class IScene : public INode
+class IComponent;
+class IScene 
 {
-	std::vector<std::unique_ptr<IGameObject>> gameObjects;
+	std::vector<IComponent*> gameObjects;
 public:
 	IScene();
 	virtual ~IScene();
-	virtual void addGameObject(IGameObject* newGameObject);
-	virtual void removeGameObject(IGameObject* target);
-	virtual std::string getName() override;
+	virtual void addGameObject(IComponent* newGameObject);
+	virtual void removeGameObject(IComponent* target);
 
 };
 

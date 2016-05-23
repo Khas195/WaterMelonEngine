@@ -1,8 +1,7 @@
 #include "WaterMelonEngine.h"
-#include<vector>
-#include<iostream>
-
-
+#include <iostream>
+#include "Square.h"
+using namespace std;
 void main()
 {
 	WaterMelonEngine engine;
