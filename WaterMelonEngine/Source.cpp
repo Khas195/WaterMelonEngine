@@ -1,5 +1,9 @@
 #include "WaterMelonEngine.h"
-void	main()
+#include<vector>
+#include<iostream>
+
+
+void main()
 {
 	WaterMelonEngine engine;
 	engine.loop();
