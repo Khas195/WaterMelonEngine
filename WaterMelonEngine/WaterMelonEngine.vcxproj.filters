@@ -3,16 +3,10 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StateStack.cpp" />
-    <ClCompile Include="Circle.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="IGameObject.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="INode.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="IScene.cpp">
@@ -33,20 +27,26 @@
     <ClCompile Include="CoreLibraries\PostOffice\Package\PackageManager.cpp">
       <Filter>CoreLibraries\PostOffice\Package</Filter>
     </ClCompile>
+    <ClCompile Include="INode.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLibraries\SpriteManager\Sprite.cpp">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLibraries\SpriteManager\TextureManager.cpp">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CoreLibraries\SpriteManager\Animation.cpp">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
     <ClInclude Include="StateStack.h" />
-    <ClInclude Include="Circle.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="IGameObject.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="INode.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="WaterMelonEngine.h">
@@ -67,6 +67,18 @@
     <ClInclude Include="CoreLibraries\PostOffice\Package\PackageManager.h">
       <Filter>CoreLibraries\PostOffice\Package</Filter>
     </ClInclude>
+    <ClInclude Include="INode.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreLibraries\SpriteManager\Sprite.h">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreLibraries\SpriteManager\TextureManager.h">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreLibraries\SpriteManager\Animation.h">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -86,6 +98,9 @@
     </Filter>
     <Filter Include="CoreLibraries\PostOffice\Package">
       <UniqueIdentifier>{df0555aa-b4c4-4445-b2c5-faac0573505e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreLibraries\SpriteManager">
+      <UniqueIdentifier>{80e26017-24eb-4f16-970b-d10ef587492d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
