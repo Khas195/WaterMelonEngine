@@ -3,12 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StateStack.cpp" />
-    <ClCompile Include="DefaultScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="IGameObject.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
     <ClCompile Include="IScene.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
@@ -27,28 +21,25 @@
     <ClCompile Include="CoreLibraries\PostOffice\Package\PackageManager.cpp">
       <Filter>CoreLibraries\PostOffice\Package</Filter>
     </ClCompile>
-    <ClCompile Include="INode.cpp">
+    <ClCompile Include="IComponent.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\SpriteManager\Sprite.cpp">
+    <ClCompile Include="Square.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
       <Filter>CoreLibraries\SpriteManager</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\SpriteManager\TextureManager.cpp">
+    <ClCompile Include="Sprite.cpp">
       <Filter>CoreLibraries\SpriteManager</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\SpriteManager\Animation.cpp">
+    <ClCompile Include="TextureManager.cpp">
       <Filter>CoreLibraries\SpriteManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
     <ClInclude Include="StateStack.h" />
-    <ClInclude Include="DefaultScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameObject.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="WaterMelonEngine.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
@@ -67,17 +58,23 @@
     <ClInclude Include="CoreLibraries\PostOffice\Package\PackageManager.h">
       <Filter>CoreLibraries\PostOffice\Package</Filter>
     </ClInclude>
-    <ClInclude Include="INode.h">
+    <ClInclude Include="IComponent.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="CoreLibraries\SpriteManager\Sprite.h">
+    <ClInclude Include="Square.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
       <Filter>CoreLibraries\SpriteManager</Filter>
     </ClInclude>
-    <ClInclude Include="CoreLibraries\SpriteManager\TextureManager.h">
+    <ClInclude Include="Sprite.h">
       <Filter>CoreLibraries\SpriteManager</Filter>
     </ClInclude>
-    <ClInclude Include="CoreLibraries\SpriteManager\Animation.h">
+    <ClInclude Include="TextureManager.h">
       <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
