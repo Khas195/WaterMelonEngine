@@ -3,44 +3,38 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="IScene.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
     <ClCompile Include="WaterMelonEngine.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\PostOffice\IObserver.cpp">
+    <ClCompile Include="IComponent.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Square.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClCompile>
+    <ClCompile Include="IObserver.cpp">
       <Filter>CoreLibraries\PostOffice</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\PostOffice\PostOffice.cpp">
+    <ClCompile Include="PostOffice.cpp">
       <Filter>CoreLibraries\PostOffice</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\PostOffice\Package\Package.cpp">
-      <Filter>CoreLibraries\PostOffice\Package</Filter>
+    <ClCompile Include="Package.cpp">
+      <Filter>CoreLibraries\Package</Filter>
     </ClCompile>
-    <ClCompile Include="CoreLibraries\PostOffice\Package\PackageManager.cpp">
-      <Filter>CoreLibraries\PostOffice\Package</Filter>
-    </ClCompile>
-    <ClCompile Include="CoreLibraries\SpriteManager\Animation.cpp">
-      <Filter>CoreLibraries\SpriteManager</Filter>
-    </ClCompile>
-    <ClCompile Include="CoreLibraries\SpriteManager\Sprite.cpp">
-      <Filter>CoreLibraries\SpriteManager</Filter>
-    </ClCompile>
-    <ClCompile Include="CoreLibraries\SpriteManager\TextureManager.cpp">
-      <Filter>CoreLibraries\SpriteManager</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="DefaultObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="SquareObject.cpp">
-      <Filter>GameObject</Filter>
+    <ClCompile Include="PackageManager.cpp">
+      <Filter>CoreLibraries\Package</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,50 +43,44 @@
     <ClInclude Include="WaterMelonEngine.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="CoreLibraries\PostOffice\IObserver.h">
-      <Filter>CoreLibraries\PostOffice</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreLibraries\PostOffice\PostOffice.h">
-      <Filter>CoreLibraries\PostOffice</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreLibraries\PostOffice\Package\Package.h">
-      <Filter>CoreLibraries\PostOffice\Package</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreLibraries\PostOffice\Package\PackageManager.h">
-      <Filter>CoreLibraries\PostOffice\Package</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreLibraries\SpriteManager\Animation.h">
-      <Filter>CoreLibraries\SpriteManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreLibraries\SpriteManager\Sprite.h">
-      <Filter>CoreLibraries\SpriteManager</Filter>
-    </ClInclude>
-    <ClInclude Include="CoreLibraries\SpriteManager\TextureManager.h">
-      <Filter>CoreLibraries\SpriteManager</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseObject.h">
+    <ClInclude Include="IScene.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="DefaultObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="IComponent.h">
-      <Filter>GameEngine\Component</Filter>
+      <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="Square.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="SquareObject.h">
-      <Filter>GameObject</Filter>
+    <ClInclude Include="Animation.h">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>CoreLibraries\SpriteManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Header.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="IObserver.h">
+      <Filter>CoreLibraries\PostOffice</Filter>
+    </ClInclude>
+    <ClInclude Include="PostOffice.h">
+      <Filter>CoreLibraries\PostOffice</Filter>
+    </ClInclude>
+    <ClInclude Include="Package.h">
+      <Filter>CoreLibraries\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="PackageManager.h">
+      <Filter>CoreLibraries\Package</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{6ecd6fb9-d4eb-48a5-9fec-f6bb7a2b5242}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Scene">
       <UniqueIdentifier>{14d0695b-6d39-4bf9-8c19-a49455de1638}</UniqueIdentifier>
     </Filter>
@@ -105,17 +93,11 @@
     <Filter Include="CoreLibraries\PostOffice">
       <UniqueIdentifier>{7b6ea10f-babb-45b3-a0fa-541f94b47251}</UniqueIdentifier>
     </Filter>
-    <Filter Include="CoreLibraries\PostOffice\Package">
-      <UniqueIdentifier>{df0555aa-b4c4-4445-b2c5-faac0573505e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="CoreLibraries\SpriteManager">
       <UniqueIdentifier>{80e26017-24eb-4f16-970b-d10ef587492d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameEngine\Component">
-      <UniqueIdentifier>{167bce23-4415-4edc-ae43-0224671ae90b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GameObject">
-      <UniqueIdentifier>{6ecd6fb9-d4eb-48a5-9fec-f6bb7a2b5242}</UniqueIdentifier>
+    <Filter Include="CoreLibraries\Package">
+      <UniqueIdentifier>{53fe5797-401c-4f7c-b207-b1b43bf7543a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
