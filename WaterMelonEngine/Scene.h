@@ -1,34 +1,21 @@
 #pragma once
 #include <vector>
-#include <memory>
+#include "BaseObject.h"
+#include "GameObject.h"
 #include "IState.h"
-#include "IGameObject.h"
-class WaterMelonEngine;
-
-class Scene  : public IState
+class Scene : public BaseObject, public IState, public IObserver
 {
-	typedef std::unique_ptr<IGameObject> ObjectPointer;
-	static WaterMelonEngine* engine;
-	std::vector<ObjectPointer> gameObjects;
+protected:
+	GameObject* godObject;
 public:
 	Scene();
+	void addGameObject(GameObject* gameObject);
+	void removeGameObject(GameObject* gameObject);
+	// Inherited via Scene
+	virtual void update(sf::Clock & gameTime) override;
+	virtual void render(sf::RenderWindow & window) override;
 	virtual ~Scene();
 
-	static void setEngine(WaterMelonEngine* engine);
-
-	void addGameObject(ObjectPointer gameObject);
-	void removeGameObject(ObjectPointer target);
-
-	virtual void update();
-	virtual void render(sf::RenderWindow & window);
-
-	// Inherited via IState
-	virtual void onPushed() override;
-
-	virtual void onPoped() override;
-
-	virtual void onReturnToTop() override;
-
-	virtual void onPressed() override;
-
-}
+	// Inherited via IObserver
+	virtual void receiveMessage(Package * package) override;
+};

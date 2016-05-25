@@ -7,7 +7,7 @@ StateStack::~StateStack()
 {
 }
 
-void StateStack::push(std::shared_ptr<IState> state)
+void StateStack::push(IState* state)
 {
 	assert(state != nullptr);
 	if (!states.empty())
@@ -22,10 +22,10 @@ bool StateStack::isEmpty()
 	return states.empty();
 }
 
-std::shared_ptr<IState> StateStack::pop()
+IState* StateStack::pop()
 {
 	assert(!states.empty());
-	std::shared_ptr<IState> poppedState = states.top();
+	IState* poppedState = states.top();
 	poppedState->onPoped();
 	states.pop();
 	if (!states.empty())
@@ -33,10 +33,4 @@ std::shared_ptr<IState> StateStack::pop()
 		states.top()->onReturnToTop();
 	}
 	return poppedState;
-}
-
-std::shared_ptr<IState> StateStack::getTop()
-{
-	assert(!states.empty());
-	return states.top();
 }

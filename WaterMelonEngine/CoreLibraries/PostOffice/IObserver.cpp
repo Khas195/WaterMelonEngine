@@ -3,6 +3,11 @@
 #include<iostream>
 
 
+IObserver::~IObserver()
+{
+	delete office;
+}
+
 void IObserver::setPostOffice(PostOffice * office)
 {
 	this->office = office;
