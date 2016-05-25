@@ -152,31 +152,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="CoreLibraries\PostOffice\IObserver.cpp" />
     <ClCompile Include="CoreLibraries\PostOffice\Package\Package.cpp" />
     <ClCompile Include="CoreLibraries\PostOffice\Package\PackageManager.cpp" />
     <ClCompile Include="CoreLibraries\PostOffice\PostOffice.cpp" />
-    <ClCompile Include="DefaultScene.cpp" />
-    <ClCompile Include="IGameObject.cpp" />
-    <ClCompile Include="INode.cpp" />
+    <ClCompile Include="IComponent.cpp" />
     <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="Square.cpp" />
     <ClCompile Include="StateStack.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="CoreLibraries\PostOffice\IObserver.h" />
     <ClInclude Include="CoreLibraries\PostOffice\Package\Package.h" />
     <ClInclude Include="CoreLibraries\PostOffice\Package\PackageManager.h" />
     <ClInclude Include="CoreLibraries\PostOffice\PostOffice.h" />
-    <ClInclude Include="DefaultScene.h" />
-    <ClInclude Include="IGameObject.h" />
-    <ClInclude Include="INode.h" />
+    <ClInclude Include="Header.h" />
+    <ClInclude Include="IComponent.h" />
     <ClInclude Include="IScene.h" />
     <ClInclude Include="IState.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Square.h" />
     <ClInclude Include="StateStack.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="WaterMelonEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

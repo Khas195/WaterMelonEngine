@@ -1,15 +1,18 @@
 #pragma once
 #include "IComponent.h"
-class Square : public IComponent
+#include"Animation.h"
+#include "TextureManager.h"
+
+class Square : public IComponent, TextureManager
 {
-	sf::RectangleShape rectangle;
+	Animation anim;
 protected:
 	virtual void onAwake() override;
 	virtual void onSleep() override;
 	virtual void onEnable() override;
 	virtual void onDisable() override;
 public:
-	Square(sf::Color color, sf::Vector2f pos, sf::Vector2f size);
+	Square();
 	~Square();
 
 	// Inherited via IComponent

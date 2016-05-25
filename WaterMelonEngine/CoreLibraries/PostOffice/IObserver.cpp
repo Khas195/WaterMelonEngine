@@ -6,5 +6,4 @@
 void IObserver::setPostOffice(PostOffice * office)
 {
 	this->office = office;
-	this->office->add(this);
 }

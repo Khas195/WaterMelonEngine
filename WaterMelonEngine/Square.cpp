@@ -2,11 +2,18 @@
 #include <stdio.h>
 
 
-Square::Square(sf::Color color, sf::Vector2f pos, sf::Vector2f size)
+Square::Square()
 {
-	this->rectangle.setFillColor(color);
-	this->rectangle.setPosition(pos);
-	this->rectangle.setSize(size);
+	TextureManager::init();
+	int tex_id = TextureManager::requestID("S:/3rd Year/Semester 2/CS411/Lab/Final/WaterMelonEngine/WaterMelonEngine/sprites/dragonFrames.png");
+	Sprite temp(TextureManager::requestTexture(tex_id), sf::Vector2f(192, 192), sf::Vector2f(3, 4));
+	temp.setTimePerFrame(0.2f);
+
+	for (int i = 0; i < 4; i++)
+	{
+		temp.setFixedRow(i);
+		anim.set(i, temp);
+	}
 }
 Square::~Square()
 {
@@ -14,28 +21,36 @@ Square::~Square()
 
 void Square::init()
 {
+	TextureManager::init();
 }
 
 void Square::update(sf::Clock& gameTime)
 {
 	if (!isEnable || !isAwake)
 		return;
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		rectangle.move(sf::Vector2f(0.0, -1.0));
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		rectangle.move(sf::Vector2f(-1.0, 0.0));
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		rectangle.move(sf::Vector2f(1.0, 0.0));
-	}
+	anim.stop();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		rectangle.move(sf::Vector2f(0.0, 1.0));
+		anim.go();
+		anim.trigger(0);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		anim.go();
+		anim.trigger(1);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
+		anim.go();
+		anim.trigger(2);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		anim.go();
+		anim.trigger(3);
+	}
+
+	this->anim.update(gameTime);
 	this->updateChildren(gameTime);
 }
 
@@ -44,7 +59,7 @@ void Square::render(sf::RenderWindow & window)
 	if (!isEnable)
 		return;
 
-	window.draw(rectangle);
+	anim.render(window);
 	this->renderChildren(window);
 }
 
