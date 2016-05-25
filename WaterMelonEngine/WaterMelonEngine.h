@@ -1,14 +1,16 @@
 #pragma once
 #include <SFML\Graphics.hpp>
+#include "StateStack.h"
+class IComponent;
+class Scene;
 
-class IGameObject;
-class WaterMelonEngine
+class WaterMelonEngine 
 {
 	sf::RenderWindow window;
-	IGameObject* gameObject;
 	const sf::Time timePerFrame;
+	StateStack sceneStack;
 protected:
-	void update();
+	void update(sf::Clock& gameTime);
 	void render();
 public:
 	WaterMelonEngine();
