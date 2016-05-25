@@ -1,82 +1,39 @@
 #include "Scene.h"
-
-
-#include "WaterMelonEngine.h"
-
+#include "DefaultObject.h"
 Scene::Scene()
 {
+	godObject = new DefaultObject();
+}
+
+void Scene::addGameObject(GameObject * gameObject)
+{
+	assert(godObject);
+	godObject->addGameObject(gameObject);
+}
+
+void Scene::removeGameObject(GameObject * gameObject)
+{
+	assert(gameObject);
+	godObject->removeGameObject(gameObject);
+}
+
+void Scene::update(sf::Clock & gameTime)
+{
+	assert(godObject);
+	godObject->update(gameTime);
+}
+
+void Scene::render(sf::RenderWindow & window)
+{
+	assert(godObject);
+	godObject->render(window);
 }
 
 Scene::~Scene()
 {
+	delete godObject;
 }
 
-void Scene::update()
+void Scene::receiveMessage(Package * package)
 {
-	for each (auto const& gameObject in gameObjects)
-	{
-		gameObject->update();
-	}
-}
-
-void Scene::render(sf::RenderWindow& window)
-{
-	for each (auto const& gameObject in gameObjects)
-	{
-		gameObject->render(window);
-	}
-}
-
-void Scene::setEngine(WaterMelonEngine* engine)
-{
-	Scene::engine = engine;
-}
-
-void Scene::addGameObject(ObjectPointer gameObject)
-{
-	this->gameObjects.push_back(gameObject);
-}
-
-void Scene::removeGameObject(ObjectPointer target)
-{
-	for (auto it = gameObjects.begin(); it != gameObjects.end(); ++it)
-	{
-		if (target == *it)
-		{
-			gameObjects.erase(it);
-			return;
-		}
-	}
-}
-
-void Scene::onPushed()
-{
-	for each(auto const& gameObject in gameObjects)
-	{
-		gameObject->enable();
-	}
-}
-
-void Scene::onPoped()
-{
-	for each (auto const& gameObject in gameObjects)
-	{
-		gameObject->disable();
-	}
-}
-
-void Scene::onReturnToTop()
-{
-	for each (auto const& gameObject in gameObjects)
-	{
-		gameObject->awaken();
-	}
-}
-
-void Scene::onPressed()
-{
-	for each (auto const& gameObject in gameObjects)
-	{
-		gameObject->sleep();
-	}
 }

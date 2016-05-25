@@ -7,15 +7,21 @@
 
 class StateStack
 {
-	std::stack<std::shared_ptr<IState>> states;
+	std::stack<IState*> states;
 public:
 	StateStack();
 	~StateStack();
 
-	void push(std::shared_ptr<IState> state);
+	void push(IState* state);
 	bool isEmpty();
-	std::shared_ptr<IState> pop();
-	std::shared_ptr<IState> getTop();
-
+	IState* pop();
+	template <typename T>
+	T* getTop()
+	{
+		assert(!states.empty());
+		T* result =  dynamic_cast<T*>(states.top());
+		assert(result);
+		return result;
+	}
 };
 

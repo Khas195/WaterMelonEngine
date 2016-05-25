@@ -1,15 +1,16 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include"Header.h"
+#include "StateStack.h"
 class IComponent;
-class WaterMelonEngine : public GameTime
+class Scene;
+
+class WaterMelonEngine 
 {
 	sf::RenderWindow window;
 	const sf::Time timePerFrame;
-	IComponent* testSquare;
-
+	StateStack sceneStack;
 protected:
-	void update(sf::Clock & gameTime);
+	void update(sf::Clock& gameTime);
 	void render();
 public:
 	WaterMelonEngine();
@@ -17,3 +18,4 @@ public:
 
 	void loop();
 };
+

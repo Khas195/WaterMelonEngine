@@ -4,12 +4,14 @@
 
 int TextureManager::loadFromFile(std::string filePath)
 {
-	path_to_id[filePath] = curId;
-	tex_dictionary[curId].loadFromFile(filePath);
-	return curId++;
+	//path_to_id[filePath] = curId;
+	//tex_dictionary[curId].loadFromFile(filePath);
+	//return curId++;
+	return 0;
 }
 
-TextureManager::TextureManager()
+
+void TextureManager::init()
 {
 	// init
 	curId = 0;
@@ -39,11 +41,11 @@ sf::Texture& TextureManager::requestTexture(int id)
 
 void TextureManager::reset()
 {
-	// clear
-	path_to_id.clear();
-	tex_dictionary.clear();
-	// init
-	curId = 0;
-	path_to_id.reserve(20);
-	tex_dictionary.reserve(20);
+	//// clear
+	//path_to_id.clear();
+	//tex_dictionary.clear();
+	//// init
+	//curId = 0;
+	//path_to_id.reserve(20);
+	//tex_dictionary.reserve(20);
 }

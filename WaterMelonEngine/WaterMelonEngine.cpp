@@ -1,61 +1,43 @@
 #include "WaterMelonEngine.h"
-#include "Square.h"
-#include "TextureManager.h"
-#include<iostream>
-
-sf::Clock GameTime::game_time;
-
+#include "CoreLibraries\SpriteManager\TextureManager.h"
+#include "GameScene.h"
+#include "StateStack.h"
 WaterMelonEngine::WaterMelonEngine()
 	: window()
-	, timePerFrame(sf::seconds(1.f / 60.0f))
+	, timePerFrame(sf::seconds(1.f / 144.0f))
 {
 	sf::VideoMode destopMode = sf::VideoMode::getDesktopMode();
 	window.create(sf::VideoMode(destopMode.width / 2, destopMode.height / 2), "Window Name", sf::Style::Default);
 	window.setFramerateLimit(144); // 144.0f framerate per limit
-	
-
-	testSquare = new Square();
+	GameScene* gameScene = new GameScene();
+	this->sceneStack.push(gameScene);
 }
 WaterMelonEngine::~WaterMelonEngine()
 {
-	delete testSquare;
 }
 void WaterMelonEngine::loop()
 {
-	//sf::Clock clock;
-	sf::Time offset;
-	game_time.restart();
+	sf::Clock clock;
+
 	while (window.isOpen())
 	{
-		if (offset >= timePerFrame) {
-			std::cout << game_time.getElapsedTime().asMicroseconds() << std::endl;
-			offset -= timePerFrame;
-			update(game_time);// Update every frame.
-		}
+		update(clock);// Update every frame.
 		render();
-		offset += game_time.restart();
+		clock.restart();
 	}
 }
-void WaterMelonEngine::update(sf::Clock & gameTime)
+void WaterMelonEngine::update(sf::Clock& gameTime)
 {
-	testSquare->update(gameTime);
+	this->sceneStack.getTop<Scene>()->update(gameTime);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		window.close();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::L))
-	{
-		testSquare->disable();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
-	{
-		testSquare->enable();
 	}
 }
 
 void WaterMelonEngine::render()
 {
 	window.clear();
-	testSquare->render(window);
+	this->sceneStack.getTop<Scene>()->render(window);
 	window.display();
 }
