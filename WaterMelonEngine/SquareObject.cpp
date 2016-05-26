@@ -2,11 +2,15 @@
 
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
-	rect.setPosition(pos);
-	rect.setScale(scale);
-	rect.setSize(size);
-	rect.rotate(degree);
-	rect.setFillColor(color);
+	TextureManager::init();
+	int tex_if = TextureManager::requestID("./sprites/dragonFrames.png");
+	Sprite temp(TextureManager::requestTexture(tex_if), sf::Vector2f(192, 192), sf::Vector2f(3, 4));
+
+	for (int i = 0; i < 4;i++)
+	{
+		temp.setFixedRow(i);
+		anim.set(i, temp);
+	}
 }
 
 SquareObject::~SquareObject()
@@ -15,43 +19,31 @@ SquareObject::~SquareObject()
 
 void SquareObject::update(sf::Clock & gameTime)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		rect.move(-3, 0);
-	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
-		rect.move(0, 3);
+		anim.trigger(0);
+		anim.move(0, 1);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		anim.trigger(1);
+		anim.move(-1, 0);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		rect.move(3, 0);
+		anim.trigger(2);
+		anim.move(1, 0);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		rect.move(0, -3);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
-	{
-		rect.rotate(-5);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
-	{
-		rect.rotate(5);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::N))
-	{
-		rect.scale(10, 10);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::M))
-	{
-		rect.scale(.1, .1);
+		anim.trigger(3);
+		anim.move(0, -1);
 	}
 }
 
 void SquareObject::render(sf::RenderWindow & window)
 {
-	window.draw(rect);
+	anim.render(window);
 }
 
 void SquareObject::receiveMessage(Package * package)

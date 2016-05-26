@@ -1,9 +1,11 @@
 #pragma once
 #include "GameObject.h"
+#include"Animation.h"
 #include "SFML\Graphics.hpp"
-class SquareObject : public GameObject
+#include"TextureManager.h"
+class SquareObject : public GameObject, public TextureManager
 {
-	sf::RectangleShape rect;
+	Animation anim;
 public:
 	SquareObject() = default;
 	SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color);
