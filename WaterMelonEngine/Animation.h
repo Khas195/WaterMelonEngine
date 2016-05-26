@@ -17,6 +17,7 @@ public:
 	void set(int trigger, Sprite sprite);
 	void trigger(int trigger);
 	int currentTrigger();
+	void move(float x, float y);
 
 	inline void stop()
 	{
@@ -27,7 +28,6 @@ public:
 	{
 		run = true;
 	};
-
 
 	void update(sf::Clock& gameTime);
 	void render(sf::RenderWindow& window);

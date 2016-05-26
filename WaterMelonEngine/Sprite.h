@@ -1,6 +1,5 @@
 #pragma once
 #include"SFML\Graphics.hpp"
-#include"Header.h"
 #include<string>
 
 class Sprite
@@ -28,6 +27,7 @@ public:
 	void setTimePerFrame(float seconds);
 	void reset();
 	void nextFrame();
+	void move(float x, float y);
 
 	void update(sf::Clock& gameTime);
 	void render(sf::RenderWindow& window);

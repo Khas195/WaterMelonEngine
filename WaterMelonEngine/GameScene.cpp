@@ -1,7 +1,8 @@
 #include "GameScene.h"
 
 #include "SquareObject.h"
-#include "CoreLibraries\PostOffice\PostOffice.h"
+#include "PostOffice.h"
+
 GameScene::GameScene()
 {
 	this->godObject->enable();

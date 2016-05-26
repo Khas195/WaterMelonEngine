@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "BaseObject.h"
-#include "CoreLibraries\PostOffice\IObserver.h"
+#include "IObserver.h"
 #include <assert.h>
 class GameObject : public  BaseObject, public IObserver
 {

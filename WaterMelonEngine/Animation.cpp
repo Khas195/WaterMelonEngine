@@ -25,6 +25,16 @@ int Animation::currentTrigger()
 {
 	return curID;
 }
+void Animation::move(float x, float y)
+{
+	if (curID != -1)
+	{
+		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		{
+			it->second.move(x, y);
+		}
+	}
+}
 void Animation::update(sf::Clock & gameTime)
  {
 	if (curID != -1)

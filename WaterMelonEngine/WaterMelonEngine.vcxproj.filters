@@ -3,16 +3,7 @@
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="StateStack.cpp" />
-    <ClCompile Include="IScene.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
     <ClCompile Include="WaterMelonEngine.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="IComponent.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Square.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="Animation.cpp">
@@ -36,20 +27,26 @@
     <ClCompile Include="PackageManager.cpp">
       <Filter>CoreLibraries\Package</Filter>
     </ClCompile>
+    <ClCompile Include="SquareObject.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameScene.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultObject.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="WaterMelonEngine.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="IScene.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="IComponent.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Square.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
@@ -75,6 +72,27 @@
     </ClInclude>
     <ClInclude Include="PackageManager.h">
       <Filter>CoreLibraries\Package</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareObject.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="IComponent.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultObject.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObject.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

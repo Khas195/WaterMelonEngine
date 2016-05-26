@@ -60,6 +60,11 @@ void Sprite::nextFrame()
 	}
 }
 
+void Sprite::move(float x, float y)
+{
+	sprite.move(x, y);
+}
+
 void Sprite::update(sf::Clock & gameTime)
 {
 }
