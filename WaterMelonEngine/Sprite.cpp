@@ -13,8 +13,19 @@ Sprite::Sprite(sf::Texture & texture, sf::Vector2f frameSize, sf::Vector2f sprit
 	this->frameSize = frameSize;
 	this->spriteDim = spriteDim;
 	this->sprite = sf::Sprite(texture);
-	rectSource = sf::IntRect(0, 0, frameSize.x, frameSize.y);
-	this->sprite.setTextureRect(rectSource);
+
+	if (frameSize.x != 0 || frameSize.y != 0)
+	{
+		rectSource = sf::IntRect(0, 0, frameSize.x, frameSize.y);
+		this->sprite.setTextureRect(rectSource);
+	}
+	else
+	{
+		sf::IntRect temp = sprite.getTextureRect();
+		this->frameSize.x = temp.width;
+		this->frameSize.y = temp.height;
+		rectSource = sf::IntRect(0, 0, temp.width, temp.height);
+	}
 }
 
 void Sprite::setFixedRow(int rowIndex)
@@ -63,6 +74,26 @@ void Sprite::nextFrame()
 void Sprite::move(float x, float y)
 {
 	sprite.move(x, y);
+}
+
+void Sprite::setPosition(float x, float y)
+{
+	sprite.setPosition(x, y);
+}
+
+sf::Vector2f Sprite::getPosition()
+{
+	return sprite.getPosition();
+}
+
+void Sprite::setScale(float x, float y)
+{
+	sprite.setScale(x, y);
+}
+
+sf::Vector2f Sprite::getScale()
+{
+	return sprite.getScale();
 }
 
 void Sprite::update(sf::Clock & gameTime)
