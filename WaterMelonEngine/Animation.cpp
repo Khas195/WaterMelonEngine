@@ -25,13 +25,13 @@ int Animation::currentTrigger()
 {
 	return curID;
 }
-void Animation::move(float x, float y)
+void Animation::moveBy(float x, float y)
 {
 	if (curID != -1)
 	{
 		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
 		{
-			it->second.move(x, y);
+			it->second.moveBy(x, y);
 		}
 	}
 }

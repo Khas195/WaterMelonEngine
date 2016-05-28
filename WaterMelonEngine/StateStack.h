@@ -10,7 +10,7 @@ class StateStack
 	std::stack<IState*> states;
 public:
 	StateStack();
-	~StateStack();
+	virtual ~StateStack();
 
 	void push(IState* state);
 	bool isEmpty();
