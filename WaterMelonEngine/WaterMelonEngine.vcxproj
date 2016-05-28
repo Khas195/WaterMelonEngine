@@ -153,31 +153,37 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="IComponent.cpp" />
+    <ClCompile Include="DefaultObject.cpp" />
+    <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="IObserver.cpp" />
-    <ClCompile Include="IScene.cpp" />
     <ClCompile Include="Package.cpp" />
     <ClCompile Include="PackageManager.cpp" />
     <ClCompile Include="PostOffice.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Square.cpp" />
+    <ClCompile Include="SquareObject.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h" />
-    <ClInclude Include="Header.h" />
+    <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="DefaultObject.h" />
+    <ClInclude Include="Definition.h" />
+    <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IObserver.h" />
-    <ClInclude Include="IScene.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="Package.h" />
     <ClInclude Include="PackageManager.h" />
     <ClInclude Include="PostOffice.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Square.h" />
+    <ClInclude Include="SquareObject.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="WaterMelonEngine.h" />

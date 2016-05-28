@@ -3,15 +3,15 @@
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
 	TextureManager::init();
-	int tex_if = TextureManager::requestID("./sprites/dragonFrames.png");
-	Sprite temp(TextureManager::requestTexture(tex_if), sf::Vector2f(192, 192), sf::Vector2f(3,4));
-	temp.setTimePerFrame(0.1f);
-
-	for (int i = 0; i < 4;i++)
-	{
-		temp.setFixedRow(i);
-		anim.set(i, temp);
-	}
+	int tex_id = TextureManager::requestID(".\sprites\dragonFrames.png");
+	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(192, 192), sf::Vector2f(1, 1));
+	this->tile->moveBy(16, 0);
+	gameView.setSize(sf::Vector2f(768, 448));
+	gameView.setFillColor(sf::Color::Blue);
+	gameView.setPosition(16, 0);
+	menuView.setSize(sf::Vector2f(800, 152));
+	menuView.setFillColor(sf::Color::Red);
+	menuView.setPosition(0, 448);
 }
 
 SquareObject::~SquareObject()
@@ -20,20 +20,24 @@ SquareObject::~SquareObject()
 
 void SquareObject::update(sf::Clock & gameTime)
 {
+	/*anim.stop();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
 	{
 		anim.trigger(0);
-		anim.move(0, 1);
+		anim.moveBy(0, 1);
+		anim.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
 		anim.trigger(1);
-		anim.move(-1, 0);
+		anim.moveBy(-1, 0);
+		anim.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
 		anim.trigger(2);
-		anim.move(1, 0);
+		anim.moveBy(1, 0);
+		anim.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
@@ -54,7 +58,9 @@ void SquareObject::update(sf::Clock & gameTime)
 
 void SquareObject::render(sf::RenderWindow & window)
 {
-	anim.render(window);
+	window.draw(gameView);
+	window.draw(menuView);
+	tile->render(window);
 }
 
 void SquareObject::receiveMessage(Package * package)

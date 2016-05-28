@@ -46,7 +46,6 @@ void Sprite::reset()
 	if (fixedRow == -1)
 		currentFrame.y = 0;
 }
-
 void Sprite::nextFrame()
 {
 	if (clock.getElapsedTime().asMilliseconds() >= framePerSecond)
@@ -71,7 +70,7 @@ void Sprite::nextFrame()
 	}
 }
 
-void Sprite::move(float x, float y)
+void Sprite::moveBy(float x, float y)
 {
 	sprite.move(x, y);
 }

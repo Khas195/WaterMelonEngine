@@ -27,20 +27,20 @@
     <ClCompile Include="PackageManager.cpp">
       <Filter>CoreLibraries\Package</Filter>
     </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
     <ClCompile Include="SquareObject.cpp">
-      <Filter>GameEngine</Filter>
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="Scene.cpp">
-      <Filter>GameEngine</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="DefaultObject.cpp">
-      <Filter>GameEngine</Filter>
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -58,9 +58,6 @@
     <ClInclude Include="TextureManager.h">
       <Filter>CoreLibraries\SpriteManager</Filter>
     </ClInclude>
-    <ClInclude Include="Header.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="IObserver.h">
       <Filter>CoreLibraries\PostOffice</Filter>
     </ClInclude>
@@ -73,27 +70,28 @@
     <ClInclude Include="PackageManager.h">
       <Filter>CoreLibraries\Package</Filter>
     </ClInclude>
-    <ClInclude Include="SquareObject.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="IComponent.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Scene.h">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="DefaultObject.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="BaseObject.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SquareObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Definition.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
