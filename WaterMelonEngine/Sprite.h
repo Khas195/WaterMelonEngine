@@ -1,6 +1,5 @@
 #pragma once
 #include"SFML\Graphics.hpp"
-#include"Header.h"
 #include<string>
 
 class Sprite
@@ -22,12 +21,21 @@ private:
 	sf::IntRect rectSource;
 public:
 	Sprite();
-	Sprite(sf::Texture & texture, sf::Vector2f frameSize, sf::Vector2f spriteDim);	
+	Sprite(sf::Texture & texture, sf::Vector2f frameSize = sf::Vector2f(0,0), sf::Vector2f spriteDim = sf::Vector2f(1, 1));
 	
 	void setFixedRow(int rowIndex);
 	void setTimePerFrame(float seconds);
 	void reset();
 	void nextFrame();
+
+	// transformation
+	void move(float x, float y);
+
+	void setPosition(float x, float y);
+	sf::Vector2f getPosition();
+
+	void setScale(float x, float y);
+	sf::Vector2f getScale();
 
 	void update(sf::Clock& gameTime);
 	void render(sf::RenderWindow& window);

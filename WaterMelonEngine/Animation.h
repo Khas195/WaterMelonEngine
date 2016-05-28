@@ -18,6 +18,15 @@ public:
 	void trigger(int trigger);
 	int currentTrigger();
 
+	// transformation
+	void move(float x, float y);
+
+	void setPosition(float x, float y);
+	sf::Vector2f getPosition();
+
+	void setScale(float x, float y);
+	sf::Vector2f getScale();
+
 	inline void stop()
 	{
 		run = false;
@@ -27,7 +36,6 @@ public:
 	{
 		run = true;
 	};
-
 
 	void update(sf::Clock& gameTime);
 	void render(sf::RenderWindow& window);

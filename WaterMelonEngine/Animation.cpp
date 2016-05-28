@@ -25,6 +25,46 @@ int Animation::currentTrigger()
 {
 	return curID;
 }
+void Animation::move(float x, float y)
+{
+	if (curID != -1)
+	{
+		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		{
+			it->second.move(x, y);
+		}
+	}
+}
+void Animation::setPosition(float x, float y)
+{
+	if (curID != -1)
+	{
+		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		{
+			it->second.setPosition(x, y);
+		}
+	}
+}
+sf::Vector2f Animation::getPosition()
+{
+	if (curID != -1)
+		return sprite_map[curID].getPosition();
+}
+void Animation::setScale(float x, float y)
+{
+	if (curID != -1)
+	{
+		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		{
+			it->second.setScale(x, y);
+		}
+	}
+}
+sf::Vector2f Animation::getScale()
+{
+	if (curID != -1)
+		return sprite_map[curID].getScale();
+}
 void Animation::update(sf::Clock & gameTime)
  {
 	if (curID != -1)
