@@ -4,7 +4,8 @@ SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f sca
 {
 	TextureManager::init();
 	int tex_if = TextureManager::requestID("./sprites/dragonFrames.png");
-	Sprite temp(TextureManager::requestTexture(tex_if), sf::Vector2f(192, 192), sf::Vector2f(3, 4));
+	Sprite temp(TextureManager::requestTexture(tex_if), sf::Vector2f(192, 192), sf::Vector2f(3,4));
+	temp.setTimePerFrame(0.1f);
 
 	for (int i = 0; i < 4;i++)
 	{
@@ -38,6 +39,16 @@ void SquareObject::update(sf::Clock & gameTime)
 	{
 		anim.trigger(3);
 		anim.move(0, -1);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		// special effect
+		anim.setScale(2,2);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		// special effect
+		anim.setScale(1, 1);
 	}
 }
 
