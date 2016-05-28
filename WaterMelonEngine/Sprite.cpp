@@ -70,7 +70,7 @@ void Sprite::nextFrame()
 	}
 }
 
-void Sprite::moveBy(float x, float y)
+void Sprite::move(float x, float y)
 {
 	sprite.move(x, y);
 }
