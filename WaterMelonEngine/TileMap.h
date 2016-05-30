@@ -3,11 +3,12 @@
 #include"TextureManager.h"
 #include"Sprite.h"
 #include"Tile.h"
+#include"Definition.h"
 
 class TileMap : public GameObject, public TextureManager
 {
 	Sprite tile;
-	Tile tiles[12][7];
+	Tile tiles[MAP_WIDTH][MAP_HEIGHT];
 public:
 	TileMap();
 

@@ -7,12 +7,13 @@ TileMap::TileMap()
 	TextureManager::init();
 	int tile_id = TextureManager::requestID("./sprites/tileset.png");
 	tile = Sprite(TextureManager::requestTexture(tile_id), sf::Vector2f(64, 64));
-	for (int i = 0; i < 12; i++)
+	float offset = (SCREEN_WIDTH - MAP_WIDTH * 32) / 2;
+	for (int i = 0; i < MAP_WIDTH; i++)
 	{
-		for (int j = 0; j < 7; j++)
+		for (int j = 0; j < MAP_HEIGHT; j++)
 		{
 			tiles[i][j] = Tile(tile);
-			tiles[i][j].setPosition(sf::Vector2f(16 + i * 64, j * 64));
+			tiles[i][j].setPosition(sf::Vector2f(offset + i * 32, j * 32));
 		}
 	}
 }
@@ -23,9 +24,9 @@ void TileMap::update(sf::Clock & gameTime)
 
 void TileMap::render(sf::RenderWindow & window)
 {
-	for (int i = 0; i < 12; i++)
+	for (int i = 0; i < MAP_WIDTH; i++)
 	{
-		for (int j = 0; j < 7; j++)
+		for (int j = 0; j < MAP_HEIGHT; j++)
 		{
 			tiles[i][j].render(window);
 		}

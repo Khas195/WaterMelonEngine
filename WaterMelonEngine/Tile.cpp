@@ -3,7 +3,8 @@
 Tile::Tile(Sprite& tileTexture)
 {
 	this->tileTexture = tileTexture;
-	rect.setSize(sf::Vector2f(64, 64));
+	this->tileTexture.setScale(0.5, 0.5);
+	rect.setSize(sf::Vector2f(32, 32));
 	rect.setFillColor(sf::Color::Transparent);
 	rect.setOutlineColor(sf::Color::Green);
 	rect.setOutlineThickness(1);
@@ -23,6 +24,11 @@ void Tile::setPosition(sf::Vector2f position)
 {
 	tileTexture.setPosition(position.x, position.y);
 	rect.setPosition(position);
+}
+
+sf::Vector2f Tile::getPosition()
+{
+	return sf::Vector2f();
 }
 
 void Tile::setSize(sf::Vector2f size)
