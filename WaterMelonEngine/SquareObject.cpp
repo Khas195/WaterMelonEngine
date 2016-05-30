@@ -3,8 +3,8 @@
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
 	TextureManager::init();
-	int tex_id = TextureManager::requestID(".\sprites\dragonFrames.png");
-	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(192, 192), sf::Vector2f(1, 1));
+	int tex_id = TextureManager::requestID("./sprites/dragonFrames.png");
+	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(64, 64), sf::Vector2f(3, 4));
 	gameView.setSize(sf::Vector2f(768, 448));
 	gameView.setFillColor(sf::Color::Blue);
 	gameView.setPosition(16, 0);
@@ -52,14 +52,15 @@ void SquareObject::update(sf::Clock & gameTime)
 	{
 		// special effect
 		anim.setScale(1, 1);
-	}
+	}*/
 	*/
 }
 
 void SquareObject::render(sf::RenderWindow & window)
 {
-	window.draw(gameView);
-	window.draw(menuView);
+	//window.draw(gameView);
+	//window.draw(menuView);
+	map.render(window);
 	tile->render(window);
 }
 
