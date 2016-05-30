@@ -48,6 +48,9 @@
     <ClCompile Include="TileMap.cpp">
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
+    <ClCompile Include="SoundManager.cpp">
+      <Filter>CoreLibraries\SoundManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
@@ -104,6 +107,9 @@
     <ClInclude Include="TileMap.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
+    <ClInclude Include="SoundManager.h">
+      <Filter>CoreLibraries\SoundManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -129,6 +135,9 @@
     </Filter>
     <Filter Include="GameObject\TileMap">
       <UniqueIdentifier>{8f3d3748-ef81-4ec5-bdc6-b4ab46efa6cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreLibraries\SoundManager">
+      <UniqueIdentifier>{c37f0b58-759d-41f2-9c59-d7c340154a4c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

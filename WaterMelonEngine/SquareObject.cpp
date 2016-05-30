@@ -11,11 +11,11 @@ SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f sca
 	menuView.setSize(sf::Vector2f(800, 152));
 	menuView.setFillColor(sf::Color::Red);
 	menuView.setPosition(0, 448);
-	dragons.setTimePerFrame(.1f);
+	tile->setTimePerFrame(.1f);
 	for (unsigned int i = 0; i < 4; ++i)
 	{
-		dragons.setFixedRow(i);
-		anim.set(i, dragons);
+		tile->setFixedRow(i);
+		anim.set(i, *tile);
 	}
 	int sound_id = SoundManager::requestID("./sounds/dragonRoar.wav");
 	this->sound.setBuffer(*SoundManager::requestSoundBuffer(sound_id));
@@ -80,7 +80,6 @@ void SquareObject::render(sf::RenderWindow & window)
 	window.draw(gameView);
 	window.draw(menuView);
 	anim.render(window);
-	tile->render(window);
 }
 
 void SquareObject::receiveMessage(Package * package)

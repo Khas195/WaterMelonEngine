@@ -3,15 +3,17 @@
 #include"Animation.h"
 #include "SFML\Graphics.hpp"
 #include "SFML\Audio.hpp"
-#include"TextureManager.h"
-#include"TileMap.h"
-class SquareObject : public GameObject, public TextureManager
+#include "TextureManager.h"
+#include "TileMap.h"
+#include "SoundManager.h"
+class SquareObject : public GameObject, public TextureManager, public SoundManager
 {
 	sf::RectangleShape gameView;
 	sf::RectangleShape menuView;
 	Sprite* tile;
 	TileMap map;
 	sf::Sound sound;
+	Animation anim;
 
 public:
 	SquareObject() = default;
