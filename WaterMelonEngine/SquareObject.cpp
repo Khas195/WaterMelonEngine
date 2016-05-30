@@ -5,7 +5,6 @@ SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f sca
 	TextureManager::init();
 	int tex_id = TextureManager::requestID("./sprites/dragonFrames.png");
 	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(64, 64), sf::Vector2f(3, 4));
-	this->tile->setPosition(48, 32);
 }
 
 SquareObject::~SquareObject()
