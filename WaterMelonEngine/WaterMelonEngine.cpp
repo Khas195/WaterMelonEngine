@@ -26,16 +26,14 @@ void WaterMelonEngine::loop()
 	while (window.isOpen())
 	{
 		sf::Event events;
-		if (window.pollEvent(events))
-		{
-			if (events.type == sf::Event::Closed)
-				window.close();
+		window.pollEvent(events);
+		if (events.type == sf::Event::Closed)
+			window.close();
 
-		}
 		if (clock.getElapsedTime() >= timePerFrame)
 		{
 			++i;
-			update(clock);// Update every frame.
+			update(events.type);// Update every frame.
 			clock.restart();
 		}
 		render();
@@ -47,9 +45,9 @@ void WaterMelonEngine::loop()
 		}
 	}
 }
-void WaterMelonEngine::update(sf::Clock& gameTime)
+void WaterMelonEngine::update(sf::Event::EventType& type)
 {
-	this->sceneStack.getTop<Scene>()->update(gameTime);
+	this->sceneStack.getTop<Scene>()->update(type);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		window.close();

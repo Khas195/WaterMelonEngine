@@ -10,7 +10,7 @@ class WaterMelonEngine
 	const sf::Time timePerFrame;
 	StateStack sceneStack;
 protected:
-	void update(sf::Clock& gameTime);
+	void update(sf::Event::EventType& type);
 	void render();
 public:
 	WaterMelonEngine();

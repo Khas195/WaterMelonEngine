@@ -35,6 +35,7 @@ sf::SoundBuffer* SoundManager::requestSoundBuffer(int id)
 void SoundManager::setBackgroundMusic(std::string filePath)
 {
 	this->music.openFromFile(filePath);
+	this->music.setLoop(true);
 }
 
 void SoundManager::playBackgroundMusic()

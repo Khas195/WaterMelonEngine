@@ -12,7 +12,7 @@ public:
 	void addGameObject(GameObject* gameObject);
 	void removeGameObject(GameObject* gameObject);
 	// Inherited via Scene
-	virtual void update(sf::Clock & gameTime) override;
+	virtual void update(sf::Event::EventType& type) override;
 	virtual void render(sf::RenderWindow & window) override;
 	virtual ~Scene();
 

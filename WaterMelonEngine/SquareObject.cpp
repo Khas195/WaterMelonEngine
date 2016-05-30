@@ -1,5 +1,5 @@
-8#include "SquareObject.h"
-
+#include "SquareObject.h"
+#include <iostream>
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
 	TextureManager::init();
@@ -27,8 +27,12 @@ SquareObject::~SquareObject()
 {
 }
 
-void SquareObject::update(sf::Clock & gameTime)
+void SquareObject::update(sf::Event::EventType& type)
 {
+	if (type == sf::Event::EventType::MouseMoved)
+	{
+		std::cout << sf::Mouse::getPosition().x << "," << sf::Mouse::getPosition().y << std::endl;
+	}
 	anim.stop();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -73,9 +77,9 @@ void SquareObject::update(sf::Clock & gameTime)
 
 void SquareObject::render(sf::RenderWindow & window)
 {
-	//window.draw(gameView);
-	//window.draw(menuView);
-	map.render(window);
+	window.draw(gameView);
+	window.draw(menuView);
+	anim.render(window);
 	tile->render(window);
 }
 

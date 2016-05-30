@@ -1,9 +1,9 @@
 #include "DefaultObject.h"
 
-void DefaultObject::update(sf::Clock & gameTime)
+void DefaultObject::update(sf::Event::EventType& type)
 {
 	if (isEnable && isAwake)
-		this->updateChildren(gameTime);
+		this->updateChildren(type);
 }
 
 void DefaultObject::render(sf::RenderWindow & window)

@@ -3,6 +3,6 @@
 class BaseObject
 {
 public:
-	virtual void update(sf::Clock& gameTime) = 0;
+	virtual void update(sf::Event::EventType& type) = 0;
 	virtual void render(sf::RenderWindow& window) = 0;
 };

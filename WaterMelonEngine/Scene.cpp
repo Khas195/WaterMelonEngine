@@ -17,10 +17,10 @@ void Scene::removeGameObject(GameObject * gameObject)
 	godObject->removeGameObject(gameObject);
 }
 
-void Scene::update(sf::Clock & gameTime)
+void Scene::update(sf::Event::EventType& type)
 {
 	assert(godObject);
-	godObject->update(gameTime);
+	godObject->update(type);
 }
 
 void Scene::render(sf::RenderWindow & window)

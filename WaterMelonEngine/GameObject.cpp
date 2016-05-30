@@ -44,11 +44,11 @@ void GameObject::awake()
 	}
 	isAwake = true;
 }
-void GameObject::updateChildren(sf::Clock & gameTime)
+void GameObject::updateChildren(sf::Event::EventType& type)
 {
 	for (GameObject* gameObject : childObjects)
 	{
-		gameObject->update(gameTime);
+		gameObject->update(type);
 	}
 }
 
