@@ -5,6 +5,12 @@ SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f sca
 	TextureManager::init();
 	int tex_id = TextureManager::requestID("./sprites/dragonFrames.png");
 	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(64, 64), sf::Vector2f(3, 4));
+	gameView.setSize(sf::Vector2f(768, 448));
+	gameView.setFillColor(sf::Color::Blue);
+	gameView.setPosition(16, 0);
+	menuView.setSize(sf::Vector2f(800, 152));
+	menuView.setFillColor(sf::Color::Red);
+	menuView.setPosition(0, 448);
 }
 
 SquareObject::~SquareObject()
@@ -47,6 +53,7 @@ void SquareObject::update(sf::Clock & gameTime)
 		// special effect
 		anim.setScale(1, 1);
 	}*/
+	*/
 }
 
 void SquareObject::render(sf::RenderWindow & window)
