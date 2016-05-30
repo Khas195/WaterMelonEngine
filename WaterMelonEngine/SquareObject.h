@@ -2,6 +2,7 @@
 #include "GameObject.h"
 #include"Animation.h"
 #include "SFML\Graphics.hpp"
+#include "SFML\Audio.hpp"
 #include"TextureManager.h"
 #include"TileMap.h"
 class SquareObject : public GameObject, public TextureManager
@@ -10,6 +11,7 @@ class SquareObject : public GameObject, public TextureManager
 	sf::RectangleShape menuView;
 	Sprite* tile;
 	TileMap map;
+	sf::Sound sound;
 
 public:
 	SquareObject() = default;
