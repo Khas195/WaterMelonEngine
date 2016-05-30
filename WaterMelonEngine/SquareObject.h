@@ -3,9 +3,14 @@
 #include"Animation.h"
 #include "SFML\Graphics.hpp"
 #include"TextureManager.h"
+#include"TileMap.h"
 class SquareObject : public GameObject, public TextureManager
 {
-	Animation anim;
+	sf::RectangleShape gameView;
+	sf::RectangleShape menuView;
+	Sprite* tile;
+	TileMap map;
+
 public:
 	SquareObject() = default;
 	SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color);

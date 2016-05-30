@@ -31,7 +31,7 @@ void Animation::move(float x, float y)
 	{
 		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
 		{
-			it->second.move(x, y);
+			it->second.setPosition(x, y);
 		}
 	}
 }

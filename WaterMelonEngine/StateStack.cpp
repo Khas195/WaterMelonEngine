@@ -5,6 +5,11 @@ StateStack::StateStack()
 }
 StateStack::~StateStack()
 {
+	while (!this->states.empty())
+	{
+		delete states.top();
+		states.pop();
+	}
 }
 
 void StateStack::push(IState* state)

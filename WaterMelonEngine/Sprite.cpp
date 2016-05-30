@@ -46,7 +46,6 @@ void Sprite::reset()
 	if (fixedRow == -1)
 		currentFrame.y = 0;
 }
-
 void Sprite::nextFrame()
 {
 	if (clock.getElapsedTime().asMilliseconds() >= framePerSecond)
