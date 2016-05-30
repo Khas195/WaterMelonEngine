@@ -6,7 +6,9 @@ TileMap::TileMap()
 {
 	TextureManager::init();
 	int tile_id = TextureManager::requestID("./sprites/tileset.png");
-	tile = Sprite(TextureManager::requestTexture(tile_id), sf::Vector2f(64, 64));
+	tile = Sprite(TextureManager::requestTexture(tile_id), sf::Vector2f(64, 64), sf::Vector2f(10,5));
+	tile.setFixedRow(2);
+	tile.setFixedColumn(2);
 	float offset = (SCREEN_WIDTH - MAP_WIDTH * 32) / 2;
 	for (int i = 0; i < MAP_WIDTH; i++)
 	{

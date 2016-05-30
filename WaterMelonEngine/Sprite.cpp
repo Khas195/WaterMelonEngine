@@ -34,14 +34,22 @@ void Sprite::setFixedRow(int rowIndex)
 {
 	this->fixedRow = rowIndex;
 	if (rowIndex != -1)
+	{
 		currentFrame.y = rowIndex;
+		rectSource.top = currentFrame.y * frameSize.y;
+		sprite.setTextureRect(rectSource);
+	}
 }
 
 void Sprite::setFixedColumn(int colIndex)
 {
 	this->fixedColumn = colIndex;
 	if (colIndex != -1)
+	{
 		currentFrame.x = colIndex;
+		rectSource.left = currentFrame.x * frameSize.x;
+		sprite.setTextureRect(rectSource);
+	}
 }
 
 void Sprite::setTimePerFrame(float seconds)
