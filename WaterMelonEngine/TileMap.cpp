@@ -20,7 +20,7 @@ TileMap::TileMap()
 	}
 }
 
-void TileMap::update(sf::Clock & gameTime)
+void TileMap::update(sf::Event::EventType& type)
 {
 }
 

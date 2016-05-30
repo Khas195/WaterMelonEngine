@@ -36,7 +36,7 @@ void Tile::setSize(sf::Vector2f size)
 	rect.setSize(size);
 }
 
-void Tile::update(sf::Clock & gameTime)
+void Tile::update(sf::Event::EventType& type)
 {
 }
 

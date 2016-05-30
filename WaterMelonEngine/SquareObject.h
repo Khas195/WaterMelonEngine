@@ -2,14 +2,18 @@
 #include "GameObject.h"
 #include"Animation.h"
 #include "SFML\Graphics.hpp"
-#include"TextureManager.h"
-#include"TileMap.h"
-class SquareObject : public GameObject, public TextureManager
+#include "SFML\Audio.hpp"
+#include "TextureManager.h"
+#include "TileMap.h"
+#include "SoundManager.h"
+class SquareObject : public GameObject, public TextureManager, public SoundManager
 {
 	sf::RectangleShape gameView;
 	sf::RectangleShape menuView;
 	Sprite* tile;
 	TileMap map;
+	sf::Sound sound;
+	Animation anim;
 
 public:
 	SquareObject() = default;
@@ -17,7 +21,7 @@ public:
 	~SquareObject();
 
 	// Inherited via GameObject
-	virtual void update(sf::Clock & gameTime) override;
+	virtual void update(sf::Event::EventType& type) override;
 	virtual void render(sf::RenderWindow & window) override;
 	virtual void receiveMessage(Package * package) override;
 	virtual std::string getName() override;
