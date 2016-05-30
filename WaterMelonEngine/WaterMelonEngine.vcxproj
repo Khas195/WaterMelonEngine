@@ -166,6 +166,8 @@
     <ClCompile Include="SquareObject.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="Tile.cpp" />
+    <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +188,8 @@
     <ClInclude Include="SquareObject.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="Tile.h" />
+    <ClInclude Include="TileMap.h" />
     <ClInclude Include="WaterMelonEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

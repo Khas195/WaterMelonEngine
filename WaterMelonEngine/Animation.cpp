@@ -49,6 +49,7 @@ sf::Vector2f Animation::getPosition()
 {
 	if (curID != -1)
 		return sprite_map[curID].getPosition();
+	return sf::Vector2f(-1, -1);
 }
 void Animation::setScale(float x, float y)
 {

@@ -42,6 +42,12 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="Tile.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
@@ -92,6 +98,12 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Definition.h" />
+    <ClInclude Include="Tile.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -114,6 +126,9 @@
     </Filter>
     <Filter Include="CoreLibraries\Package">
       <UniqueIdentifier>{53fe5797-401c-4f7c-b207-b1b43bf7543a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\TileMap">
+      <UniqueIdentifier>{8f3d3748-ef81-4ec5-bdc6-b4ab46efa6cc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -53,7 +53,6 @@ void SquareObject::update(sf::Clock & gameTime)
 		// special effect
 		anim.setScale(1, 1);
 	}*/
-	*/
 }
 
 void SquareObject::render(sf::RenderWindow & window)
