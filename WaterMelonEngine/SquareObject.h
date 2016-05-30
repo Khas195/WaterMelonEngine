@@ -3,11 +3,13 @@
 #include"Animation.h"
 #include "SFML\Graphics.hpp"
 #include"TextureManager.h"
+#include"TileMap.h"
 class SquareObject : public GameObject, public TextureManager
 {
 	sf::RectangleShape gameView;
 	sf::RectangleShape menuView;
 	Sprite* tile;
+	TileMap map;
 
 public:
 	SquareObject() = default;
