@@ -4,11 +4,13 @@
 Sprite::Sprite()
 {
 	this->fixedRow = -1;
+	this->fixColumn = -1;
 }
 
 Sprite::Sprite(sf::Texture & texture, sf::Vector2f frameSize, sf::Vector2f spriteDim)
 {
 	this->fixedRow = -1;
+	this->fixColumn = -1;
 
 	this->frameSize = frameSize;
 	this->spriteDim = spriteDim;
@@ -35,6 +37,13 @@ void Sprite::setFixedRow(int rowIndex)
 		currentFrame.y = rowIndex;
 }
 
+void Sprite::setFixedColumn(int columnIndex)
+{
+	this->fixColumn = columnIndex;
+	if (columnIndex != -1)
+		currentFrame.x = columnIndex;
+}
+
 void Sprite::setTimePerFrame(float seconds)
 {
 	framePerSecond = seconds * 1000;
@@ -42,7 +51,8 @@ void Sprite::setTimePerFrame(float seconds)
 
 void Sprite::reset()
 {
-	currentFrame.x = 0;
+	if (fixColumn == -1)
+		currentFrame.x = 0;
 	if (fixedRow == -1)
 		currentFrame.y = 0;
 }
