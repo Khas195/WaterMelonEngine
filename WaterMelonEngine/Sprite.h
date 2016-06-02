@@ -27,6 +27,7 @@ public:
 	void setTimePerFrame(float seconds);
 	void reset();
 	void nextFrame();
+	void setCurrentFrame(int x, int y);
 
 	// transformation
 	void move(float x, float y);
