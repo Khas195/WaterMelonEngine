@@ -42,14 +42,23 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>GameObject\TileMap</Filter>
-    </ClCompile>
     <ClCompile Include="TileMap.cpp">
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>CoreLibraries\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonScene.cpp">
+      <Filter>Scene\DungeonScene</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroObject.cpp">
+      <Filter>GameObject\DungeonObject</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonMapObject.cpp">
+      <Filter>GameObject\DungeonObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,14 +110,26 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Definition.h" />
-    <ClInclude Include="Tile.h">
-      <Filter>GameObject\TileMap</Filter>
-    </ClInclude>
     <ClInclude Include="TileMap.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>CoreLibraries\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Tile.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonScene.h">
+      <Filter>Scene\DungeonScene</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroObject.h">
+      <Filter>GameObject\DungeonObject</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonMapObject.h">
+      <Filter>GameObject\DungeonObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +158,13 @@
       <UniqueIdentifier>{8f3d3748-ef81-4ec5-bdc6-b4ab46efa6cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="CoreLibraries\SoundManager">
-      <UniqueIdentifier>{c37f0b58-759d-41f2-9c59-d7c340154a4c}</UniqueIdentifier>
+      <UniqueIdentifier>{2d9b0a41-a694-43a6-8dc5-598fc5f79dd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\DungeonScene">
+      <UniqueIdentifier>{0f653353-8fac-4892-975c-a58ab348bde0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\DungeonObject">
+      <UniqueIdentifier>{6aae4608-ef0f-4c0b-a55f-f5384f4f41f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

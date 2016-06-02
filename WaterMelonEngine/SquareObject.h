@@ -11,7 +11,7 @@ class SquareObject : public GameObject, public TextureManager, public SoundManag
 	sf::RectangleShape gameView;
 	sf::RectangleShape menuView;
 	Sprite* tile;
-	TileMap map;
+	TileMap * map;
 	sf::Sound sound;
 	Animation anim;
 

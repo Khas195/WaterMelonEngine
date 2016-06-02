@@ -4,13 +4,11 @@
 Sprite::Sprite()
 {
 	this->fixedRow = -1;
-	this->fixedColumn = -1;
 }
 
 Sprite::Sprite(sf::Texture & texture, sf::Vector2f frameSize, sf::Vector2f spriteDim)
 {
 	this->fixedRow = -1;
-	this->fixedColumn = -1;
 
 	this->frameSize = frameSize;
 	this->spriteDim = spriteDim;
@@ -41,17 +39,6 @@ void Sprite::setFixedRow(int rowIndex)
 	}
 }
 
-void Sprite::setFixedColumn(int colIndex)
-{
-	this->fixedColumn = colIndex;
-	if (colIndex != -1)
-	{
-		currentFrame.x = colIndex;
-		rectSource.left = currentFrame.x * frameSize.x;
-		sprite.setTextureRect(rectSource);
-	}
-}
-
 void Sprite::setTimePerFrame(float seconds)
 {
 	framePerSecond = seconds * 1000;
@@ -59,8 +46,6 @@ void Sprite::setTimePerFrame(float seconds)
 
 void Sprite::reset()
 {
-	if (fixedColumn == -1)
-		currentFrame.x = 0;
 	if (fixedRow == -1)
 		currentFrame.y = 0;
 }
@@ -68,19 +53,16 @@ void Sprite::nextFrame()
 {
 	if (clock.getElapsedTime().asMilliseconds() >= framePerSecond)
 	{
-		if (fixedColumn == -1)
+		++currentFrame.x;
+		if (currentFrame.x >= spriteDim.x)
 		{
-			++currentFrame.x;
-			if (currentFrame.x >= spriteDim.x)
+			currentFrame.x = 0;
+			if (fixedRow == -1)
 			{
-				currentFrame.x = 0;
-				if (fixedRow == -1)
+				++currentFrame.y;
+				if (currentFrame.y >= spriteDim.y)
 				{
-					++currentFrame.y;
-					if (currentFrame.y >= spriteDim.y)
-					{
-						currentFrame.y = 0;
-					}
+					currentFrame.y = 0;
 				}
 			}
 		}
@@ -99,6 +81,11 @@ void Sprite::move(float x, float y)
 void Sprite::setPosition(float x, float y)
 {
 	sprite.setPosition(x, y);
+}
+
+void Sprite::setPosition(sf::Vector2f position)
+{
+	this->sprite.setPosition(position);
 }
 
 sf::Vector2f Sprite::getPosition()

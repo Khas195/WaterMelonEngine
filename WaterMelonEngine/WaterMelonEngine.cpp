@@ -1,21 +1,27 @@
 #include "WaterMelonEngine.h"
 #include "CoreLibraries\SpriteManager\TextureManager.h"
-#include "GameScene.h"
+#include "DungeonScene.h"
 #include "StateStack.h"
 #include "Definition.h"
 #include <iostream>
+
+sf::RenderWindow WaterMelonEngine::window;
+
 WaterMelonEngine::WaterMelonEngine()
-	: window()
-	, timePerFrame(sf::seconds(1.f / 144.0f))
+	: timePerFrame(sf::seconds(1.f / 144.0f))
 {
 	window.create(sf::VideoMode(SCREEN_WIDTH , SCREEN_HEIGHT), "Window Name", sf::Style::Default);
 	window.setFramerateLimit(144); // 144.0f framerate per limit
-	GameScene* gameScene = new GameScene();
-	this->sceneStack.push(gameScene);
+	DungeonScene* dungeonScene = new DungeonScene();
+	this->sceneStack.push(dungeonScene);
 	std::cout << timePerFrame.asMilliseconds() << std::endl;
 }
 WaterMelonEngine::~WaterMelonEngine()
 {
+}
+const sf::RenderWindow & WaterMelonEngine::getWindow()
+{
+	return window;
 }
 void WaterMelonEngine::loop()
 {

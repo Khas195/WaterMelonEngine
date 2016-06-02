@@ -1,36 +1,24 @@
 #pragma once
 #include"GameObject.h"
 #include"Sprite.h"
+#include"Definition.h"
+#include<vector>
 
-
-class Tile : public GameObject
+class TileMap;
+class Tile
 {
-	enum TILE_STATE
-	{
-		OCCUPIED = -100,
-		MUD = -1,
-		SAND = -2,
-		FREE = 0,
-		ACCELERATE = 1
-	};
-	TILE_STATE state = FREE;
-	Sprite tileTexture;
-	sf::RectangleShape rect;
+	friend class  TileMap;
+	TILE_STATE state;
+	sf::Uint32 firstgid;
+	sf::Vector2f position;
+	sf::Color borderColor;
+	sf::Color fillColor;
+	std::vector<Tile*> neighbour;
 public:
-	Tile() = default;
-	Tile(Sprite& tileTexture);
-
-	// class function
-	void setBorderColor(sf::Color color);
-	void setFillColor(sf::Color color);
-	void setPosition(sf::Vector2f position);
-	sf::Vector2f getPosition();
-	void setSize(sf::Vector2f size);
-
-	// Inherited via GameObject
-	virtual void update(sf::Event::EventType& type) override;
-	virtual void render(sf::RenderWindow & window) override;
-	virtual void receiveMessage(Package * package) override;
-	virtual std::string getName() override;
+	Tile() : firstgid(-1) ,position(sf::Vector2f(0, 0)), state(FREE), borderColor(sf::Color::Green), fillColor(sf::Color::Transparent){};
+	void setState(TILE_STATE state) { this->state = state; }
+	void setColor(sf::Color color) { this->fillColor = color; }
+	sf::Vector2f getPosition() { return position; }
+	const TILE_STATE getState() { return state; }
 };
 

@@ -1,5 +1,7 @@
 #include "SquareObject.h"
 #include <iostream>
+#include<vector>
+#include"WaterMelonEngine.h"
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
 	TextureManager::init();
@@ -21,18 +23,26 @@ SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f sca
 	this->sound.setBuffer(*SoundManager::requestSoundBuffer(sound_id));
 	SoundManager::setBackgroundMusic("./musics/musicsBox.ogg");
 	SoundManager::playBackgroundMusic();
+
+	map = TileMap::loadMap("./sprites/spriteset/Examples/Dungeon.tmx", "Dungeon");
+	std::vector<Tile*> temp = map->getRoad(1, map->getGid(3,3), map->getGid(15,8));
+	FORIT(temp, it)
+	{
+		(*it)->setColor(sf::Color::Red);
+	}
 }
 
 SquareObject::~SquareObject()
 {
+	delete map;
 }
 
 void SquareObject::update(sf::Event::EventType& type)
 {
-	if (type == sf::Event::EventType::MouseMoved)
-	{
-		std::cout << sf::Mouse::getPosition().x << "," << sf::Mouse::getPosition().y << std::endl;
-	}
+	//if (type == sf::Event::EventType::MouseMoved)
+	//{
+	//	std::cout << sf::Mouse::getPosition().x << "," << sf::Mouse::getPosition().y << std::endl;
+	//}
 	anim.stop();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -72,13 +82,14 @@ void SquareObject::update(sf::Event::EventType& type)
 		// special effect
 		anim.setScale(1, 1);
 	}
-	
+	map->update(type);
 }
 
 void SquareObject::render(sf::RenderWindow & window)
 {
-	window.draw(gameView);
-	window.draw(menuView);
+	//window.draw(gameView);
+	//window.draw(menuView);
+	map->render(window);
 	anim.render(window);
 }
 
