@@ -56,6 +56,8 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 
 	fall.setFixedRow(FALL);
 	heroAction.set(FALL, fall);
+	heroAction.trigger(MOVE_RIGHT);
+	heroAction.go();
 }
 
 HeroObject::~HeroObject()
