@@ -1,5 +1,5 @@
 #include "GameScene.h"
-
+#include "MenuPanel.h"
 #include "SquareObject.h"
 #include "PostOffice.h"
 
@@ -8,7 +8,11 @@ GameScene::GameScene()
 	this->godObject->enable();
 	this->office = new PostOffice();
 	SquareObject* square = new SquareObject(sf::Vector2f(50, 50), sf::Vector2f(50, 50), sf::Vector2f(1, 1), 0, sf::Color::Red);
+	MenuPanel* panel = new MenuPanel();
+
 	this->addGameObject(square);
+	this->addGameObject(panel);
+	this->office->add(panel);
 	this->office->add(square);
 }
 

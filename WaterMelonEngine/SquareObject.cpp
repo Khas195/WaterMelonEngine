@@ -1,18 +1,13 @@
 #include "SquareObject.h"
 #include <iostream>
-#include<vector>
-#include"WaterMelonEngine.h"
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
 	TextureManager::init();
 	int tex_id = TextureManager::requestID("./sprites/dragonFrames.png");
 	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(64, 64), sf::Vector2f(3, 4));
-	gameView.setSize(sf::Vector2f(768, 448));
+	gameView.setSize(sf::Vector2f(TILE_SIZE * MAP_WIDTH, TILE_SIZE * MAP_HEIGHT));
 	gameView.setFillColor(sf::Color::Blue);
-	gameView.setPosition(16, 0);
-	menuView.setSize(sf::Vector2f(800, 152));
-	menuView.setFillColor(sf::Color::Red);
-	menuView.setPosition(0, 448);
+	gameView.setPosition((SCREEN_WIDTH - TILE_SIZE * MAP_WIDTH) / 2, 0);
 	tile->setTimePerFrame(.1f);
 	for (unsigned int i = 0; i < 4; ++i)
 	{
@@ -23,26 +18,14 @@ SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f sca
 	this->sound.setBuffer(*SoundManager::requestSoundBuffer(sound_id));
 	SoundManager::setBackgroundMusic("./musics/musicsBox.ogg");
 	SoundManager::playBackgroundMusic();
-
-	map = TileMap::loadMap("./sprites/spriteset/Examples/Dungeon.tmx", "Dungeon");
-	std::vector<Tile*> temp = map->getRoad(1, map->getGid(3,3), map->getGid(15,8));
-	FORIT(temp, it)
-	{
-		(*it)->setColor(sf::Color::Red);
-	}
 }
 
 SquareObject::~SquareObject()
 {
-	delete map;
 }
 
 void SquareObject::update(sf::Event::EventType& type)
 {
-	//if (type == sf::Event::EventType::MouseMoved)
-	//{
-	//	std::cout << sf::Mouse::getPosition().x << "," << sf::Mouse::getPosition().y << std::endl;
-	//}
 	anim.stop();
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
@@ -82,14 +65,12 @@ void SquareObject::update(sf::Event::EventType& type)
 		// special effect
 		anim.setScale(1, 1);
 	}
-	map->update(type);
+	
 }
 
 void SquareObject::render(sf::RenderWindow & window)
 {
-	//window.draw(gameView);
-	//window.draw(menuView);
-	map->render(window);
+	window.draw(gameView);
 	anim.render(window);
 }
 
