@@ -7,7 +7,6 @@ class Sprite
 private:
 	//Transform *transform
 	int fixedRow;
-	int fixedColumn;
 
 	std::string spriteName;
 
@@ -25,7 +24,6 @@ public:
 	Sprite(sf::Texture & texture, sf::Vector2f frameSize = sf::Vector2f(0,0), sf::Vector2f spriteDim = sf::Vector2f(1, 1));
 	
 	void setFixedRow(int rowIndex);
-	void setFixedColumn(int colIndex);
 	void setTimePerFrame(float seconds);
 	void reset();
 	void nextFrame();
@@ -34,6 +32,7 @@ public:
 	void move(float x, float y);
 
 	void setPosition(float x, float y);
+	void setPosition(sf::Vector2f position);
 	sf::Vector2f getPosition();
 
 	void setScale(float x, float y);

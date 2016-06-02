@@ -29,9 +29,9 @@ void Animation::move(float x, float y)
 {
 	if (curID != -1)
 	{
-		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		FORIT(sprite_map, it)
 		{
-			it->second.setPosition(x, y);
+			it->second.move(x, y);
 		}
 	}
 }
@@ -39,7 +39,7 @@ void Animation::setPosition(float x, float y)
 {
 	if (curID != -1)
 	{
-		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		FORIT(sprite_map, it)
 		{
 			it->second.setPosition(x, y);
 		}
@@ -49,12 +49,13 @@ sf::Vector2f Animation::getPosition()
 {
 	if (curID != -1)
 		return sprite_map[curID].getPosition();
+	return sf::Vector2f(-1, -1);
 }
 void Animation::setScale(float x, float y)
 {
 	if (curID != -1)
 	{
-		for (auto it = sprite_map.begin(); it != sprite_map.end(); it++)
+		FORIT(sprite_map, it)
 		{
 			it->second.setScale(x, y);
 		}

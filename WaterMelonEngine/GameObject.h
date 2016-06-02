@@ -14,7 +14,7 @@ protected:
 	virtual void onSleep() {};
 	virtual void onEnable() {};
 	virtual void onDisable() {};
-	void updateChildren(sf::Clock& gameTime);
+	void updateChildren(sf::Event::EventType& type);
 	void renderChildren(sf::RenderWindow& window);
 public:
 	GameObject() = default;

@@ -1,21 +1,27 @@
 #include "WaterMelonEngine.h"
 #include "CoreLibraries\SpriteManager\TextureManager.h"
-#include "GameScene.h"
+#include "DungeonScene.h"
 #include "StateStack.h"
 #include "Definition.h"
 #include <iostream>
+
+sf::RenderWindow WaterMelonEngine::window;
+
 WaterMelonEngine::WaterMelonEngine()
-	: window()
-	, timePerFrame(sf::seconds(1.f / 144.0f))
+	: timePerFrame(sf::seconds(1.f / 144.0f))
 {
 	window.create(sf::VideoMode(SCREEN_WIDTH , SCREEN_HEIGHT), "Window Name", sf::Style::Default);
 	window.setFramerateLimit(144); // 144.0f framerate per limit
-	GameScene* gameScene = new GameScene();
-	this->sceneStack.push(gameScene);
+	DungeonScene* dungeonScene = new DungeonScene();
+	this->sceneStack.push(dungeonScene);
 	std::cout << timePerFrame.asMilliseconds() << std::endl;
 }
 WaterMelonEngine::~WaterMelonEngine()
 {
+}
+const sf::RenderWindow & WaterMelonEngine::getWindow()
+{
+	return window;
 }
 void WaterMelonEngine::loop()
 {
@@ -26,16 +32,14 @@ void WaterMelonEngine::loop()
 	while (window.isOpen())
 	{
 		sf::Event events;
-		if (window.pollEvent(events))
-		{
-			if (events.type == sf::Event::Closed)
-				window.close();
+		window.pollEvent(events);
+		if (events.type == sf::Event::Closed)
+			window.close();
 
-		}
 		if (clock.getElapsedTime() >= timePerFrame)
 		{
 			++i;
-			update(clock);// Update every frame.
+			update(events.type);// Update every frame.
 			clock.restart();
 		}
 		render();
@@ -47,9 +51,9 @@ void WaterMelonEngine::loop()
 		}
 	}
 }
-void WaterMelonEngine::update(sf::Clock& gameTime)
+void WaterMelonEngine::update(sf::Event::EventType& type)
 {
-	this->sceneStack.getTop<Scene>()->update(gameTime);
+	this->sceneStack.getTop<Scene>()->update(type);
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 	{
 		window.close();
