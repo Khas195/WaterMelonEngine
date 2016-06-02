@@ -4,6 +4,7 @@
 #include "TextureManager.h"
 #include "Sprite.h"
 #include "StatisticBox.h"
+#include "Animation.h"
 class MenuPanel : public GameObject , public TextureManager
 {
 	sf::Font font;
@@ -11,7 +12,7 @@ class MenuPanel : public GameObject , public TextureManager
 	Sprite* corner;
 	sf::Vector2f pos;
 	sf::Vector2f size;
-	sf::RectangleShape avatar;
+	Animation avatar;
 	StatisticBox* health;
 	StatisticBox* mana;
 	StatisticBox* attackDamage;

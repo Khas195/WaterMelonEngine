@@ -10,18 +10,26 @@ MenuPanel::MenuPanel()
 	size.x = PANEL_WIDTH;
 	size.y = PANEL_HEIGHT;
 
-	int cornerID = TextureManager::requestID("./sprites/menuPanelConors.png");
+	int menuBoxID = TextureManager::requestID("./sprites/menu_box.png");
 	int lineID = TextureManager::requestID("./sprites/menuPanelLine.png");
 	int menuBackground = TextureManager::requestID("./sprites/menuPanelBackground.png");
+	int avatarID = TextureManager::requestID("./sprites/hero.png");
+
 
 	background = new Sprite(TextureManager::requestTexture(menuBackground), sf::Vector2f(SCREEN_WIDTH, PANEL_HEIGHT));
-	corner = new Sprite(TextureManager::requestTexture(cornerID), sf::Vector2f(76, 76));
+
+	corner = new Sprite(TextureManager::requestTexture(menuBoxID), sf::Vector2f(76, 76));
 	corner->setScale(CORNER_SIZE / 76, CORNER_SIZE / 76);
 	background->setPosition(0, pos.y);
 
-	avatar.setPosition(AVATAR_POS_X, AVATAR_POS_Y);
-	avatar.setSize(sf::Vector2f(AVATAR_WIDTH, AVATAR_HEIGHT));
-	avatar.setFillColor(sf::Color::White);
+	Sprite temp = Sprite(TextureManager::requestTexture(avatarID), sf::Vector2f(64, 64), sf::Vector2f(9, 21));
+	temp.setFixedRow(10);
+	temp.setTimePerFrame(0.1f);
+	temp.setPosition(AVATAR_POS_X, AVATAR_POS_Y);
+	temp.setScale(AVATAR_WIDTH / 64.0f, AVATAR_HEIGHT / 64.0f);
+	avatar.set(0, temp);
+	//avatar.setSize(sf::Vector2f(AVATAR_WIDTH, AVATAR_HEIGHT));
+	//avatar.setFillColor(sf::Color::White);
 
 	health = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE), sf::Vector2f(AVATAR_POS_X + 9, AVATAR_POS_Y + AVATAR_HEIGHT));
 	health->setString("00000/00000");
@@ -89,7 +97,7 @@ void MenuPanel::render(sf::RenderWindow & window)
 	corner->setPosition(SCREEN_WIDTH, SCREEN_HEIGHT);
 	corner->setScale(-1, -1);
 	corner->render(window);
-	window.draw(avatar);
+	avatar.render(window);
 	this->renderChildren(window);
 }
 
