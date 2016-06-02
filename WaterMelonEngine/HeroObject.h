@@ -4,9 +4,11 @@
 #include "SFML\Graphics.hpp"
 #include "TextureManager.h"
 #include "TileMap.h"
+#include "DungeonMapObject.h"
 
 class HeroObject : public GameObject, public TextureManager
 {
+	friend class DungeonMapObject;
 	Animation heroAction;
 public:
 	HeroObject() = default;

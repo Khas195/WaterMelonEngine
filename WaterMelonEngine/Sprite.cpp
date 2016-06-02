@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include<iostream>
+#include<assert.h>
 
 Sprite::Sprite()
 {
@@ -71,6 +72,17 @@ void Sprite::nextFrame()
 		sprite.setTextureRect(rectSource);
 		clock.restart();
 	}
+}
+
+void Sprite::setCurrentFrame(int x, int y)
+{
+	assert(x >= 0 && x <= spriteDim.x);
+	assert(y >= 0 && y <= spriteDim.y);
+	currentFrame.x = x;
+	currentFrame.y = y;
+	rectSource.left = currentFrame.x * frameSize.x;
+	rectSource.top = currentFrame.y * frameSize.y;
+	sprite.setTextureRect(rectSource);
 }
 
 void Sprite::move(float x, float y)

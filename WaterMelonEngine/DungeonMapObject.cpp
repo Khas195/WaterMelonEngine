@@ -19,7 +19,8 @@ DungeonMapObject::~DungeonMapObject()
 void DungeonMapObject::update(sf::Event::EventType & type)
 {
 	updateChildren(type);
-
+	//sf::Vector2f temp = hero->heroAction.getPosition();
+	//temp.x = std::floor(temp.x / map->mapWidth);
 }
 
 void DungeonMapObject::render(sf::RenderWindow & window)
