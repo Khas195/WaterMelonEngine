@@ -64,7 +64,7 @@ TileMap::TileMap(std::string name, std::string source, sf::Uint32 mapWidth, sf::
 	: name(name), source(source), mapWidth(mapWidth), mapHeight(mapHeight), tileWidth(tileWidth), tileHeight(tileHeight)
 {
 	rect.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
-	rect.setOutlineThickness(1);
+	//rect.setOutlineThickness(1);
 
 	tiles.resize(mapWidth * mapHeight);
 	float offset = (SCREEN_WIDTH - mapWidth * TILE_SIZE) / 2.0f;

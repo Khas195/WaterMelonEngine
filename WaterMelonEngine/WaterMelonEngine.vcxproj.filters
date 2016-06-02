@@ -52,22 +52,13 @@
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="DungeonScene.cpp">
-      <Filter>Scene\DungeonScene</Filter>
+      <Filter>MonsterKill\DungeonScene</Filter>
     </ClCompile>
     <ClCompile Include="HeroObject.cpp">
-      <Filter>GameObject\DungeonObject</Filter>
+      <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
     <ClCompile Include="DungeonMapObject.cpp">
-      <Filter>GameObject\DungeonObject</Filter>
-    </ClCompile>
-    <ClCompile Include="StatisticBox.cpp">
-      <Filter>GameObject\MenuPanel</Filter>
-    </ClCompile>
-    <ClCompile Include="ActionPanel.cpp">
-      <Filter>GameObject\MenuPanel</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuPanel.cpp">
-      <Filter>GameObject\MenuPanel</Filter>
+      <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -132,25 +123,13 @@
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="DungeonScene.h">
-      <Filter>Scene\DungeonScene</Filter>
+      <Filter>MonsterKill\DungeonScene</Filter>
     </ClInclude>
     <ClInclude Include="HeroObject.h">
-      <Filter>GameObject\DungeonObject</Filter>
+      <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
     <ClInclude Include="DungeonMapObject.h">
-      <Filter>GameObject\DungeonObject</Filter>
-    </ClInclude>
-    <ClInclude Include="StatisticBox.h">
-      <Filter>GameObject\MenuPanel</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionPanel.h">
-      <Filter>GameObject\MenuPanel</Filter>
-    </ClInclude>
-    <ClInclude Include="ActionButton.h">
-      <Filter>GameObject\MenuPanel</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuPanel.h">
-      <Filter>GameObject\MenuPanel</Filter>
+      <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -181,14 +160,14 @@
     <Filter Include="CoreLibraries\SoundManager">
       <UniqueIdentifier>{2d9b0a41-a694-43a6-8dc5-598fc5f79dd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene\DungeonScene">
-      <UniqueIdentifier>{0f653353-8fac-4892-975c-a58ab348bde0}</UniqueIdentifier>
+    <Filter Include="MonsterKill">
+      <UniqueIdentifier>{eb1a0259-7669-40a9-b347-d53dd12a75cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\DungeonObject">
+    <Filter Include="MonsterKill\DungeonObject">
       <UniqueIdentifier>{6aae4608-ef0f-4c0b-a55f-f5384f4f41f2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GameObject\MenuPanel">
-      <UniqueIdentifier>{c3fc8ce7-8461-4b53-bfcd-e170fdb9ae0e}</UniqueIdentifier>
+    <Filter Include="MonsterKill\DungeonScene">
+      <UniqueIdentifier>{0f653353-8fac-4892-975c-a58ab348bde0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

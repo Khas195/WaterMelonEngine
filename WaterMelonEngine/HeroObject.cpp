@@ -3,20 +3,8 @@
 
 #define MOVEMENT_SPEED 1
 
-enum ACTION
-{
-	MOVE_UP = 8,
-	MOVE_LEFT = 9,
-	MOVE_DOWN = 10,
-	MOVE_RIGHT = 11,
-	ATTACK_UP = 0,
-	ATTACK_LEFT = 1,
-	ATTACK_DOWN = 2,
-	ATTACK_RIGHT = 3,
-	FALL = 21
-};
 
-ACTION currentAttack;
+HERO_ACTION currentAttack;
 bool isAttacking = false;
 sf::Clock attack_clock;
 
@@ -35,7 +23,7 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 	move.setPosition(startPosition);
 	fall.setPosition(startPosition);
 	attack.setPosition(startPosition);
-	attack.move(-32, -32);
+	attack.move(-ATTACK_OFFSET, -ATTACK_OFFSET);
 
 	double scaleFactor = TILE_SIZE / 64.0f;
 	move.setScale(scaleFactor, scaleFactor);
@@ -56,6 +44,8 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 
 	fall.setFixedRow(FALL);
 	heroAction.set(FALL, fall);
+	heroAction.trigger(MOVE_RIGHT);
+	heroAction.go();
 }
 
 HeroObject::~HeroObject()

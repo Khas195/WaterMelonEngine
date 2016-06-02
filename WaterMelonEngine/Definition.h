@@ -40,3 +40,18 @@ enum TILE_STATE
 #define TEXT_SIZE 14
 // Ultilities
 #define FORIT(t,it) for(auto it = t.begin(); it != t.end(); ++it)
+
+#define ATTACK_OFFSET 32
+
+enum HERO_ACTION
+{
+	MOVE_UP = 8,
+	MOVE_LEFT = 9,
+	MOVE_DOWN = 10,
+	MOVE_RIGHT = 11,
+	ATTACK_UP = 0,
+	ATTACK_LEFT = 1,
+	ATTACK_DOWN = 2,
+	ATTACK_RIGHT = 3,
+	FALL = 20
+};
