@@ -1,5 +1,6 @@
 #pragma once
 #include"Sprite.h"
+#include"Definition.h"
 #include<unordered_map>
 #include<string>
 

@@ -4,9 +4,10 @@
 class IComponent;
 class Scene;
 
-class WaterMelonEngine 
+
+class WaterMelonEngine
 {
-	sf::RenderWindow window;
+	static sf::RenderWindow window;
 	const sf::Time timePerFrame;
 	StateStack sceneStack;
 protected:
@@ -15,6 +16,8 @@ protected:
 public:
 	WaterMelonEngine();
 	~WaterMelonEngine();
+
+	static const sf::RenderWindow& getWindow();
 
 	void loop();
 };
