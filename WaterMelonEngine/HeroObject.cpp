@@ -1,5 +1,6 @@
 #include "HeroObject.h"
-#include"Sprite.h"
+#include "Sprite.h"
+#include "DungeonMapObject.h"
 
 #define MOVEMENT_SPEED 1
 
@@ -8,6 +9,8 @@ HERO_ACTION currentAttack;
 bool isAttacking = false;
 sf::Clock attack_clock;
 
+sf::RectangleShape heroRect;
+
 HeroObject::HeroObject(sf::Vector2f startPosition)
 {
 	int norm_id = TextureManager::requestID("./sprites/hero.png");
@@ -15,11 +18,16 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 	Sprite move(TextureManager::requestTexture(norm_id), sf::Vector2f(64, 64), sf::Vector2f(9, 21));
 	Sprite fall(TextureManager::requestTexture(norm_id), sf::Vector2f(64, 64), sf::Vector2f(6, 21));
 	Sprite attack(TextureManager::requestTexture(att_id), sf::Vector2f(192, 192), sf::Vector2f(6, 4));
+	heroRect.setSize(sf::Vector2f(32,32));
+	heroRect.setOutlineThickness(1);
+	heroRect.setFillColor(sf::Color::Transparent);
+	heroRect.setOutlineColor(sf::Color::Red);
 
 	move.setTimePerFrame(0.01f);
 	fall.setTimePerFrame(0.01f);
 	attack.setTimePerFrame(0.1f);
 
+	heroRect.setPosition(startPosition);
 	move.setPosition(startPosition);
 	fall.setPosition(startPosition);
 	attack.setPosition(startPosition);
@@ -29,6 +37,8 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 	move.setScale(scaleFactor, scaleFactor);
 	fall.setScale(scaleFactor, scaleFactor);
 	attack.setScale(scaleFactor, scaleFactor);
+
+	box = sf::Rect<float>(startPosition, sf::Vector2f(TILE_SIZE, TILE_SIZE));
 
 	for (int i = MOVE_UP; i <= MOVE_RIGHT; ++i)
 	{
@@ -80,6 +90,7 @@ void HeroObject::update(sf::Event::EventType & type)
 		if (!isAttacking || MOVE_UP - heroAction.currentTrigger() != 8)
 			heroAction.trigger(MOVE_UP);
 		heroAction.move(0, -MOVEMENT_SPEED);
+		heroRect.move(0, -MOVEMENT_SPEED);
 		heroAction.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
@@ -87,6 +98,7 @@ void HeroObject::update(sf::Event::EventType & type)
 		if (!isAttacking || MOVE_LEFT - heroAction.currentTrigger() != 8)
 			heroAction.trigger(MOVE_LEFT);
 		heroAction.move(-MOVEMENT_SPEED, 0);
+		heroRect.move(-MOVEMENT_SPEED, 0);
 		heroAction.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
@@ -94,6 +106,7 @@ void HeroObject::update(sf::Event::EventType & type)
 		if (!isAttacking || MOVE_DOWN - heroAction.currentTrigger() != 8)
 			heroAction.trigger(MOVE_DOWN);
 		heroAction.move(0, MOVEMENT_SPEED);
+		heroRect.move(0, MOVEMENT_SPEED);
 		heroAction.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
@@ -101,6 +114,7 @@ void HeroObject::update(sf::Event::EventType & type)
 		if (!isAttacking || MOVE_RIGHT - heroAction.currentTrigger() != 8)
 			heroAction.trigger(MOVE_RIGHT);
 		heroAction.move(MOVEMENT_SPEED, 0);
+		heroRect.move(MOVEMENT_SPEED, 0);
 		heroAction.go();
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
@@ -129,6 +143,7 @@ void HeroObject::update(sf::Event::EventType & type)
 void HeroObject::render(sf::RenderWindow & window)
 {
 	heroAction.render(window);
+	window.draw(heroRect);
 }
 
 void HeroObject::receiveMessage(Package * package)

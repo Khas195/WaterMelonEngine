@@ -1,5 +1,5 @@
 #include "DungeonMapObject.h"
-
+#include <iostream>
 
 
 DungeonMapObject::DungeonMapObject()
@@ -19,8 +19,15 @@ DungeonMapObject::~DungeonMapObject()
 void DungeonMapObject::update(sf::Event::EventType & type)
 {
 	updateChildren(type);
-	//sf::Vector2f temp = hero->heroAction.getPosition();
-	//temp.x = std::floor(temp.x / map->mapWidth);
+	//sf::Vector2f heroPos = hero->heroAction.getPosition();
+	//sf::Vector2i temp((int)(heroPos.x - 48) / TILE_SIZE, (int)(heroPos.y) / TILE_SIZE);
+	//std::cout << temp.x << " " << temp.y << std::endl;
+	//
+	//Tile tile = map->getTile(temp.x, temp.y);
+	//if (tile.getState() == OCCUPIED)
+	//{
+	//	sf::Vector2f tilePos = tile.getPosition();
+	//}
 }
 
 void DungeonMapObject::render(sf::RenderWindow & window)

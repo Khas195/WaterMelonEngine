@@ -105,6 +105,16 @@ sf::Vector2f Sprite::getPosition()
 	return sprite.getPosition();
 }
 
+const sf::Vector2u& Sprite::getGlobalSize()
+{
+	return sprite.getTexture()->getSize();
+}
+
+sf::Vector2f Sprite::getLocalSize()
+{
+	return frameSize;
+}
+
 void Sprite::setScale(float x, float y)
 {
 	sprite.setScale(x, y);

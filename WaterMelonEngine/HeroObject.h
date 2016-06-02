@@ -4,12 +4,13 @@
 #include "SFML\Graphics.hpp"
 #include "TextureManager.h"
 #include "TileMap.h"
-#include "DungeonMapObject.h"
 
+class DungeonMapObject;
 class HeroObject : public GameObject, public TextureManager
 {
 	friend class DungeonMapObject;
 	Animation heroAction;
+	sf::Rect<float> box;
 public:
 	HeroObject() = default;
 	HeroObject(sf::Vector2f startPosition);
