@@ -4,7 +4,7 @@
 #include "TileMap.h"
 #include "HeroObject.h"
 #include "TextureManager.h"
-#include"Definition.h"
+#include "Definition.h"
 
 class DungeonMapObject : public GameObject, public TextureManager
 {

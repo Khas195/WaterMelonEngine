@@ -35,6 +35,8 @@ public:
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f position);
 	sf::Vector2f getPosition();
+	const sf::Vector2u& getGlobalSize();
+	sf::Vector2f getLocalSize();
 
 	void setScale(float x, float y);
 	sf::Vector2f getScale();

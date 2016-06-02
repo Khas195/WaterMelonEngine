@@ -64,7 +64,7 @@ TileMap::TileMap(std::string name, std::string source, sf::Uint32 mapWidth, sf::
 	: name(name), source(source), mapWidth(mapWidth), mapHeight(mapHeight), tileWidth(tileWidth), tileHeight(tileHeight)
 {
 	rect.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
-	//rect.setOutlineThickness(1);
+	rect.setOutlineThickness(1);
 
 	tiles.resize(mapWidth * mapHeight);
 	float offset = (SCREEN_WIDTH - mapWidth * TILE_SIZE) / 2.0f;
@@ -72,7 +72,10 @@ TileMap::TileMap(std::string name, std::string source, sf::Uint32 mapWidth, sf::
 	{
 		FORI(0, mapWidth, w)
 		{
-			tiles[w + (h * mapWidth)].position = sf::Vector2f(offset + w * TILE_SIZE, h * TILE_SIZE);
+			sf::Vector2f postion(offset + w * TILE_SIZE, h * TILE_SIZE);
+			sf::Vector2f size(TILE_SIZE, TILE_SIZE);
+			tiles[w + (h * mapWidth)].position = postion;
+			tiles[w + (h * mapWidth)].box = sf::Rect<float>(postion, size);
 			if (w > 0)
 				tiles[w + (h * mapWidth)].neighbour.push_back(&tiles[w - 1 + (h * mapWidth)]);
 			if (w < mapWidth - 1)
