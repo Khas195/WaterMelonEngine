@@ -152,6 +152,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionPanel.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="DefaultObject.cpp" />
     <ClCompile Include="DungeonMapObject.cpp" />
@@ -177,6 +178,8 @@
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionButton.h" />
+    <ClInclude Include="ActionPanel.h" />
     <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="DefaultObject.h" />
