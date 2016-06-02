@@ -60,6 +60,15 @@
     <ClCompile Include="DungeonMapObject.cpp">
       <Filter>GameObject\DungeonObject</Filter>
     </ClCompile>
+    <ClCompile Include="StatisticBox.cpp">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionPanel.cpp">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuPanel.cpp">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
@@ -131,6 +140,18 @@
     <ClInclude Include="DungeonMapObject.h">
       <Filter>GameObject\DungeonObject</Filter>
     </ClInclude>
+    <ClInclude Include="StatisticBox.h">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionPanel.h">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionButton.h">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuPanel.h">
+      <Filter>GameObject\MenuPanel</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -165,6 +186,9 @@
     </Filter>
     <Filter Include="GameObject\DungeonObject">
       <UniqueIdentifier>{6aae4608-ef0f-4c0b-a55f-f5384f4f41f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\MenuPanel">
+      <UniqueIdentifier>{c3fc8ce7-8461-4b53-bfcd-e170fdb9ae0e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
