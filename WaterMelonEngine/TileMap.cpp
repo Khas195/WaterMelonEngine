@@ -144,7 +144,7 @@ Tile & TileMap::getTile(int x, int y)
 	return tiles[getGid(x, y)];
 }
 
-std::vector<Tile>& TileMap::getTiles()
+std::vector<Tile>& TileMap::getLayout()
 {
 	return tiles;
 }

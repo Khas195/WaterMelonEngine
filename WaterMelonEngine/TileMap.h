@@ -29,7 +29,7 @@ public:
 	std::vector<Tile*> getRoad(int size, sf::Uint32 start, sf::Uint32 end);
 	int getGid(int x, int y);
 	Tile& getTile(int x, int y);
-	std::vector<Tile>& getTiles();
+	std::vector<Tile>& getLayout();
 
 	// Inherited via GameObject
 	virtual void update(sf::Event::EventType& type) override;

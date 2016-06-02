@@ -35,11 +35,12 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 	move.setPosition(startPosition);
 	fall.setPosition(startPosition);
 	attack.setPosition(startPosition);
-	attack.move(-48, -48);
+	attack.move(-32, -32);
 
-	move.setScale(0.8f, 0.8f);
-	fall.setScale(0.8f, 0.8f);
-	attack.setScale(0.8f, 0.8f);
+	double scaleFactor = TILE_SIZE / 64.0f;
+	move.setScale(scaleFactor, scaleFactor);
+	fall.setScale(scaleFactor, scaleFactor);
+	attack.setScale(scaleFactor, scaleFactor);
 
 	for (int i = MOVE_UP; i <= MOVE_RIGHT; ++i)
 	{

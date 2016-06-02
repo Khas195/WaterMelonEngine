@@ -15,5 +15,6 @@ enum TILE_STATE
 	OCCUPIED = -100,
 	MUD = -1,
 	SAND = -2,
-	FREE = 0
+	FREE = 0,
+	SPAWN = -101
 };
