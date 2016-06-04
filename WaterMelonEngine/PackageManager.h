@@ -10,7 +10,7 @@ class PackageManager
 	PackageManager();
 	~PackageManager();
 public:
-	static PackageManager* getInstance();
+	static PackageManager * getInstance();
 	Package* requestPackage();
 	void returnPackage(Package* package);
 };

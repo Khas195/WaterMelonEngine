@@ -1,15 +1,17 @@
 #include "HeroObject.h"
 #include "Sprite.h"
 #include "DungeonMapObject.h"
+#include "PackageManager.h"
+#include "Package.h"
+#include "PostOffice.h"
+#include "WaterMelonEngine.h"
 
 #define MOVEMENT_SPEED 1
 
 
-HERO_ACTION currentAttack;
+HeroObject::HERO_ACTION currentAttack;
 bool isAttacking = false;
 sf::Clock attack_clock;
-
-sf::RectangleShape heroRect;
 
 HeroObject::HeroObject(sf::Vector2f startPosition)
 {
@@ -23,15 +25,14 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 	heroRect.setFillColor(sf::Color::Transparent);
 	heroRect.setOutlineColor(sf::Color::Red);
 
-	move.setTimePerFrame(0.01f);
+	move.setTimePerFrame(0.05f);
 	fall.setTimePerFrame(0.01f);
 	attack.setTimePerFrame(0.1f);
 
 	heroRect.setPosition(startPosition);
 	move.setPosition(startPosition);
 	fall.setPosition(startPosition);
-	attack.setPosition(startPosition);
-	attack.move(-ATTACK_OFFSET, -ATTACK_OFFSET);
+	attack.setPosition(startPosition.x - ATTACK_OFFSET, startPosition.y - ATTACK_OFFSET);
 
 	double scaleFactor = TILE_SIZE / 64.0f;
 	move.setScale(scaleFactor, scaleFactor);
@@ -61,9 +62,17 @@ HeroObject::HeroObject(sf::Vector2f startPosition)
 HeroObject::~HeroObject()
 {
 }
-
+//bool isSent = false;
 void HeroObject::update(sf::Event::EventType & type)
 {
+	//if (!isSent)
+	//{
+	//	Package * temp = PackageManager::getInstance()->requestPackage();
+	//	temp->put<HeroObject>("selected", this);
+	//	office->notifyAllObserver(temp);
+	//	PackageManager::getInstance()->returnPackage(temp);
+	//	isSent = true;
+	//}
 	if (isAttacking && attack_clock.getElapsedTime().asMilliseconds() > 600)
 	{
 		isAttacking = false;
@@ -148,9 +157,11 @@ void HeroObject::render(sf::RenderWindow & window)
 
 void HeroObject::receiveMessage(Package * package)
 {
+	//HeroObject * temp = package->get<HeroObject>("selected");
+	//std::cout << temp->getName() << std::endl;
 }
 
 std::string HeroObject::getName()
 {
-	return std::string();
+	return "HERO NEVER DIE!!!";
 }
