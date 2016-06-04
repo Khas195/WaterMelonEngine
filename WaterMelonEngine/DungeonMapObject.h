@@ -5,14 +5,16 @@
 #include "HeroObject.h"
 #include "TextureManager.h"
 #include "Definition.h"
+#include "PostOffice.h"
 
 class DungeonMapObject : public GameObject, public TextureManager
 {
 	TileMap * map;
-	HeroObject * hero;
 public:
 	DungeonMapObject();
 	~DungeonMapObject();
+
+	sf::Vector2f getMapPosition(float x, float y);
 
 	// Inherited via GameObject
 	virtual void update(sf::Event::EventType& type) override;

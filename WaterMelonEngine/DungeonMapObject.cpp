@@ -1,13 +1,23 @@
 #include "DungeonMapObject.h"
 #include <iostream>
+#include "WaterMelonEngine.h"
+#include "Package.h"
+#include "PackageManager.h"
+#include "PostOffice.h"
 
+sf::Uint32 top, left, bottom, right;
+
+int curPath;
+std::vector<Tile*> path;
 
 DungeonMapObject::DungeonMapObject()
 {
 	TextureManager::reset();
 	map = TileMap::loadMap("./sprites/dungeon/map/Dungeon.tmx", "Dungeon");
-	hero = new HeroObject(map->getTile(3, 3).getPosition());
-	addGameObject(hero);
+	left = map->getTile(1, 1).getPosition().x;
+	top = map->getTile(1, 1).getPosition().y;
+	right = map->getTile(20, 12).getPosition().x;
+	bottom = map->getTile(20, 12).getPosition().y;
 }
 
 
@@ -16,18 +26,14 @@ DungeonMapObject::~DungeonMapObject()
 	delete map;
 }
 
+sf::Vector2f DungeonMapObject::getMapPosition(float x, float y)
+{
+	return map->getTile(x, y).getPosition();
+}
+
 void DungeonMapObject::update(sf::Event::EventType & type)
 {
 	updateChildren(type);
-	//sf::Vector2f heroPos = hero->heroAction.getPosition();
-	//sf::Vector2i temp((int)(heroPos.x - 48) / TILE_SIZE, (int)(heroPos.y) / TILE_SIZE);
-	//std::cout << temp.x << " " << temp.y << std::endl;
-	//
-	//Tile tile = map->getTile(temp.x, temp.y);
-	//if (tile.getState() == OCCUPIED)
-	//{
-	//	sf::Vector2f tilePos = tile.getPosition();
-	//}
 }
 
 void DungeonMapObject::render(sf::RenderWindow & window)
