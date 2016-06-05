@@ -3,7 +3,6 @@
 #include "PostOffice.h"
 #include "DungeonMapObject.h"
 #include "MenuPanel.h"
-#include "HeroObject.h"
 
 DungeonScene::DungeonScene()
 {
@@ -11,7 +10,7 @@ DungeonScene::DungeonScene()
 	this->office = new PostOffice();
 	DungeonMapObject * dungeon = new DungeonMapObject();
 	MenuPanel* menu = new MenuPanel();
-	HeroObject* hero = new HeroObject(dungeon->getMapPosition(3,3));
+	HeroObject* hero = new HeroObject(dungeon->getMapPosition(3, 3));
 	this->addGameObject(menu);
 	this->addGameObject(dungeon);
 	this->addGameObject(hero);

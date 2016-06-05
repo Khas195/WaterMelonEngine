@@ -8,7 +8,7 @@
 #include<unordered_map>
 #include<vector>
 
-class TileMap : public GameObject, public TextureManager
+class TileMap : public GameObject
 {
 	std::unordered_map<int, sf::Sprite> tileSprites;
 	std::vector<TileSet> tilesets;

@@ -4,6 +4,7 @@
 #include "Package.h"
 #include "PackageManager.h"
 #include "PostOffice.h"
+#include "TextureManager.h"
 
 sf::Uint32 top, left, bottom, right;
 
@@ -12,7 +13,6 @@ std::vector<Tile*> path;
 
 DungeonMapObject::DungeonMapObject()
 {
-	TextureManager::reset();
 	map = TileMap::loadMap("./sprites/dungeon/map/Dungeon.tmx", "Dungeon");
 	left = map->getTile(1, 1).getPosition().x;
 	top = map->getTile(1, 1).getPosition().y;

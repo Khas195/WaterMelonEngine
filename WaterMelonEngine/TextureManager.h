@@ -10,11 +10,10 @@ private:
 	static std::unordered_map<std::string, int> path_to_id;
 	static std::unordered_map<int, sf::Texture> tex_dictionary;
 
-	int loadFromFile(std::string filePath);
-protected:
-	int requestID(std::string filePath);
-	sf::Texture& requestTexture(int id);
+	static int loadFromFile(std::string filePath);
+public:
+	static int requestID(std::string filePath);
+	static sf::Texture& requestTexture(int id);
 
-	void reset();
-	void init();
+	static void init();
 };

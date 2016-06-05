@@ -2,11 +2,10 @@
 #include "GameObject.h"
 #include "Animation.h"
 #include "SFML\Graphics.hpp"
-#include "TextureManager.h"
 #include "TileMap.h"
 
 class DungeonMapObject;
-class HeroObject : public GameObject, public TextureManager
+class HeroObject : public GameObject
 {
 	friend class DungeonMapObject;
 	Animation heroAction;

@@ -1,8 +1,8 @@
 #include "SquareObject.h"
+#include "TextureManager.h"
 #include <iostream>
 SquareObject::SquareObject(sf::Vector2f pos, sf::Vector2f size, sf::Vector2f scale, float degree, sf::Color color)
 {
-	TextureManager::init();
 	int tex_id = TextureManager::requestID("./sprites/dragonFrames.png");
 	this->tile = new Sprite(TextureManager::requestTexture(tex_id), sf::Vector2f(64, 64), sf::Vector2f(3, 4));
 	gameView.setSize(sf::Vector2f(TILE_SIZE * MAP_WIDTH, TILE_SIZE * MAP_HEIGHT));
