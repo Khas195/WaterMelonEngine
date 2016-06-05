@@ -1,5 +1,6 @@
 #include "MenuPanel.h"
 #include "Definition.h"
+#include "TextureManager.h"
 #include <iostream>
 using namespace std;
 

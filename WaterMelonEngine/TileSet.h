@@ -2,12 +2,11 @@
 #include<SFML\Graphics.hpp>
 #include<string>
 #include<unordered_map>
-#include"TextureManager.h"
 #include"Sprite.h"
 #include"Definition.h"
 
 // hold info of a tileset
-class TileSet : public TextureManager
+class TileSet
 {
 public:
 	std::string name;

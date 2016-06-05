@@ -54,10 +54,13 @@
     <ClCompile Include="DungeonScene.cpp">
       <Filter>MonsterKill\DungeonScene</Filter>
     </ClCompile>
-    <ClCompile Include="HeroObject.cpp">
+    <ClCompile Include="DungeonMapObject.cpp">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
-    <ClCompile Include="DungeonMapObject.cpp">
+    <ClCompile Include="ActionPanel.cpp" />
+    <ClCompile Include="MenuPanel.cpp" />
+    <ClCompile Include="StatisticBox.cpp" />
+    <ClCompile Include="HeroObject.cpp">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
   </ItemGroup>
@@ -125,10 +128,14 @@
     <ClInclude Include="DungeonScene.h">
       <Filter>MonsterKill\DungeonScene</Filter>
     </ClInclude>
-    <ClInclude Include="HeroObject.h">
+    <ClInclude Include="DungeonMapObject.h">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
-    <ClInclude Include="DungeonMapObject.h">
+    <ClInclude Include="ActionButton.h" />
+    <ClInclude Include="ActionPanel.h" />
+    <ClInclude Include="MenuPanel.h" />
+    <ClInclude Include="StatisticBox.h" />
+    <ClInclude Include="HeroObject.h">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
   </ItemGroup>

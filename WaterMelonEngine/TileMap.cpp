@@ -1,6 +1,7 @@
 #include"TileMap.h"
 #include"Definition.h"
 #include "WaterMelonEngine.h"
+#include"TextureManager.h"
 #include<stdio.h>
 #include<iostream>
 #include<queue>

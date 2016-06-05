@@ -5,6 +5,7 @@
 #include "Package.h"
 #include "PostOffice.h"
 #include "WaterMelonEngine.h"
+#include "TextureManager.h"
 
 #define MOVEMENT_SPEED 1
 

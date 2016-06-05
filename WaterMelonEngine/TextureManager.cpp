@@ -16,13 +16,13 @@ int TextureManager::loadFromFile(std::string filePath)
 
 void TextureManager::init()
 {
-	// init
-	if (path_to_id.size() == 0) 
-	{
-		curId = 0;
-		path_to_id.reserve(20);
-		tex_dictionary.reserve(20);
-	}
+	// clear
+	path_to_id.clear();
+	tex_dictionary.clear();
+
+	curId = 0;
+	path_to_id.reserve(20);
+	tex_dictionary.reserve(20);
 }
 
 int TextureManager::requestID(std::string filePath)
@@ -43,13 +43,4 @@ sf::Texture& TextureManager::requestTexture(int id)
 		return tex_dictionary[id];
 	else
 		return sf::Texture();
-}
-
-void TextureManager::reset()
-{
-	// clear
-	path_to_id.clear();
-	tex_dictionary.clear();
-
-	init();
 }

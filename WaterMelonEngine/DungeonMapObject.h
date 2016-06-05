@@ -3,11 +3,10 @@
 #include "SFML\Graphics.hpp"
 #include "TileMap.h"
 #include "HeroObject.h"
-#include "TextureManager.h"
 #include "Definition.h"
 #include "PostOffice.h"
 
-class DungeonMapObject : public GameObject, public TextureManager
+class DungeonMapObject : public GameObject
 {
 	TileMap * map;
 public:

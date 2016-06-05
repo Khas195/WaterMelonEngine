@@ -3,10 +3,9 @@
 #include"Animation.h"
 #include "SFML\Graphics.hpp"
 #include "SFML\Audio.hpp"
-#include "TextureManager.h"
 #include "TileMap.h"
 #include "SoundManager.h"
-class SquareObject : public GameObject, public TextureManager, public SoundManager
+class SquareObject : public GameObject, public SoundManager
 {
 	sf::RectangleShape gameView;
 	Sprite* tile;

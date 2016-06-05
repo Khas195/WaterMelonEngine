@@ -1,11 +1,10 @@
 #pragma once
 #include "GameObject.h"
 #include "SFML\Graphics.hpp"
-#include "TextureManager.h"
 #include "Sprite.h"
 #include "StatisticBox.h"
 #include "Animation.h"
-class MenuPanel : public GameObject , public TextureManager
+class MenuPanel : public GameObject
 {
 	sf::Font font;
 	Sprite* background;
