@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="22" height="14" tilewidth="16" tileheight="16" nextobjectid="1">
- <tileset firstgid="1" name="Wall" tilewidth="16" tileheight="16" tilecount="1020" columns="20">
+ <tileset firstgid="1" name="Wall" tilewidth="16" tileheight="16" tilecount="1020" columns="20" state="-100">
   <image source="../Objects/Wall.png" width="320" height="816"/>
  </tileset>
- <tileset firstgid="1021" name="Floor" tilewidth="16" tileheight="16" tilecount="819" columns="21">
+ <tileset firstgid="1021" name="Floor" tilewidth="16" tileheight="16" tilecount="819" columns="21" state="0">
   <image source="../Objects/Floor.png" width="336" height="624"/>
  </tileset>
- <tileset firstgid="1840" name="Door0" tilewidth="16" tileheight="16" tilecount="48" columns="8">
+ <tileset firstgid="1840" name="Door0" tilewidth="16" tileheight="16" tilecount="48" columns="8" state="-100">
   <image source="../Objects/Door0.png" width="128" height="96"/>
  </tileset>
  <layer name="Dungeon" width="22" height="14">

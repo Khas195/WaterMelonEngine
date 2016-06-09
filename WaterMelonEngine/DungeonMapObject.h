@@ -1,14 +1,13 @@
 #pragma once
 #include "GameObject.h"
 #include "SFML\Graphics.hpp"
-#include "TileMap.h"
-#include "HeroObject.h"
+#include "Map.h"
 #include "Definition.h"
 #include "PostOffice.h"
 
 class DungeonMapObject : public GameObject
 {
-	TileMap * map;
+	Map * map;
 public:
 	DungeonMapObject();
 	~DungeonMapObject();

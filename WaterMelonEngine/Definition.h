@@ -43,3 +43,5 @@ enum TILE_STATE
 #define FORIT(t,it) for(auto it = t.begin(); it != t.end(); ++it)
 
 #define ATTACK_OFFSET 32
+
+#define MAX_LAYERS 2

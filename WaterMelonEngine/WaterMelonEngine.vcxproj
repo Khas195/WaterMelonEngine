@@ -158,9 +158,9 @@
     <ClCompile Include="DungeonMapObject.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="GameScene.cpp" />
-    <ClCompile Include="HeroObject.cpp" />
+    <ClCompile Include="Helper.cpp" />
     <ClCompile Include="IObserver.cpp" />
+    <ClCompile Include="MapTile.cpp" />
     <ClCompile Include="MenuPanel.cpp" />
     <ClCompile Include="Package.cpp" />
     <ClCompile Include="PackageManager.cpp" />
@@ -169,12 +169,13 @@
     <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="SquareObject.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="StatisticBox.cpp" />
     <ClCompile Include="TextureManager.cpp" />
-    <ClCompile Include="TileMap.cpp" />
+    <ClCompile Include="TileLayer.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="TileSet.cpp" />
+    <ClCompile Include="TilesetTile.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -187,8 +188,7 @@
     <ClInclude Include="DungeonMapObject.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="GameScene.h" />
-    <ClInclude Include="HeroObject.h" />
+    <ClInclude Include="Helper.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="IState.h" />
@@ -199,13 +199,14 @@
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SoundManager.h" />
     <ClInclude Include="Sprite.h" />
-    <ClInclude Include="SquareObject.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="StatisticBox.h" />
     <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="Tile.h" />
-    <ClInclude Include="TileMap.h" />
+    <ClInclude Include="MapTile.h" />
+    <ClInclude Include="TileLayer.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="TileSet.h" />
+    <ClInclude Include="TilesetTile.h" />
     <ClInclude Include="WaterMelonEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

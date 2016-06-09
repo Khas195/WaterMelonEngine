@@ -23,7 +23,7 @@ MenuPanel::MenuPanel()
 	corner->setScale(CORNER_SIZE / 76, CORNER_SIZE / 76);
 	background->setPosition(0, pos.y);
 
-	Sprite temp = Sprite(TextureManager::requestTexture(avatarID), sf::Vector2f(64, 64), sf::Vector2f(9, 21));
+	Sprite temp = Sprite(TextureManager::requestTexture(avatarID), sf::Vector2f(64, 64), sf::Vector2u(9, 21));
 	temp.setFixedRow(10);
 	temp.setTimePerFrame(0.1f);
 	temp.setPosition(AVATAR_POS_X, AVATAR_POS_Y);

@@ -5,31 +5,26 @@
 #include "PackageManager.h"
 #include "PostOffice.h"
 #include "TextureManager.h"
+#include "Helper.h"
 
 sf::Uint32 top, left, bottom, right;
 
 int curPath;
-std::vector<Tile*> path;
 
 DungeonMapObject::DungeonMapObject()
 {
-	map = TileMap::loadMap("./sprites/dungeon/map/Dungeon.tmx", "Dungeon");
-	left = map->getTile(1, 1).getPosition().x;
-	top = map->getTile(1, 1).getPosition().y;
-	right = map->getTile(20, 12).getPosition().x;
-	bottom = map->getTile(20, 12).getPosition().y;
+	map = Helper::LoadMapFromSource("./sprites/dungeon/map/Dungeon.tmx", "Dungeon");
 }
 
 
 DungeonMapObject::~DungeonMapObject()
 {
-	delete map;
 }
 
-sf::Vector2f DungeonMapObject::getMapPosition(float x, float y)
-{
-	return map->getTile(x, y).getPosition();
-}
+//sf::Vector2f DungeonMapObject::getMapPosition(float x, float y)
+//{
+//
+//}
 
 void DungeonMapObject::update(sf::Event::EventType & type)
 {

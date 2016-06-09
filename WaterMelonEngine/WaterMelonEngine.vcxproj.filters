@@ -30,20 +30,11 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SquareObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>GameObject\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>CoreLibraries\SoundManager</Filter>
@@ -60,8 +51,16 @@
     <ClCompile Include="ActionPanel.cpp" />
     <ClCompile Include="MenuPanel.cpp" />
     <ClCompile Include="StatisticBox.cpp" />
-    <ClCompile Include="HeroObject.cpp">
-      <Filter>MonsterKill\DungeonObject</Filter>
+    <ClCompile Include="TileLayer.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="MapTile.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TilesetTile.cpp" />
+    <ClCompile Include="Map.cpp">
+      <Filter>GameObject\TileMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,12 +99,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SquareObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -113,16 +106,10 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Definition.h" />
-    <ClInclude Include="TileMap.h">
-      <Filter>GameObject\TileMap</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>CoreLibraries\SoundManager</Filter>
     </ClInclude>
     <ClInclude Include="TileSet.h">
-      <Filter>GameObject\TileMap</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="DungeonScene.h">
@@ -135,8 +122,16 @@
     <ClInclude Include="ActionPanel.h" />
     <ClInclude Include="MenuPanel.h" />
     <ClInclude Include="StatisticBox.h" />
-    <ClInclude Include="HeroObject.h">
-      <Filter>MonsterKill\DungeonObject</Filter>
+    <ClInclude Include="TileLayer.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h" />
+    <ClInclude Include="MapTile.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TilesetTile.h" />
+    <ClInclude Include="Map.h">
+      <Filter>GameObject\TileMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

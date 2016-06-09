@@ -10,12 +10,9 @@ DungeonScene::DungeonScene()
 	this->office = new PostOffice();
 	DungeonMapObject * dungeon = new DungeonMapObject();
 	MenuPanel* menu = new MenuPanel();
-	HeroObject* hero = new HeroObject(dungeon->getMapPosition(3, 3));
 	this->addGameObject(menu);
 	this->addGameObject(dungeon);
-	this->addGameObject(hero);
 	this->office->add(dungeon);
-	this->office->add(hero);
 }
 
 

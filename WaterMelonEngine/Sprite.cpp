@@ -7,7 +7,7 @@ Sprite::Sprite()
 	this->fixedRow = -1;
 }
 
-Sprite::Sprite(sf::Texture & texture, sf::Vector2f frameSize, sf::Vector2f spriteDim)
+Sprite::Sprite(sf::Texture & texture, sf::Vector2f frameSize, sf::Vector2u spriteDim)
 {
 	this->fixedRow = -1;
 
@@ -54,21 +54,9 @@ void Sprite::nextFrame()
 {
 	if (clock.getElapsedTime().asMilliseconds() >= framePerSecond)
 	{
-		++currentFrame.x;
-		if (currentFrame.x >= spriteDim.x)
-		{
-			currentFrame.x = 0;
-			if (fixedRow == -1)
-			{
-				++currentFrame.y;
-				if (currentFrame.y >= spriteDim.y)
-				{
-					currentFrame.y = 0;
-				}
-			}
-		}
+		currentFrame.x = (clock.getElapsedTime().asMilliseconds() / framePerSecond) % spriteDim.x;
+
 		rectSource.left = currentFrame.x * frameSize.x;
-		rectSource.top = currentFrame.y * frameSize.y;
 		sprite.setTextureRect(rectSource);
 		clock.restart();
 	}

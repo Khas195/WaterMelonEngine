@@ -13,7 +13,7 @@ private:
 	sf::Sprite sprite;
 	sf::Vector2f frameSize;
 	sf::Vector2f currentFrame;
-	sf::Vector2f spriteDim;
+	sf::Vector2u spriteDim;
 
 	sf::Clock clock;
 	sf::Int64 framePerSecond;
@@ -21,7 +21,7 @@ private:
 	sf::IntRect rectSource;
 public:
 	Sprite();
-	Sprite(sf::Texture & texture, sf::Vector2f frameSize = sf::Vector2f(0,0), sf::Vector2f spriteDim = sf::Vector2f(1, 1));
+	Sprite(sf::Texture & texture, sf::Vector2f frameSize = sf::Vector2f(0,0), sf::Vector2u spriteDim = sf::Vector2u(1, 1));
 	
 	void setFixedRow(int rowIndex);
 	void setTimePerFrame(float seconds);
