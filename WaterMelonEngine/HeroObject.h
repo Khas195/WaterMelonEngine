@@ -37,7 +37,7 @@ public:
 	virtual void die() override;
 
 	virtual void setCurrentState(ACTOR_STATE state) override;
-	virtual void setCurrentCommand(IActorCommand * command) override;
+	virtual void setCurrentCommand(std::shared_ptr<IActorCommand> command) override;
 	virtual void setCurrentAnimation(UNIT_ACTION command) override;
 
 	virtual int getCurrentDirection() override;

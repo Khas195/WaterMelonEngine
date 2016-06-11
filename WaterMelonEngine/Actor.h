@@ -2,6 +2,7 @@
 #include <SFML\Graphics.hpp>
 #include "GameObject.h"
 #include "Definition.h"
+#include <memory>
 
 class IActorState;
 class IActorCommand;
@@ -38,7 +39,7 @@ public:
 
 	virtual void setCurrentState(ACTOR_STATE state) = 0;
 	virtual void setCurrentAnimation(UNIT_ACTION animation) = 0;
-	virtual void setCurrentCommand(IActorCommand * command) = 0;
+	virtual void setCurrentCommand(std::shared_ptr<IActorCommand> command) = 0;
 
 	virtual int getCurrentDirection() = 0; /*	0 - UP
 											1 - LEFT
@@ -47,8 +48,8 @@ public:
 	virtual ACTOR_STATE getCurrentState() = 0;
 	virtual UNIT_ACTION getCurrentAction() = 0;
 protected:
-	IActorCommand * curCommand;
-	IActorState * curState;
+	std::shared_ptr<IActorCommand> curCommand;
+	std::shared_ptr<IActorState> curState;
 	UNIT_ACTION curAction;
 	ACTOR_STATE curActorState;
 };
