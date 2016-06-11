@@ -1,10 +1,11 @@
 #include "MoveAction.h"
+#include <memory>
 #include "TextureManager.h"
 #include "Sprite.h"
 #include <assert.h>
 #include "Actor.h"
 
-MoveUp::MoveUp(Actor * actor)
+MoveUp::MoveUp(std::shared_ptr<Actor> actor)
 	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -26,7 +27,7 @@ void MoveUp::finished()
 }
 
 
-MoveLeft::MoveLeft(Actor * actor)
+MoveLeft::MoveLeft(std::shared_ptr<Actor>actor)
 	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -47,7 +48,7 @@ void MoveLeft::finished()
 	done = true;
 }
 
-MoveDown::MoveDown(Actor * actor)
+MoveDown::MoveDown(std::shared_ptr<Actor> actor)
 	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -68,7 +69,7 @@ void MoveDown::finished()
 	done = true;
 }
 
-MoveRight::MoveRight(Actor * actor)
+MoveRight::MoveRight(std::shared_ptr<Actor> actor)
 	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);

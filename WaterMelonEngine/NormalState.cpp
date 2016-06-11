@@ -1,6 +1,7 @@
 #include "NormalState.h"
 #include "SFML\Graphics.hpp"
 #include "Actor.h"
+#include "Package.h"
 #include "MoveAction.h"
 #include "AttackAction.h"
 NormalState::NormalState(std::shared_ptr<Actor> actor) : IActorState::IActorState(actor)
@@ -20,7 +21,7 @@ NormalState::~NormalState()
 
 void NormalState::update(sf::Event::EventType & type)
 {
-	if (curActor->getCurrentAction()->isDone())
+	if (curActor->getCurrentCommand()->isDone())
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
@@ -44,3 +45,4 @@ void NormalState::update(sf::Event::EventType & type)
 		}
 	}
 }
+
