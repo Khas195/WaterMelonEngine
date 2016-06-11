@@ -151,7 +151,7 @@ void HeroObject::setCurrentState(ACTOR_STATE state)
 	curActorState = state;
 }
 
-void HeroObject::setCurrentCommand(IActorCommand * command)
+void HeroObject::setCurrentCommand(std::shared_ptr<IActorCommand> command)
 {
 	if (curCommand->isDone())
 		this->curCommand = command;
