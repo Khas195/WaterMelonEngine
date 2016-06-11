@@ -29,11 +29,11 @@ MonsterObject::MonsterObject(std::string source, std::string name, float movemen
 	die = new Animation();
 	
 	dieSp.setFixedRow(0);
-	die->set(DIE, dieSp);
+	die->set(Actor::DIE_ACTION, dieSp);
 	FORI(0, 4, i)
 	{
 		moveSp.setFixedRow(i);
-		move->set(MOVE + i + 1, moveSp);
+		move->set(Actor::MOVE_UP + i, moveSp);
 	}
 }
 
@@ -79,22 +79,22 @@ void MonsterObject::update(sf::Event::EventType & type)
 		sf::Vector2f enemyPos = enemy->getPosition();
 		if (enemyPos.x - position.x < 0)
 		{
-			move->trigger(MOVE_LEFT);
+			move->trigger(Actor::MOVE_LEFT);
 			moveBy(-movementSpeed, 0);
 		}
 		else if (enemyPos.x - position.x > 0)
 		{
-			move->trigger(MOVE_RIGHT);
+			move->trigger(Actor::MOVE_RIGHT);
 			moveBy(movementSpeed, 0);
 		}
 		if (enemyPos.y - position.y < 0)
 		{
-			move->trigger(MOVE_UP);
+			move->trigger(Actor::MOVE_UP);
 			moveBy(0, -movementSpeed);
 		}
 		else if (enemyPos.y - position.y > 0)
 		{
-			move->trigger(MOVE_DOWN);
+			move->trigger(Actor::MOVE_DOWN);
 			moveBy(0, movementSpeed);
 		}
 	}

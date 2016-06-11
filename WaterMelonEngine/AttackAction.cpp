@@ -6,7 +6,7 @@
 
 
 AttackAction::AttackAction(Actor * actor)
-	: ICommand::ICommand(actor)
+	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);
 }
@@ -14,4 +14,14 @@ AttackAction::AttackAction(Actor * actor)
 void AttackAction::execute()
 {
 	actor->attack();
+}
+
+bool AttackAction::isDone()
+{
+	return done;
+}
+
+void AttackAction::finished()
+{
+	done = true;
 }

@@ -1,23 +1,18 @@
 #pragma once
 #include <SFML\Graphics.hpp>
-#include "GameObject.h"
 #include "Animation.h"
-class HeroObject : public GameObject
+#include "Actor.h"
+#include <memory>
+
+class HeroObject : public Actor
 {
 	sf::Vector2f position;
 
 	sf::FloatRect collisionBox;
 
-	Animation * move;
-	Animation * attack;
-	Animation * die;
-
-	bool isAttack;
-	bool isDie;
-
-	void onAttack();
-	void onMove();
-	void onDie();
+	std::unique_ptr<Animation> moveAnimation;
+	std::unique_ptr<Animation>  attackAnimation;
+	std::unique_ptr<Animation>  dieAnimation;
 public:
 	HeroObject();
 	~HeroObject();
@@ -32,5 +27,21 @@ public:
 	virtual void render(sf::RenderWindow & window) override;
 	virtual void receiveMessage(Package * package) override;
 	virtual std::string getName() override;
+
+	// actor
+	virtual void moveUp() override;
+	virtual void moveLeft() override;
+	virtual void moveDown() override;
+	virtual void moveRight() override;
+	virtual void attack() override;
+	virtual void die() override;
+
+	virtual void setCurrentState(ACTOR_STATE state) override;
+	virtual void setCurrentCommand(IActorCommand * command) override;
+	virtual void setCurrentAnimation(UNIT_ACTION command) override;
+
+	virtual int getCurrentDirection() override;
+	virtual ACTOR_STATE getCurrentState() override;
+	virtual UNIT_ACTION getCurrentAction() override;
 };
 
