@@ -47,6 +47,7 @@ public:
 											3 - RIGHT	*/
 	virtual ACTOR_STATE getCurrentState() = 0;
 	virtual UNIT_ACTION getCurrentAction() = 0;
+	virtual const std::shared_ptr<IActorCommand> getCurrentCommand() = 0;
 protected:
 	std::shared_ptr<IActorCommand> curCommand;
 	std::shared_ptr<IActorState> curState;
