@@ -3,10 +3,10 @@
 #include <string>
 
 class Actor;
-class DieAction : IActorCommand
+class DieAction : public IActorCommand
 {
 public:
-	DieAction(Actor * actor);
+	DieAction(std::shared_ptr<Actor> actor);
 	virtual void execute() override;
 
 	// Inherited via IActorCommand

@@ -1,10 +1,10 @@
 #pragma once
 #include "ICommand.h"
 #include <string>
-class AttackAction : IActorCommand
+class AttackAction : public IActorCommand
 {
 public:
-	AttackAction(Actor * actor);
+	AttackAction(std::shared_ptr<Actor> actor);
 	virtual void execute() override;
 
 	// Inherited via IActorCommand

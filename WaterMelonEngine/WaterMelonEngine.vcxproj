@@ -152,9 +152,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="AttackAction.cpp" />
+    <ClCompile Include="DeadState.cpp" />
     <ClCompile Include="DefaultObject.cpp" />
     <ClCompile Include="DieAction.cpp" />
     <ClCompile Include="DungeonMapObject.cpp" />
@@ -167,6 +167,7 @@
     <ClCompile Include="MenuPanel.cpp" />
     <ClCompile Include="MonsterObject.cpp" />
     <ClCompile Include="MoveAction.cpp" />
+    <ClCompile Include="NormalState.cpp" />
     <ClCompile Include="Package.cpp" />
     <ClCompile Include="PackageManager.cpp" />
     <ClCompile Include="PostOffice.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Animation.h" />
     <ClInclude Include="AttackAction.h" />
     <ClInclude Include="BaseObject.h" />
+    <ClInclude Include="DeadState.h" />
     <ClInclude Include="DefaultObject.h" />
     <ClInclude Include="Definition.h" />
     <ClInclude Include="DieAction.h" />
@@ -198,12 +200,14 @@
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Helper.h" />
     <ClInclude Include="HeroObject.h" />
+    <ClInclude Include="IActorState.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="MenuPanel.h" />
     <ClInclude Include="MonsterObject.h" />
     <ClInclude Include="MoveAction.h" />
+    <ClInclude Include="NormalState.h" />
     <ClInclude Include="Package.h" />
     <ClInclude Include="PackageManager.h" />
     <ClInclude Include="PostOffice.h" />

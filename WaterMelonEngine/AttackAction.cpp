@@ -3,9 +3,10 @@
 #include "Sprite.h"
 #include "Actor.h"
 #include <assert.h>
+#include <memory>
 
 
-AttackAction::AttackAction(Actor * actor)
+AttackAction::AttackAction(std::shared_ptr<Actor> actor)
 	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);

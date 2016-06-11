@@ -3,10 +3,10 @@
 #include <string>
 
 class Actor;
-class MoveUp : IActorCommand
+class MoveUp : public IActorCommand
 {
 public:
-	MoveUp(Actor * actor);
+	MoveUp(std::shared_ptr<Actor> actor);
 	virtual void execute() override;
 
 	// Inherited via IActorCommand
@@ -16,10 +16,10 @@ public:
 	virtual void finished() override;
 };
 
-class MoveLeft : IActorCommand
+class MoveLeft : public IActorCommand
 {
 public:
-	MoveLeft(Actor * actor);
+	MoveLeft(std::shared_ptr<Actor> actor);
 	virtual void execute() override;
 
 	// Inherited via IActorCommand
@@ -29,10 +29,10 @@ public:
 	virtual void finished() override;
 };
 
-class MoveDown : IActorCommand
+class MoveDown : public IActorCommand
 {
 public:
-	MoveDown(Actor * actor);
+	MoveDown(std::shared_ptr<Actor> actor);
 	virtual void execute() override;
 
 	// Inherited via IActorCommand
@@ -42,10 +42,10 @@ public:
 	virtual void finished() override;
 };
 
-class MoveRight : IActorCommand
+class MoveRight : public IActorCommand
 {
 public:
-	MoveRight(Actor * actor);
+	MoveRight(std::shared_ptr<Actor> actor);
 	virtual void execute() override;
 
 	// Inherited via IActorCommand

@@ -57,8 +57,12 @@
     <ClCompile Include="MapTile.cpp">
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
+    <ClCompile Include="TilesetTile.cpp" />
     <ClCompile Include="Map.cpp">
       <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUnit.cpp">
+      <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
     <ClCompile Include="AttackAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
@@ -69,14 +73,18 @@
     <ClCompile Include="MoveAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
+    <ClCompile Include="HeroObject.cpp" />
+    <ClCompile Include="MonsterObject.cpp">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClCompile>
     <ClCompile Include="ICommand.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
-    <ClCompile Include="HeroObject.cpp">
-      <Filter>MonsterKill\DungeonObject</Filter>
+    <ClCompile Include="NormalState.cpp">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClCompile>
-    <ClCompile Include="TilesetTile.cpp">
-      <Filter>GameObject\TileMap</Filter>
+    <ClCompile Include="DeadState.cpp">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -143,8 +151,15 @@
     <ClInclude Include="MapTile.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
+    <ClInclude Include="TilesetTile.h" />
     <ClInclude Include="Map.h">
       <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUnit.h">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackAction.h">
+      <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
     <ClInclude Include="DieAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
@@ -152,17 +167,24 @@
     <ClInclude Include="MoveAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
+    <ClInclude Include="HeroObject.h" />
+    <ClInclude Include="MonsterObject.h">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClInclude>
     <ClInclude Include="ICommand.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>MonsterKill\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="HeroObject.h">
-      <Filter>MonsterKill\DungeonObject</Filter>
+    <ClInclude Include="IActorState.h">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClInclude>
-    <ClInclude Include="TilesetTile.h">
-      <Filter>GameObject\TileMap</Filter>
+    <ClInclude Include="NormalState.h">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClInclude>
+    <ClInclude Include="DeadState.h">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
