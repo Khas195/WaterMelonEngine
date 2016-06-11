@@ -6,11 +6,11 @@
 #include "AttackAction.h"
 NormalState::NormalState(std::shared_ptr<Actor> actor) : IActorState::IActorState(actor)
 {
-	goUp = std::make_shared<MoveUp>();
-	goDown = std::make_shared<MoveDown>();
-	goLeft = std::make_shared<MoveLeft>();
-	goRight = std::make_shared<MoveRight>();
-	attack = std::make_shared<AttackAction>();
+	goUp = std::make_shared<MoveUp>(actor);
+	goDown = std::make_shared<MoveDown>(actor);
+	goLeft = std::make_shared<MoveLeft>(actor);
+	goRight = std::make_shared<MoveRight>(actor);
+	attack = std::make_shared<AttackAction>(actor);
 }
 
 

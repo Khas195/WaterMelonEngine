@@ -1,6 +1,7 @@
 #pragma once
 #include "ICommand.h"
 #include <string>
+
 class AttackAction : public IActorCommand
 {
 public:

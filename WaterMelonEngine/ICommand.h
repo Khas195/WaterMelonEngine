@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML\Graphics.hpp>
 #include "Definition.h"
+#include <memory>
 
 class Actor;
 class IActorCommand
