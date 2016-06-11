@@ -20,7 +20,7 @@ NormalState::~NormalState()
 
 void NormalState::update(sf::Event::EventType & type)
 {
-	if (curActor->getCurrentCommand()->isDone())
+	if (curActor->getCurrentAction()->isDone())
 	{
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
