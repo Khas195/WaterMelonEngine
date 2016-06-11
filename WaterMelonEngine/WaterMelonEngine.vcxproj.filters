@@ -62,6 +62,26 @@
     <ClCompile Include="Map.cpp">
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
+    <ClCompile Include="TestUnit.cpp">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitAction.cpp">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackAction.cpp">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClCompile>
+    <ClCompile Include="DieAction.cpp">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveAction.cpp">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionAdapter.cpp" />
+    <ClCompile Include="HeroObject.cpp" />
+    <ClCompile Include="MonsterObject.cpp">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
@@ -133,6 +153,26 @@
     <ClInclude Include="Map.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
+    <ClInclude Include="TestUnit.h">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClInclude>
+    <ClInclude Include="UnitAction.h">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackAction.h">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClInclude>
+    <ClInclude Include="DieAction.h">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveAction.h">
+      <Filter>MonsterKill\UnitAction</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionAdapter.h" />
+    <ClInclude Include="HeroObject.h" />
+    <ClInclude Include="MonsterObject.h">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="GameObject">
@@ -170,6 +210,9 @@
     </Filter>
     <Filter Include="MonsterKill\DungeonScene">
       <UniqueIdentifier>{0f653353-8fac-4892-975c-a58ab348bde0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MonsterKill\UnitAction">
+      <UniqueIdentifier>{5c787d3c-06b7-414f-9b3b-8956c6c61760}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

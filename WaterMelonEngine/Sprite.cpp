@@ -54,7 +54,9 @@ void Sprite::nextFrame()
 {
 	if (clock.getElapsedTime().asMilliseconds() >= framePerSecond)
 	{
-		currentFrame.x = (clock.getElapsedTime().asMilliseconds() / framePerSecond) % spriteDim.x;
+		++currentFrame.x;
+		if (currentFrame.x >= spriteDim.x)
+			currentFrame.x = 0;
 
 		rectSource.left = currentFrame.x * frameSize.x;
 		sprite.setTextureRect(rectSource);
@@ -113,7 +115,7 @@ sf::Vector2f Sprite::getScale()
 	return sprite.getScale();
 }
 
-void Sprite::update(sf::Clock & gameTime)
+void Sprite::update()
 {
 }
 

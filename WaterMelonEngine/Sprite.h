@@ -41,7 +41,7 @@ public:
 	void setScale(float x, float y);
 	sf::Vector2f getScale();
 
-	void update(sf::Clock& gameTime);
+	void update();
 	void render(sf::RenderWindow& window);
 	std::string getName();
 };

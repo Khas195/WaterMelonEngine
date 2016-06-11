@@ -25,7 +25,6 @@ DungeonMapObject::~DungeonMapObject()
 //{
 //
 //}
-
 void DungeonMapObject::update(sf::Event::EventType & type)
 {
 	updateChildren(type);

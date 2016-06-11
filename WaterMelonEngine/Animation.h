@@ -38,7 +38,7 @@ public:
 		run = true;
 	};
 
-	void update(sf::Clock& gameTime);
+	void update();
 	void render(sf::RenderWindow& window);
 	std::string getName();
 };

@@ -1,11 +1,14 @@
 #include "MenuPanel.h"
 #include "Definition.h"
 #include "TextureManager.h"
+#include "Package.h"
 #include <iostream>
 using namespace std;
 
 MenuPanel::MenuPanel()
 {
+	scoreVal = 0;
+	HP = "0000000000000";
 	pos.x = PANEL_POS_X;
 	pos.y = PANEL_POS_Y;
 	size.x = PANEL_WIDTH;
@@ -19,8 +22,11 @@ MenuPanel::MenuPanel()
 
 	background = new Sprite(TextureManager::requestTexture(menuBackground), sf::Vector2f(SCREEN_WIDTH, PANEL_HEIGHT));
 
-	corner = new Sprite(TextureManager::requestTexture(menuBoxID), sf::Vector2f(76, 76));
-	corner->setScale(CORNER_SIZE / 76, CORNER_SIZE / 76);
+	menuBox = new Sprite(TextureManager::requestTexture(menuBoxID), sf::Vector2f(186, 186));
+	menuBox->setPosition(0, pos.y);
+	menuBox->setScale(SCREEN_WIDTH / 186.0f, 1);
+	//corner = new Sprite(TextureManager::requestTexture(menuBoxID), sf::Vector2f(76, 76));
+	//corner->setScale(CORNER_SIZE / 76, CORNER_SIZE / 76);
 	background->setPosition(0, pos.y);
 
 	Sprite temp = Sprite(TextureManager::requestTexture(avatarID), sf::Vector2f(64, 64), sf::Vector2u(9, 21));
@@ -29,48 +35,29 @@ MenuPanel::MenuPanel()
 	temp.setPosition(AVATAR_POS_X, AVATAR_POS_Y);
 	temp.setScale(AVATAR_WIDTH / 64.0f, AVATAR_HEIGHT / 64.0f);
 	avatar.set(0, temp);
-	//avatar.setSize(sf::Vector2f(AVATAR_WIDTH, AVATAR_HEIGHT));
-	//avatar.setFillColor(sf::Color::White);
+	avatarBox.setSize(sf::Vector2f(AVATAR_WIDTH, AVATAR_HEIGHT));
+	avatarBox.setPosition(AVATAR_POS_X, AVATAR_POS_Y);
+	avatarBox.setOutlineThickness(3);
+	avatarBox.setOutlineColor(sf::Color::White);
+	avatarBox.setFillColor(sf::Color(0,0,0,127));
 
-	health = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE), sf::Vector2f(AVATAR_POS_X + 9, AVATAR_POS_Y + AVATAR_HEIGHT));
-	health->setString("00000/00000");
+	health = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE), sf::Vector2f(AVATAR_POS_X, AVATAR_POS_Y + AVATAR_HEIGHT + 3));
+	health->setString(&HP[0]);
 	health->setColor(sf::Color::Red);
-	mana = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE), sf::Vector2f(AVATAR_POS_X + 9, health->getPosition().y + TEXT_SIZE));
-	mana->setString("00000/00000");
-	mana->setColor(sf::Color::Blue);
-	
-	attackDamage = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE)
-		, sf::Vector2f(AVATAR_POS_X + AVATAR_WIDTH + STATS_OFFSET_X, AVATAR_POS_Y));
-	attackDamage->setString("Attack: 00000");
-	attackDamage->setColor(sf::Color::Black);
 
-	spellDamage = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE)
-		, sf::Vector2f(attackDamage->getPosition().x, AVATAR_POS_Y + TEXT_SIZE * 3));
-	spellDamage->setString("Spell: 00000");
-	spellDamage->setColor(sf::Color::Black);
+	score = new StatisticBox(sf::Vector2f(STATS_WIDTH, SCORE_TEXT_SIZE), sf::Vector2f(AVATAR_POS_X + AVATAR_WIDTH + 9, AVATAR_POS_Y + AVATAR_HEIGHT / 2.0f));
+	score->setString("Score: 0");
+	score->setColor(sf::Color::White);
 
-	armor = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE)
-		, sf::Vector2f(attackDamage->getPosition().x + attackDamage->getSize().x + STATS_OFFSET_X * 2, AVATAR_POS_Y));
-	armor->setString("Armor: 00000");
-	armor->setColor(sf::Color::Black);
-
-	spellResist = new StatisticBox(sf::Vector2f(STATS_WIDTH, TEXT_SIZE)
-		, sf::Vector2f(attackDamage->getPosition().x + attackDamage->getSize().x + STATS_OFFSET_X * 2, AVATAR_POS_Y + TEXT_SIZE * 3));
-	spellResist->setString("Shield: 00000");
-	spellResist->setColor(sf::Color::Black);
-
-	this->addGameObject(spellResist);
-	this->addGameObject(armor);
-	this->addGameObject(spellDamage);
-	this->addGameObject(attackDamage);
 	this->addGameObject(health);
-	this->addGameObject(mana);
+	this->addGameObject(score);
 }
 
 
 MenuPanel::~MenuPanel()
 {
-	delete corner;
+	delete menuBox;
+	//delete corner;
 	delete background;
 }
 
@@ -82,28 +69,44 @@ void MenuPanel::render(sf::RenderWindow & window)
 {
 	background->render(window);
 
-	// tope left 
-	corner->setPosition(0, pos.y);
-	corner->setScale(1, 1);
-	corner->render(window);
-	// top right
-	corner->setPosition(SCREEN_WIDTH, pos.y);
-	corner->setScale(-1, 1);
-	corner->render(window);
-	// bottom left
-	corner->setPosition(0, SCREEN_HEIGHT);
-	corner->setScale(1, -1);
-	corner->render(window);
-	// bottom right 
-	corner->setPosition(SCREEN_WIDTH, SCREEN_HEIGHT);
-	corner->setScale(-1, -1);
-	corner->render(window);
+	//// tope left 
+	//corner->setPosition(0, pos.y);
+	//corner->setScale(1, 1);
+	//corner->render(window);
+	//// top right
+	//corner->setPosition(SCREEN_WIDTH, pos.y);
+	//corner->setScale(-1, 1);
+	//corner->render(window);
+	//// bottom left
+	//corner->setPosition(0, SCREEN_HEIGHT);
+	//corner->setScale(1, -1);
+	//corner->render(window);
+	//// bottom right 
+	//corner->setPosition(SCREEN_WIDTH, SCREEN_HEIGHT);
+	//corner->setScale(-1, -1);
+	//corner->render(window);
+	menuBox->render(window);
+	window.draw(avatarBox);
 	avatar.render(window);
 	this->renderChildren(window);
 }
 
 void MenuPanel::receiveMessage(Package * package)
 {
+	if (package->get<bool>("score"))
+	{
+		++scoreVal;
+		string temp = "Score: " + to_string(scoreVal);
+		score->setString(&temp[0]);
+	}
+	if (package->get<bool>("HP"))
+	{
+		if (HP.size())
+		{
+			HP.pop_back();
+			health->setString(&HP[0]);
+		}
+	}
 }
 
 std::string MenuPanel::getName()

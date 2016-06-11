@@ -66,10 +66,10 @@ sf::Vector2f Animation::getScale()
 	if (curID != -1)
 		return sprite_map[curID].getScale();
 }
-void Animation::update(sf::Clock & gameTime)
+void Animation::update()
  {
 	if (curID != -1)
-		sprite_map[curID].update(gameTime);
+		sprite_map[curID].update();
 }
 
 void Animation::render(sf::RenderWindow & window)

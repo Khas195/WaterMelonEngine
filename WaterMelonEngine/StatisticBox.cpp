@@ -6,7 +6,7 @@ StatisticBox::StatisticBox(sf::Vector2f size, sf::Vector2f position) : size(size
 	font.loadFromFile("./fonts/Krumkake.ttf");
 	text.setPosition(position);
 	text.setFont(font);
-	text.setCharacterSize(TEXT_SIZE);
+	text.setCharacterSize(size.y);
 }
 StatisticBox::~StatisticBox()
 {

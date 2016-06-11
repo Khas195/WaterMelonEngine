@@ -152,16 +152,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ActionAdapter.cpp" />
     <ClCompile Include="ActionPanel.cpp" />
     <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="AttackAction.cpp" />
     <ClCompile Include="DefaultObject.cpp" />
+    <ClCompile Include="DieAction.cpp" />
     <ClCompile Include="DungeonMapObject.cpp" />
     <ClCompile Include="DungeonScene.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="HeroObject.cpp" />
     <ClCompile Include="IObserver.cpp" />
     <ClCompile Include="MapTile.cpp" />
     <ClCompile Include="MenuPanel.cpp" />
+    <ClCompile Include="MonsterObject.cpp" />
+    <ClCompile Include="MoveAction.cpp" />
     <ClCompile Include="Package.cpp" />
     <ClCompile Include="PackageManager.cpp" />
     <ClCompile Include="PostOffice.cpp" />
@@ -171,28 +177,36 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="StatisticBox.cpp" />
+    <ClCompile Include="TestUnit.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TileLayer.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="TilesetTile.cpp" />
+    <ClCompile Include="UnitAction.cpp" />
     <ClCompile Include="WaterMelonEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ActionAdapter.h" />
     <ClInclude Include="ActionButton.h" />
     <ClInclude Include="ActionPanel.h" />
     <ClInclude Include="Animation.h" />
+    <ClInclude Include="AttackAction.h" />
     <ClInclude Include="BaseObject.h" />
     <ClInclude Include="DefaultObject.h" />
     <ClInclude Include="Definition.h" />
+    <ClInclude Include="DieAction.h" />
     <ClInclude Include="DungeonMapObject.h" />
     <ClInclude Include="DungeonScene.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Helper.h" />
+    <ClInclude Include="HeroObject.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="MenuPanel.h" />
+    <ClInclude Include="MonsterObject.h" />
+    <ClInclude Include="MoveAction.h" />
     <ClInclude Include="Package.h" />
     <ClInclude Include="PackageManager.h" />
     <ClInclude Include="PostOffice.h" />
@@ -201,12 +215,14 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="StatisticBox.h" />
+    <ClInclude Include="TestUnit.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="MapTile.h" />
     <ClInclude Include="TileLayer.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="TilesetTile.h" />
+    <ClInclude Include="UnitAction.h" />
     <ClInclude Include="WaterMelonEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
