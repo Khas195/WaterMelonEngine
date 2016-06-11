@@ -2,11 +2,10 @@
 #include "TextureManager.h"
 #include "Sprite.h"
 #include "Actor.h"
-#include <memory>
 #include <assert.h>
 
 DieAction::DieAction(std::shared_ptr<Actor> actor)
-	: IActorCommand::IActorCommand(actor)
+	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
 }

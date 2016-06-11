@@ -3,7 +3,7 @@
 #include "DieAction.h"
 DeadState::DeadState(std::shared_ptr<Actor> actor) : IActorState::IActorState(actor)
 {
-	die = std::make_shared<DieAction>();
+	die = std::make_shared<DieAction>(actor);
 }
 
 

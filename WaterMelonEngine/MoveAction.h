@@ -2,7 +2,6 @@
 #include "ICommand.h"
 #include <string>
 
-class Actor;
 class MoveUp : public IActorCommand
 {
 public:
