@@ -5,7 +5,7 @@
 #include <assert.h>
 
 DieAction::DieAction(Actor * actor)
-	: ICommand::ICommand(actor)
+	: IActorCommand::IActorCommand(actor)
 {
 	assert(actor != nullptr);
 }
@@ -13,4 +13,14 @@ DieAction::DieAction(Actor * actor)
 void DieAction::execute()
 {
 	actor->die();
+}
+
+bool DieAction::isDone()
+{
+	return done;
+}
+
+void DieAction::finished()
+{
+	done = true;
 }

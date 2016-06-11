@@ -1,6 +1,6 @@
 #include "ICommand.h"
 
-ICommand::ICommand(Actor * actor)
+IActorCommand::IActorCommand(Actor * actor)
 	: actor(actor)
 {
 }

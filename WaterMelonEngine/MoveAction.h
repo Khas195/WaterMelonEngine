@@ -3,30 +3,54 @@
 #include <string>
 
 class Actor;
-class MoveUp : ICommand
+class MoveUp : IActorCommand
 {
 public:
 	MoveUp(Actor * actor);
 	virtual void execute() override;
+
+	// Inherited via IActorCommand
+	virtual bool isDone() override;
+
+	// Inherited via IActorCommand
+	virtual void finished() override;
 };
 
-class MoveLeft : ICommand
+class MoveLeft : IActorCommand
 {
 public:
 	MoveLeft(Actor * actor);
 	virtual void execute() override;
+
+	// Inherited via IActorCommand
+	virtual bool isDone() override;
+
+	// Inherited via IActorCommand
+	virtual void finished() override;
 };
 
-class MoveDown : ICommand
+class MoveDown : IActorCommand
 {
 public:
 	MoveDown(Actor * actor);
 	virtual void execute() override;
+
+	// Inherited via IActorCommand
+	virtual bool isDone() override;
+
+	// Inherited via IActorCommand
+	virtual void finished() override;
 };
 
-class MoveRight : ICommand
+class MoveRight : IActorCommand
 {
 public:
 	MoveRight(Actor * actor);
 	virtual void execute() override;
+
+	// Inherited via IActorCommand
+	virtual bool isDone() override;
+
+	// Inherited via IActorCommand
+	virtual void finished() override;
 };
