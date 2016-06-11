@@ -1,168 +1,161 @@
 #include "HeroObject.h"
-#include "Sprite.h"
-#include "DungeonMapObject.h"
-#include "PackageManager.h"
-#include "Package.h"
-#include "PostOffice.h"
-#include "WaterMelonEngine.h"
 #include "TextureManager.h"
+#include "Sprite.h"
+#include <iostream>
 
-#define MOVEMENT_SPEED 1
-
-
-HeroObject::HERO_ACTION currentAttack;
-bool isAttacking = false;
-sf::Clock attack_clock;
-
-HeroObject::HeroObject(sf::Vector2f startPosition)
+sf::Clock attackClock;
+sf::Clock dieClock;
+void HeroObject::onAttack()
 {
-	int norm_id = TextureManager::requestID("./sprites/hero.png");
-	int att_id = TextureManager::requestID("./sprites/hero_attack.png");
-	Sprite move(TextureManager::requestTexture(norm_id), sf::Vector2f(64, 64), sf::Vector2f(9, 21));
-	Sprite fall(TextureManager::requestTexture(norm_id), sf::Vector2f(64, 64), sf::Vector2f(6, 21));
-	Sprite attack(TextureManager::requestTexture(att_id), sf::Vector2f(192, 192), sf::Vector2f(6, 4));
-	heroRect.setSize(sf::Vector2f(32,32));
-	heroRect.setOutlineThickness(1);
-	heroRect.setFillColor(sf::Color::Transparent);
-	heroRect.setOutlineColor(sf::Color::Red);
-
-	move.setTimePerFrame(0.05f);
-	fall.setTimePerFrame(0.01f);
-	attack.setTimePerFrame(0.1f);
-
-	heroRect.setPosition(startPosition);
-	move.setPosition(startPosition);
-	fall.setPosition(startPosition);
-	attack.setPosition(startPosition.x - ATTACK_OFFSET, startPosition.y - ATTACK_OFFSET);
-
-	double scaleFactor = TILE_SIZE / 64.0f;
-	move.setScale(scaleFactor, scaleFactor);
-	fall.setScale(scaleFactor, scaleFactor);
-	attack.setScale(scaleFactor, scaleFactor);
-
-	box = sf::Rect<float>(startPosition, sf::Vector2f(TILE_SIZE, TILE_SIZE));
-
-	for (int i = MOVE_UP; i <= MOVE_RIGHT; ++i)
+	if (attackClock.getElapsedTime().asMilliseconds() > HERO_ATTACK_SPD * 6)
 	{
-		move.setFixedRow(i);
-		heroAction.set(i, move);
+		isAttack = false;
 	}
-
-	for (int i = ATTACK_UP; i <= ATTACK_RIGHT; ++i)
-	{
-		attack.setFixedRow(i);
-		heroAction.set(i, attack);
-	}
-
-	fall.setFixedRow(FALL);
-	heroAction.set(FALL, fall);
-	heroAction.trigger(MOVE_RIGHT);
-	heroAction.go();
 }
+
+void HeroObject::onMove()
+{
+}
+
+void HeroObject::onDie()
+{
+}
+
+HeroObject::HeroObject()
+{
+	isAttack = isDie = false;
+
+	int moveID = TextureManager::requestID("./sprites/hero_move.png");
+	int attackID = TextureManager::requestID("./sprites/hero_attack.png");
+	int dieID = TextureManager::requestID("./sprites/hero_die.png");
+
+	Sprite moveSprite(TextureManager::requestTexture(moveID), sf::Vector2f(64, 64), sf::Vector2u(9, 4));
+	Sprite attackSprite(TextureManager::requestTexture(attackID), sf::Vector2f(192, 192), sf::Vector2u(6, 4));
+	Sprite dieSprite(TextureManager::requestTexture(dieID), sf::Vector2f(64, 64), sf::Vector2u(6, 1));
+
+	moveSprite.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
+	attackSprite.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
+	dieSprite.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
+
+	moveSprite.setTimePerFrame(MOVE_TIME / 1000.0f);
+	attackSprite.setTimePerFrame(HERO_ATTACK_SPD / 1000.0f);
+	dieSprite.setTimePerFrame(DIE_TIME / 1000.0f);
+
+	attackSprite.move(-32, -32);
+
+	move = new Animation();
+	attack = new Animation();
+	die = new Animation();
+
+	dieSprite.setFixedRow(0);
+	die->set(DIE, dieSprite);
+	FORI(0, 4, i)
+	{
+		moveSprite.setFixedRow(i);
+		attackSprite.setFixedRow(i);
+		move->set(MOVE + i + 1, moveSprite);
+		attack->set(ATTACK + i + 1, attackSprite);
+	}
+
+	collisionBox = sf::FloatRect(0, 0, 64, 64);
+}
+
 
 HeroObject::~HeroObject()
 {
+	delete move;
+	delete attack;
+	delete die;
 }
-//bool isSent = false;
+
+const sf::FloatRect & HeroObject::getCollisionBox()
+{
+	return collisionBox;
+}
+
+const sf::Vector2f & HeroObject::getPosition()
+{
+	return position;
+}
+
+void HeroObject::setPosition(sf::Vector2f position)
+{
+	this->position = position;
+	move->setPosition(position.x, position.y);
+	attack->setPosition(position.x - 32, position.y - 32);
+	die->setPosition(position.x, position.y);
+	collisionBox.left = position.x, collisionBox.top = position.y;
+}
+
+void HeroObject::moveBy(float x, float y)
+{
+	position = position + sf::Vector2f(x, y);
+	move->move(x, y);
+	attack->move(x, y);
+	die->move(x, y);
+	collisionBox.left += x, collisionBox.top += y;
+}
+
 void HeroObject::update(sf::Event::EventType & type)
 {
-	//if (!isSent)
-	//{
-	//	Package * temp = PackageManager::getInstance()->requestPackage();
-	//	temp->put<HeroObject>("selected", this);
-	//	office->notifyAllObserver(temp);
-	//	PackageManager::getInstance()->returnPackage(temp);
-	//	isSent = true;
-	//}
-	if (isAttacking && attack_clock.getElapsedTime().asMilliseconds() > 600)
+	std::cout << "Hero: " << position.x << " - " << position.y << std::endl;
+	if (isDie)
+		onDie();
+	else if (isAttack)
+		onAttack();
+	else
 	{
-		isAttacking = false;
-		switch (heroAction.currentTrigger())
+
+		move->stop();
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 		{
-		case ATTACK_UP:
-			heroAction.trigger(MOVE_UP);
-			break;
-		case ATTACK_LEFT:
-			heroAction.trigger(MOVE_LEFT);
-			break;
-		case ATTACK_DOWN:
-			heroAction.trigger(MOVE_DOWN);
-			break;
-		case ATTACK_RIGHT:
-			heroAction.trigger(MOVE_RIGHT);
-			break;
+			move->trigger(MOVE_UP);
+			moveBy(0, -HERO_MOVE_SPD);
+			move->go();
 		}
-	}
-	if (!isAttacking)
-		heroAction.stop();
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-	{
-		if (!isAttacking || MOVE_UP - heroAction.currentTrigger() != 8)
-			heroAction.trigger(MOVE_UP);
-		heroAction.move(0, -MOVEMENT_SPEED);
-		heroRect.move(0, -MOVEMENT_SPEED);
-		heroAction.go();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-	{
-		if (!isAttacking || MOVE_LEFT - heroAction.currentTrigger() != 8)
-			heroAction.trigger(MOVE_LEFT);
-		heroAction.move(-MOVEMENT_SPEED, 0);
-		heroRect.move(-MOVEMENT_SPEED, 0);
-		heroAction.go();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-	{
-		if (!isAttacking || MOVE_DOWN - heroAction.currentTrigger() != 8)
-			heroAction.trigger(MOVE_DOWN);
-		heroAction.move(0, MOVEMENT_SPEED);
-		heroRect.move(0, MOVEMENT_SPEED);
-		heroAction.go();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-		if (!isAttacking || MOVE_RIGHT - heroAction.currentTrigger() != 8)
-			heroAction.trigger(MOVE_RIGHT);
-		heroAction.move(MOVEMENT_SPEED, 0);
-		heroRect.move(MOVEMENT_SPEED, 0);
-		heroAction.go();
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
-	{
-		isAttacking = true;
-		attack_clock.restart();
-		switch (heroAction.currentTrigger())
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-		case MOVE_UP:
-			heroAction.trigger(ATTACK_UP);
-			break;
-		case MOVE_LEFT:
-			heroAction.trigger(ATTACK_LEFT);
-			break;
-		case MOVE_DOWN:
-			heroAction.trigger(ATTACK_DOWN);
-			break;
-		case MOVE_RIGHT:
-			heroAction.trigger(ATTACK_RIGHT);
-			break;
+			move->trigger(MOVE_LEFT);
+			moveBy(-HERO_MOVE_SPD, 0);
+			move->go();
 		}
-		heroAction.go();
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			move->trigger(MOVE_DOWN);
+			moveBy(0, HERO_MOVE_SPD);
+			move->go();
+		}
+		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+		{
+			move->trigger(MOVE_RIGHT);
+			moveBy(HERO_MOVE_SPD, 0);
+			move->go();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::K))
+		{
+			isAttack = true;
+			attack->trigger(move->currentTrigger() + ATTACK - MOVE);
+			attack->go();
+			attackClock.restart();
+		}
 	}
 }
 
 void HeroObject::render(sf::RenderWindow & window)
 {
-	heroAction.render(window);
-	window.draw(heroRect);
+	if (isDie)
+		die->render(window);
+	else if (isAttack)
+		attack->render(window);
+	else
+		move->render(window);
 }
 
 void HeroObject::receiveMessage(Package * package)
 {
-	//HeroObject * temp = package->get<HeroObject>("selected");
-	//std::cout << temp->getName() << std::endl;
 }
 
 std::string HeroObject::getName()
 {
-	return "HERO NEVER DIE!!!";
+	return "Bald Scalp";
 }

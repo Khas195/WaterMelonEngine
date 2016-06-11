@@ -30,20 +30,11 @@
     <ClCompile Include="Scene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SquareObject.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="GameScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultObject.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMap.cpp">
-      <Filter>GameObject\TileMap</Filter>
     </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>CoreLibraries\SoundManager</Filter>
@@ -57,11 +48,40 @@
     <ClCompile Include="DungeonMapObject.cpp">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
-    <ClCompile Include="ActionPanel.cpp" />
     <ClCompile Include="MenuPanel.cpp" />
     <ClCompile Include="StatisticBox.cpp" />
-    <ClCompile Include="HeroObject.cpp">
+    <ClCompile Include="TileLayer.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Helper.cpp" />
+    <ClCompile Include="MapTile.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TilesetTile.cpp" />
+    <ClCompile Include="Map.cpp">
+      <Filter>GameObject\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="TestUnit.cpp">
       <Filter>MonsterKill\DungeonObject</Filter>
+    </ClCompile>
+    <ClCompile Include="AttackAction.cpp">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="DieAction.cpp">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveAction.cpp">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroObject.cpp" />
+    <ClCompile Include="MonsterObject.cpp">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClCompile>
+    <ClCompile Include="ICommand.cpp">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>MonsterKill\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -100,12 +120,6 @@
     <ClInclude Include="Scene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SquareObject.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="GameScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultObject.h">
       <Filter>GameObject</Filter>
     </ClInclude>
@@ -113,16 +127,10 @@
       <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Definition.h" />
-    <ClInclude Include="TileMap.h">
-      <Filter>GameObject\TileMap</Filter>
-    </ClInclude>
     <ClInclude Include="SoundManager.h">
       <Filter>CoreLibraries\SoundManager</Filter>
     </ClInclude>
     <ClInclude Include="TileSet.h">
-      <Filter>GameObject\TileMap</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
     <ClInclude Include="DungeonScene.h">
@@ -131,12 +139,40 @@
     <ClInclude Include="DungeonMapObject.h">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
-    <ClInclude Include="ActionButton.h" />
-    <ClInclude Include="ActionPanel.h" />
     <ClInclude Include="MenuPanel.h" />
     <ClInclude Include="StatisticBox.h" />
-    <ClInclude Include="HeroObject.h">
+    <ClInclude Include="TileLayer.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Helper.h" />
+    <ClInclude Include="MapTile.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TilesetTile.h" />
+    <ClInclude Include="Map.h">
+      <Filter>GameObject\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="TestUnit.h">
       <Filter>MonsterKill\DungeonObject</Filter>
+    </ClInclude>
+    <ClInclude Include="AttackAction.h">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="DieAction.h">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveAction.h">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroObject.h" />
+    <ClInclude Include="MonsterObject.h">
+      <Filter>MonsterKill\DungeonObject</Filter>
+    </ClInclude>
+    <ClInclude Include="ICommand.h">
+      <Filter>MonsterKill\Actor\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>MonsterKill\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +211,15 @@
     </Filter>
     <Filter Include="MonsterKill\DungeonScene">
       <UniqueIdentifier>{0f653353-8fac-4892-975c-a58ab348bde0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MonsterKill\Actor">
+      <UniqueIdentifier>{10879772-ad56-4f61-b875-af00160e502d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MonsterKill\Actor\IActorState">
+      <UniqueIdentifier>{0f945e1e-2bc3-4712-a095-349bedcd8b9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MonsterKill\Actor\Command">
+      <UniqueIdentifier>{5c787d3c-06b7-414f-9b3b-8956c6c61760}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

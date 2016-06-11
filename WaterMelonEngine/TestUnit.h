@@ -1,15 +1,14 @@
 #pragma once
+#include <SFML\Graphics.hpp>
 #include "GameObject.h"
-#include "SFML\Graphics.hpp"
-#include "Map.h"
-#include "Definition.h"
-
-class DungeonMapObject : public GameObject
+#include "Animation.h"
+class TestUnit : public GameObject
 {
-	Map * map;
+	sf::Sprite * test;
+	sf::Transform transform;
 public:
-	DungeonMapObject();
-	~DungeonMapObject();
+	TestUnit();
+	~TestUnit();
 
 	// Inherited via GameObject
 	virtual void update(sf::Event::EventType& type) override;
@@ -17,3 +16,4 @@ public:
 	virtual void receiveMessage(Package * package) override;
 	virtual std::string getName() override;
 };
+

@@ -9,15 +9,15 @@ class MenuPanel : public GameObject
 	sf::Font font;
 	Sprite* background;
 	Sprite* corner;
+	Sprite* menuBox;
 	sf::Vector2f pos;
 	sf::Vector2f size;
+	sf::RectangleShape avatarBox;
 	Animation avatar;
 	StatisticBox* health;
-	StatisticBox* mana;
-	StatisticBox* attackDamage;
-	StatisticBox* spellDamage;
-	StatisticBox* armor;
-	StatisticBox* spellResist;
+	StatisticBox* score;
+	std::string HP;
+	int scoreVal;
 public:
 	MenuPanel();
 	~MenuPanel();

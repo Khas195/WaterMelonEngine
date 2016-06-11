@@ -2,25 +2,32 @@
 #include <SFML\Graphics.hpp>
 #include "GameObject.h"
 #include "Animation.h"
-class HeroObject : public GameObject
+#include <string>
+
+class HeroObject;
+class MonsterObject : public GameObject
 {
+	HeroObject * enemy;
+
 	sf::Vector2f position;
 
 	sf::FloatRect collisionBox;
 
+	float movementSpeed;
+
 	Animation * move;
-	Animation * attack;
+	//Animation * attack;
 	Animation * die;
 
-	bool isAttack;
+	//bool isAttack;
 	bool isDie;
 
-	void onAttack();
+	//void onAttack();
 	void onMove();
 	void onDie();
 public:
-	HeroObject();
-	~HeroObject();
+	MonsterObject(std::string source, std::string name, float movementSpeed, HeroObject * enemy);
+	~MonsterObject();
 
 	const sf::FloatRect & getCollisionBox();
 	const sf::Vector2f & getPosition();
