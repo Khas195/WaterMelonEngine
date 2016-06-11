@@ -1,10 +1,12 @@
 #pragma once
-#include "UnitAction.h"
+#include "ICommand.h"
 #include <string>
-class DieAction : UnitAction
+
+class Actor;
+class DieAction : ICommand
 {
 public:
-	DieAction(std::string source);
-	virtual UNIT_ACTION action(UNIT_ACTION action) override;
+	DieAction(Actor * actor);
+	virtual void execute() override;
 };
 

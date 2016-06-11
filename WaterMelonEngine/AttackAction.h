@@ -1,10 +1,10 @@
 #pragma once
-#include "UnitAction.h"
+#include "ICommand.h"
 #include <string>
-class AttackAction : UnitAction
+class AttackAction : ICommand
 {
 public:
-	AttackAction(std::string source, sf::Int32 millisecondPerFrame);
-	virtual UNIT_ACTION action(UNIT_ACTION action) override;
+	AttackAction(Actor * actor);
+	virtual void execute() override;
 };
 

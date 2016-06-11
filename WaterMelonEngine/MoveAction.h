@@ -1,10 +1,32 @@
 #pragma once
-#include "UnitAction.h"
+#include "ICommand.h"
 #include <string>
-class MoveAction : UnitAction
+
+class Actor;
+class MoveUp : ICommand
 {
 public:
-	MoveAction(std::string source);
-	virtual UNIT_ACTION action(UNIT_ACTION action) override;
+	MoveUp(Actor * actor);
+	virtual void execute() override;
 };
 
+class MoveLeft : ICommand
+{
+public:
+	MoveLeft(Actor * actor);
+	virtual void execute() override;
+};
+
+class MoveDown : ICommand
+{
+public:
+	MoveDown(Actor * actor);
+	virtual void execute() override;
+};
+
+class MoveRight : ICommand
+{
+public:
+	MoveRight(Actor * actor);
+	virtual void execute() override;
+};
