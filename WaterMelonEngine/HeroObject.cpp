@@ -176,3 +176,8 @@ Actor::UNIT_ACTION HeroObject::getCurrentAction()
 {
 	return curAction;
 }
+
+const std::shared_ptr<IActorCommand> HeroObject::getCurrentCommand()
+{
+	return curCommand;
+}

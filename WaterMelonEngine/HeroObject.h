@@ -43,5 +43,6 @@ public:
 	virtual int getCurrentDirection() override;
 	virtual ACTOR_STATE getCurrentState() override;
 	virtual UNIT_ACTION getCurrentAction() override;
+	virtual const std::shared_ptr<IActorCommand> getCurrentCommand() override;
 };
 
