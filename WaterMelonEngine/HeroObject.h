@@ -3,21 +3,25 @@
 #include "Animation.h"
 #include "Actor.h"
 #include <memory>
+#include <vector>
 
 class HeroObject : public Actor
 {
 	sf::Vector2f position;
 
-	sf::FloatRect collisionBox;
+	sf::FloatRect collisionBox[4];
 
 	std::unique_ptr<Animation> moveAnimation;
 	std::unique_ptr<Animation>  attackAnimation;
 	std::unique_ptr<Animation>  dieAnimation;
+
+protected:
+	virtual bool intersect(GameObject * object) override;
 public:
 	HeroObject();
 	~HeroObject();
 
-	const sf::FloatRect & getCollisionBox();
+	virtual sf::FloatRect * getCollisionBox() override;
 	const sf::Vector2f & getPosition();
 	void setPosition(sf::Vector2f position);
 	void moveBy(float x, float y);
@@ -28,21 +32,26 @@ public:
 	virtual void receiveMessage(Package * package) override;
 	virtual std::string getName() override;
 
+
+	virtual void onCollistion(GameObject * object) override;
+
 	// actor
 	virtual void moveUp() override;
 	virtual void moveLeft() override;
 	virtual void moveDown() override;
 	virtual void moveRight() override;
 	virtual void attack() override;
+	virtual void knockBack() override;
 	virtual void die() override;
 
 	virtual void setCurrentState(ACTOR_STATE state) override;
 	virtual void setCurrentCommand(std::shared_ptr<IActorCommand> command) override;
-	virtual void setCurrentAnimation(UNIT_ACTION command) override;
+	virtual void setCurrentAction(UNIT_ACTION action) override;
 
 	virtual int getCurrentDirection() override;
 	virtual ACTOR_STATE getCurrentState() override;
 	virtual UNIT_ACTION getCurrentAction() override;
 	virtual const std::shared_ptr<IActorCommand> getCurrentCommand() override;
+
 };
 

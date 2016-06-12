@@ -61,9 +61,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
-    <ClCompile Include="TestUnit.cpp">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClCompile>
     <ClCompile Include="AttackAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
@@ -73,10 +70,6 @@
     <ClCompile Include="MoveAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
-    <ClCompile Include="HeroObject.cpp" />
-    <ClCompile Include="MonsterObject.cpp">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClCompile>
     <ClCompile Include="ICommand.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
@@ -85,6 +78,9 @@
     </ClCompile>
     <ClCompile Include="DeadState.cpp">
       <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroObject.cpp">
+      <Filter>MonsterKill\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,21 +151,11 @@
     <ClInclude Include="Map.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
-    <ClInclude Include="TestUnit.h">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClInclude>
-    <ClInclude Include="AttackAction.h">
-      <Filter>MonsterKill\Actor\Command</Filter>
-    </ClInclude>
     <ClInclude Include="DieAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
     <ClInclude Include="MoveAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
-    </ClInclude>
-    <ClInclude Include="HeroObject.h" />
-    <ClInclude Include="MonsterObject.h">
-      <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
     <ClInclude Include="ICommand.h">
       <Filter>MonsterKill\Actor\Command</Filter>
@@ -185,6 +171,9 @@
     </ClInclude>
     <ClInclude Include="DeadState.h">
       <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroObject.h">
+      <Filter>MonsterKill\Actor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
