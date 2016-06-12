@@ -16,5 +16,8 @@ public:
 
 	// Inherited via IActorState
 	virtual void update(sf::Event::EventType & type) override;
+
+	// Inherited via IActorState
+	virtual void receiveMessage(Package * package) override;
 };
 

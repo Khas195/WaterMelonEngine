@@ -61,9 +61,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>GameObject\TileMap</Filter>
     </ClCompile>
-    <ClCompile Include="TestUnit.cpp">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClCompile>
     <ClCompile Include="AttackAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
@@ -73,7 +70,6 @@
     <ClCompile Include="MoveAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
-    <ClCompile Include="HeroObject.cpp" />
     <ClCompile Include="MonsterObject.cpp">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClCompile>
@@ -85,6 +81,18 @@
     </ClCompile>
     <ClCompile Include="DeadState.cpp">
       <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClCompile>
+    <ClCompile Include="HeroObject.cpp">
+      <Filter>MonsterKill\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="KnockBack.cpp">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameDirector.cpp">
+      <Filter>GameObject\GameDirector</Filter>
+    </ClCompile>
+    <ClCompile Include="StartGame.cpp">
+      <Filter>GameObject\GameDirector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -155,9 +163,6 @@
     <ClInclude Include="Map.h">
       <Filter>GameObject\TileMap</Filter>
     </ClInclude>
-    <ClInclude Include="TestUnit.h">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClInclude>
     <ClInclude Include="AttackAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
@@ -167,7 +172,6 @@
     <ClInclude Include="MoveAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
-    <ClInclude Include="HeroObject.h" />
     <ClInclude Include="MonsterObject.h">
       <Filter>MonsterKill\DungeonObject</Filter>
     </ClInclude>
@@ -185,6 +189,21 @@
     </ClInclude>
     <ClInclude Include="DeadState.h">
       <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClInclude>
+    <ClInclude Include="HeroObject.h">
+      <Filter>MonsterKill\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="KnockBack.h">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameDirector.h">
+      <Filter>GameObject\GameDirector</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>GameObject\GameDirector</Filter>
+    </ClInclude>
+    <ClInclude Include="StartGame.h">
+      <Filter>GameObject\GameDirector</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +251,9 @@
     </Filter>
     <Filter Include="MonsterKill\Actor\Command">
       <UniqueIdentifier>{5c787d3c-06b7-414f-9b3b-8956c6c61760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\GameDirector">
+      <UniqueIdentifier>{9c927c7e-f380-417f-8824-b8bd00afe99c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

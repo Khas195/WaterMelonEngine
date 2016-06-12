@@ -4,6 +4,7 @@
 #include "DungeonMapObject.h"
 #include "MenuPanel.h"
 #include "HeroObject.h"
+#include "GameDirector.h"
 //#include "MonsterObject.h"
 
 DungeonScene::DungeonScene()
@@ -15,10 +16,14 @@ DungeonScene::DungeonScene()
 	HeroObject* hero = new HeroObject();
 	//MonsterObject * monster = new MonsterObject("./sprites/darkElf/", "rouge", MONSTER_MOVE_SPD_MIN, hero);
 	hero->setPosition(sf::Vector2f(300, 300));
+	GameDirector *director = new GameDirector(this);
+
+
 	//monster->setPosition(sf::Vector2f(100, 64));
 	this->addGameObject(menu);
 	this->addGameObject(dungeon);
 	this->addGameObject(hero);
+	this->addGameObject(director);
 	//this->addGameObject(monster);
 	this->office->add(dungeon);
 	this->office->add(menu);

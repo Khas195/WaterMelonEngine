@@ -18,3 +18,7 @@ void DeadState::update(sf::Event::EventType & type)
 		curActor->setCurrentCommand(die);
 	}
 }
+
+void DeadState::receiveMessage(Package * package)
+{
+}

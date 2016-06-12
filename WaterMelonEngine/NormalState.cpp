@@ -46,3 +46,7 @@ void NormalState::update(sf::Event::EventType & type)
 	}
 }
 
+void NormalState::receiveMessage(Package * package)
+{
+}
+

@@ -1,18 +1,14 @@
 #pragma once
 #include "IActorState.h"
-#include <memory>
 class IActorCommand;
-class DeadState : public IActorState
+class KnockBack : public IActorState
 {
-	std::shared_ptr<IActorCommand> die;
+	std::shared_ptr<IActorCommand> knockBack;
 public:
-	DeadState(std::shared_ptr<Actor> actor);
-	~DeadState();
+	KnockBack(std::shared_ptr<Actor> actor);
+	~KnockBack();
 
 	// Inherited via IActorState
 	virtual void update(sf::Event::EventType & type) override;
-
-	// Inherited via IActorState
 	virtual void receiveMessage(Package * package) override;
 };
-
