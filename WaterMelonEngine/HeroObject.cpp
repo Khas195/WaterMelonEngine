@@ -57,6 +57,7 @@ HeroObject::HeroObject()
 		collisionBox[i] = sf::FloatRect(0, 0, TILE_SIZE, TILE_SIZE);
 	}
 
+	// TODO: change state to NORMAL
 }
 
 
