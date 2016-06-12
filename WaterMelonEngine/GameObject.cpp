@@ -1,4 +1,5 @@
 #include "GameObject.h"
+#include "Definition.h"
 
 GameObject::~GameObject()
 {
@@ -44,11 +45,30 @@ void GameObject::awake()
 	}
 	isAwake = true;
 }
+void GameObject::onCollistion(GameObject * object)
+{
+	//TODO: nothing 
+}
+sf::FloatRect * GameObject::getCollisionBox()
+{
+	return nullptr;
+}
 void GameObject::updateChildren(sf::Event::EventType& type)
 {
 	for (GameObject* gameObject : childObjects)
 	{
 		gameObject->update(type);
+	}
+
+	for (auto objA = childObjects.begin(); objA != childObjects.end(); ++objA)
+	{
+		for (auto objB = objA + 1; objB != childObjects.end(); ++objB)
+		{
+			if ((*objA)->intersect(*objB))
+			{
+				(*objA)->onCollistion(*objB);
+			}
+		}
 	}
 }
 
@@ -58,6 +78,12 @@ void GameObject::renderChildren(sf::RenderWindow & window)
 	{
 		gameObject->render(window);
 	}
+}
+
+bool GameObject::intersect(GameObject * object)
+{
+	//TODO: always fail
+	return false;
 }
 
 

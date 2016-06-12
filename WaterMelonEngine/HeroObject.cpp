@@ -2,11 +2,27 @@
 #include "TextureManager.h"
 #include "Sprite.h"
 #include "ICommand.h"
+#include "IActorState.h"
+#include "Package.h"
 #include <iostream>
 
+int knockBackDirection = -1;
+sf::Vector2f targetPos;
+sf::Clock attackClock, knockbackClock, moveClock;
+bool HeroObject::intersect(GameObject * object)
+{
+	if (object->getCollisionBox())
+	{
+		FOREACH(collisionBox, box)
+		{
+			if (box.intersects(*object->getCollisionBox()))
+				return true;
+		}
+	}
+	return false;
+}
 HeroObject::HeroObject()
 {
-
 	int moveID = TextureManager::requestID("./sprites/hero_move.png");
 	int attackID = TextureManager::requestID("./sprites/hero_attack.png");
 	int dieID = TextureManager::requestID("./sprites/hero_die.png");
@@ -37,9 +53,10 @@ HeroObject::HeroObject()
 		attackSprite.setFixedRow(i);
 		moveAnimation->set(MOVE + i + 1, moveSprite);
 		attackAnimation->set(ATTACK + i + 1, attackSprite);
+
+		collisionBox[i] = sf::FloatRect(0, 0, TILE_SIZE, TILE_SIZE);
 	}
 
-	collisionBox = sf::FloatRect(0, 0, 64, 64);
 }
 
 
@@ -47,7 +64,7 @@ HeroObject::~HeroObject()
 {
 }
 
-const sf::FloatRect & HeroObject::getCollisionBox()
+sf::FloatRect * HeroObject::getCollisionBox()
 {
 	return collisionBox;
 }
@@ -63,7 +80,11 @@ void HeroObject::setPosition(sf::Vector2f position)
 	moveAnimation->setPosition(position.x, position.y);
 	attackAnimation->setPosition(position.x - 32, position.y - 32);
 	dieAnimation->setPosition(position.x, position.y);
-	collisionBox.left = position.x, collisionBox.top = position.y;
+	FOREACH(collisionBox, box)
+	{
+		box.left = position.x, box.top = position.y;
+	}
+	targetPos = position;
 }
 
 void HeroObject::moveBy(float x, float y)
@@ -72,14 +93,17 @@ void HeroObject::moveBy(float x, float y)
 	moveAnimation->move(x, y);
 	attackAnimation->move(x, y);
 	dieAnimation->move(x, y);
-	collisionBox.left += x, collisionBox.top += y;
+	FOREACH(collisionBox, box)
+	{
+		box.left += x, box.top += y;
+	}
 }
 
 void HeroObject::update(sf::Event::EventType & type)
 {
 	if (isEnable && isAwake)
 	{
-		//curState->update(type);
+		curState->update(type);
 	}
 }
 
@@ -87,9 +111,9 @@ void HeroObject::render(sf::RenderWindow & window)
 {
 	if (isEnable)
 	{
-		if (curAction - ATTACK < 0)
+		if (curAction < ATTACK)
 			moveAnimation->render(window);
-		else if (curAction - DIE_ACTION < 0)
+		else if (curAction < DIE_ACTION)
 			attackAnimation->render(window);
 		else if (curAction == DIE_ACTION)
 			dieAnimation->render(window);
@@ -98,6 +122,10 @@ void HeroObject::render(sf::RenderWindow & window)
 
 void HeroObject::receiveMessage(Package * package)
 {
+	if (package)
+	{
+		curState->receiveMessage(package);
+	}
 }
 
 std::string HeroObject::getName()
@@ -105,38 +133,175 @@ std::string HeroObject::getName()
 	return "Bald Scalp";
 }
 
+void HeroObject::onCollistion(GameObject * object)
+{
+	sf::FloatRect* objBox = object->getCollisionBox();
+
+	if (collisionBox[0].intersects(*objBox))
+	{
+		if (knockbackClock.getElapsedTime().asSeconds() > 2)
+		{
+			if (objBox->top > collisionBox[0].top)
+				knockBackDirection = 0;
+			else if (objBox->left > collisionBox[0].left)
+				knockBackDirection = 1;
+			else if (objBox->top < collisionBox[0].top)
+				knockBackDirection = 2;
+			else
+				knockBackDirection = 3;
+
+			// knock back action
+			curActorState = KNOCKBACK;
+			curAction = (UNIT_ACTION)moveAnimation->currentTrigger();
+			moveAnimation->stop();
+			
+			switch (knockBackDirection)
+			{
+			case 0:
+				targetPos.y -= KNOCKBACK_DISTANCE * TILE_SIZE;
+				break;
+			case 1:
+				targetPos.x -= KNOCKBACK_DISTANCE * TILE_SIZE;
+				break;
+			case 2:
+				targetPos.y += KNOCKBACK_DISTANCE * TILE_SIZE;
+				break;
+			case 3:
+				targetPos.x += KNOCKBACK_DISTANCE * TILE_SIZE;
+			}
+			//TODO: change state to knockback state
+			knockbackClock.restart();
+		}
+	}
+	else if (curAction == ATTACK)
+	{
+		object->onCollistion(this);
+	}
+}
+
 void HeroObject::moveUp()
 {
-	curAction = MOVE_UP;
-	moveAnimation->trigger(MOVE_UP);
-	moveBy(0, -HERO_MOVE_SPD);
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_UP;
+		moveAnimation->trigger(MOVE_UP);
+		moveBy(0, -HERO_MOVE_SPD);
+	}
+	curCommand->finished();
 }
 
 void HeroObject::moveLeft()
 {
-	curAction = MOVE_LEFT;
-	moveAnimation->trigger(MOVE_LEFT);
-	moveBy(-HERO_MOVE_SPD, 0);
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_LEFT;
+		moveAnimation->trigger(MOVE_LEFT);
+		moveBy(-HERO_MOVE_SPD, 0);
+	}
+	curCommand->finished();
 }
 
 void HeroObject::moveDown()
 {
-	curAction = MOVE_DOWN;
-	moveAnimation->trigger(MOVE_DOWN);
-	moveBy(0, HERO_MOVE_SPD);
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_DOWN;
+		moveAnimation->trigger(MOVE_DOWN);
+		moveBy(0, HERO_MOVE_SPD);
+	}
+	curCommand->finished();
 }
 
 void HeroObject::moveRight()
 {
-	curAction = MOVE_RIGHT;
-	moveAnimation->trigger(MOVE_RIGHT);
-	moveBy(HERO_MOVE_SPD, 0);
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_RIGHT;
+		moveAnimation->trigger(MOVE_RIGHT);
+		moveBy(HERO_MOVE_SPD, 0);
+	}
+	curCommand->finished();
 }
 
 void HeroObject::attack()
 {
-	curAction = (Actor::UNIT_ACTION) (ATTACK_UP + getCurrentDirection());
-	attackAnimation->trigger(ATTACK_UP + getCurrentDirection());
+	if (curAction < ATTACK)
+	{
+		int currentDirection = getCurrentDirection();
+		curAction = (Actor::UNIT_ACTION) (ATTACK_UP + currentDirection);
+		attackAnimation->trigger(ATTACK_UP + currentDirection);
+		FORI(1, 4, i)
+		{
+			switch (currentDirection)
+			{
+			case 0:
+				collisionBox[i].top += TILE_SIZE;
+				collisionBox[i].left += (i - 2) * TILE_SIZE;
+				break;
+			case 1:
+				collisionBox[i].top += (i - 2) * TILE_SIZE;
+				collisionBox[i].left -= TILE_SIZE;
+				break;
+			case 2:
+				collisionBox[i].top -= TILE_SIZE;
+				collisionBox[i].left += (i - 2) * TILE_SIZE;
+				break;
+			case 3:
+				collisionBox[i].top += (i - 2) * TILE_SIZE;
+				collisionBox[i].left += TILE_SIZE;
+			}
+		}
+		attackClock.restart();
+	}
+	else if (curAction != DIE_ACTION)
+	{
+		if (attackClock.getElapsedTime().asMilliseconds() > HERO_ATTACK_SPD * 6)
+		{
+			curAction = (UNIT_ACTION)moveAnimation->currentTrigger();
+			moveAnimation->reset();
+			FORI(0, 4, i)
+			{
+				collisionBox[i].top = position.y, collisionBox[i].left = position.x;
+			}
+			curCommand->finished();
+		}
+	}
+}
+
+void HeroObject::knockBack()
+{
+	if (targetPos == position)
+	{
+		curActorState = NORMAL;
+		moveAnimation->go();
+		knockBackDirection = -1;
+		// TODO: change state to NORMAL
+		curCommand->finished();
+	}
+	else
+	{
+		if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY / 2)
+		{
+			switch (knockBackDirection)
+			{
+			case 0:
+				moveBy(0, -HERO_MOVE_SPD);
+				break;
+			case 1:
+				moveBy(-HERO_MOVE_SPD, 0);
+				break;
+			case 2:
+				moveBy(0, HERO_MOVE_SPD);
+				break;
+			case 3:
+				moveBy(HERO_MOVE_SPD, 0);
+				break;
+			default:
+			}
+			moveClock.restart();
+		}
+
+	}
 }
 
 void HeroObject::die()
@@ -147,23 +312,24 @@ void HeroObject::die()
 
 void HeroObject::setCurrentState(ACTOR_STATE state)
 {
-	// need istate
+	// TODO: need states
 	curActorState = state;
 }
 
 void HeroObject::setCurrentCommand(std::shared_ptr<IActorCommand> command)
 {
-	if (curCommand->isDone())
-		this->curCommand = command;
+	this->curCommand = command;
 }
 
-void HeroObject::setCurrentAnimation(UNIT_ACTION animation)
+void HeroObject::setCurrentAction(UNIT_ACTION action)
 {
-	curAction = animation;
+	curAction = action;
 }
 
 int HeroObject::getCurrentDirection()
 {
+	if (knockBackDirection != -1)
+		return knockBackDirection;
 	return moveAnimation->currentTrigger() - MOVE_UP;
 }
 

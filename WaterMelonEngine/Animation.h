@@ -19,6 +19,8 @@ public:
 	void trigger(int trigger);
 	int currentTrigger();
 
+	void reset();
+
 	// transformation
 	void move(float x, float y);
 

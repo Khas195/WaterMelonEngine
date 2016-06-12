@@ -1,5 +1,5 @@
 #include "Animation.h"
-
+#include <assert.h>
 
 
 Animation::Animation()
@@ -24,6 +24,11 @@ void Animation::trigger(int trigger)
 int Animation::currentTrigger()
 {
 	return curID;
+}
+void Animation::reset()
+{
+	assert(curID != -1);
+	sprite_map[curID].reset();
 }
 void Animation::move(float x, float y)
 {

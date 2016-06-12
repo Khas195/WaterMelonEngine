@@ -16,6 +16,7 @@ protected:
 	virtual void onDisable() {};
 	void updateChildren(sf::Event::EventType& type);
 	void renderChildren(sf::RenderWindow& window);
+	virtual bool intersect(GameObject * object);
 public:
 	GameObject() = default;
 	virtual ~GameObject();
@@ -25,6 +26,8 @@ public:
 	void disable();
 	void sleep();
 	void awake();
+	virtual void onCollistion(GameObject * object);
+	virtual sf::FloatRect * getCollisionBox();
 	void addGameObject(GameObject* gameObject);
 	void removeGameObject(GameObject* target);
 	template <typename T>
