@@ -62,11 +62,17 @@ void GameObject::updateChildren(sf::Event::EventType& type)
 
 	for (auto objA = childObjects.begin(); objA != childObjects.end(); ++objA)
 	{
-		for (auto objB = objA + 1; objB != childObjects.end(); ++objB)
+		if ((*objA)->isEnable)
 		{
-			if ((*objA)->intersect(*objB))
+			for (auto objB = objA + 1; objB != childObjects.end(); ++objB)
 			{
-				(*objA)->onCollistion(*objB);
+				if ((*objB)->isEnable)
+				{
+					if ((*objA)->intersect(*objB))
+					{
+						(*objA)->onCollistion(*objB);
+					}
+				}
 			}
 		}
 	}

@@ -7,14 +7,22 @@
 
 class HeroObject : public Actor
 {
+	sf::RectangleShape debugBox;
+	int knockBackDirection = -1;
+	sf::Vector2f targetPos;
+	sf::Clock attackClock, knockbackClock, moveClock;
+
 	sf::Vector2f position;
 
-	sf::FloatRect collisionBox[4];
+	sf::FloatRect collisionBox[2];
+
+	std::shared_ptr<IActorState> normalState;
+	std::shared_ptr<IActorState> knockbackState;
+	std::shared_ptr<IActorState> dieState;
 
 	std::unique_ptr<Animation> moveAnimation;
 	std::unique_ptr<Animation>  attackAnimation;
 	std::unique_ptr<Animation>  dieAnimation;
-
 protected:
 	virtual bool intersect(GameObject * object) override;
 public:
@@ -22,8 +30,8 @@ public:
 	~HeroObject();
 
 	virtual sf::FloatRect * getCollisionBox() override;
-	const sf::Vector2f & getPosition();
-	void setPosition(sf::Vector2f position);
+	virtual const sf::Vector2f & getPosition() override;
+	virtual void setPosition(sf::Vector2f position) override;
 	void moveBy(float x, float y);
 
 	// Inherited via GameObject
@@ -52,6 +60,5 @@ public:
 	virtual ACTOR_STATE getCurrentState() override;
 	virtual UNIT_ACTION getCurrentAction() override;
 	virtual const std::shared_ptr<IActorCommand> getCurrentCommand() override;
-
 };
 

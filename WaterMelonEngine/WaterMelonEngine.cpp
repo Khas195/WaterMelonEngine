@@ -6,11 +6,12 @@
 #include <iostream>
 
 sf::RenderWindow WaterMelonEngine::window;
+bool WaterMelonEngine::isDebug = false;
 
 WaterMelonEngine::WaterMelonEngine()
 	: timePerFrame(sf::seconds(1.f / 144.0f))
 {
-	window.create(sf::VideoMode(SCREEN_WIDTH , SCREEN_HEIGHT), "Window Name", sf::Style::Default);
+	window.create(sf::VideoMode(SCREEN_WIDTH , SCREEN_HEIGHT), "Monster Kill", sf::Style::Default);
 	window.setFramerateLimit(144); // 144.0f framerate per limit
 	DungeonScene* dungeonScene = new DungeonScene();
 	this->sceneStack.push(dungeonScene);

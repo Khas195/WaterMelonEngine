@@ -5,11 +5,11 @@
 using namespace std;
 void main()
 {
-//#if _DEBUG
-//	isDebug = true;
-//#else
-//	isDebug = false;
-//#endif
+#if _DEBUG
+	WaterMelonEngine::isDebug = true;
+#else
+	WaterMelonEngine::isDebug = false;
+#endif
 	WaterMelonEngine engine;
 	engine.loop();
 	return;

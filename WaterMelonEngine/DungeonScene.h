@@ -11,4 +11,6 @@ public:
 	virtual void onPoped() override;
 	virtual void onReturnToTop() override;
 	virtual void onPressed() override;
+
+	virtual void update(sf::Event::EventType& type) override;
 };

@@ -7,6 +7,8 @@
 #include "TextureManager.h"
 #include <assert.h>
 
+sf::RectangleShape rectangle;
+
 Map::~Map()
 {
 	FORIT(layerList, layer)
@@ -31,14 +33,18 @@ Map::Map(std::string name, std::string source, sf::Uint32 mapWidth, sf::Uint32 m
 	Map::Map(std::string name, std::string source, sf::Vector2u mapSize, sf::Vector2u tileSize)
 		: name(name), source(source), mapSize(mapSize), tileSize(tileSize)
 	{
+		rectangle.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+		rectangle.setFillColor(sf::Color::Transparent);
+		rectangle.setOutlineColor(sf::Color::White);
+		if (WaterMelonEngine::isDebug)
+			rectangle.setOutlineThickness(1);
 		this->layout.resize(mapSize.x * mapSize.y);
-		float offset = (SCREEN_WIDTH - (mapSize.x * TILE_SIZE)) / 2.0f;
 		FORI(0, mapSize.y, h)
 		{
 			FORI(0, mapSize.x, w)
 			{
 				int pos = w + h * mapSize.x;
-				this->layout[pos] = new MapTile(this, pos, sf::Vector2f(offset + w * TILE_SIZE, h * TILE_SIZE));
+				this->layout[pos] = new MapTile(this, pos, sf::Vector2f(MAP_OFFSET + w * TILE_SIZE, h * TILE_SIZE));
 			}
 		}
 	}
@@ -62,6 +68,10 @@ Map::Map(std::string name, std::string source, sf::Uint32 mapWidth, sf::Uint32 m
 	{
 		return tilesetList;
 	}
+	sf::Vector2f Map::getPosition(int x, int y)
+	{
+		return layout[x + y * mapSize.x]->getPosition();
+	}
 	void Map::update(sf::Event::EventType & type)
 	{
 		// TODO: somethign here
@@ -75,7 +85,9 @@ Map::Map(std::string name, std::string source, sf::Uint32 mapWidth, sf::Uint32 m
 				if (!(*tile)->tileset)
 					continue;
 				tileSprites[(*tile)->tilesetGid].setPosition((*mtile)->position);
+				rectangle.setPosition((*mtile)->position);
 				window.draw(tileSprites[(*tile)->tilesetGid]);
+				window.draw(rectangle);
 			}
 		}
 	}

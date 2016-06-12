@@ -11,7 +11,7 @@ class NormalState :	public IActorState
 	std::shared_ptr<IActorCommand> goDown;
 	std::shared_ptr<IActorCommand> attack;
 public:
-	NormalState(std::shared_ptr<Actor> actor);
+	NormalState(Actor * actor);
 	~NormalState();
 
 	// Inherited via IActorState

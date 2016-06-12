@@ -5,7 +5,7 @@
 #include <assert.h>
 
 
-AttackAction::AttackAction(std::shared_ptr<Actor> actor)
+AttackAction::AttackAction(/*std::shared_ptr<Actor>*/ Actor* actor)
 	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -21,7 +21,7 @@ bool AttackAction::isDone()
 	return done;
 }
 
-void AttackAction::finished()
+void AttackAction::setDone(bool done)
 {
-	done = true;
+	this->done = done;
 }

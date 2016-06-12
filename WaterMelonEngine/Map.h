@@ -43,6 +43,8 @@ class Helper;
 		const std::vector<TileLayer*> & getLayerList();
 		const std::vector<TileSet*> & getTilesetList();
 
+		sf::Vector2f getPosition(int x, int y);
+
 		// Inherited via GameObject
 		virtual void update(sf::Event::EventType& type) override;
 		virtual void render(sf::RenderWindow & window) override;

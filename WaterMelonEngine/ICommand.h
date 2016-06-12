@@ -8,10 +8,10 @@ class IActorCommand
 {
 protected:
 	bool done;
-	std::shared_ptr<Actor> actor;
+	/*std::shared_ptr<Actor>*/ Actor* actor;
 public:
-	IActorCommand(std::shared_ptr<Actor> actor);
+	IActorCommand(/*std::shared_ptr<Actor>*/ Actor* actor);
 	virtual void execute() = 0;
 	virtual bool isDone() = 0;
-	virtual void finished() = 0;
+	virtual void setDone(bool done) = 0;
 };

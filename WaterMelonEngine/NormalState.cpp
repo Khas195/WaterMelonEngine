@@ -4,13 +4,15 @@
 #include "Package.h"
 #include "MoveAction.h"
 #include "AttackAction.h"
-NormalState::NormalState(std::shared_ptr<Actor> actor) : IActorState::IActorState(actor)
+NormalState::NormalState(Actor * actor) : IActorState::IActorState(actor)
 {
 	goUp = std::make_shared<MoveUp>(actor);
 	goDown = std::make_shared<MoveDown>(actor);
 	goLeft = std::make_shared<MoveLeft>(actor);
 	goRight = std::make_shared<MoveRight>(actor);
 	attack = std::make_shared<AttackAction>(actor);
+	curActor->setCurrentCommand(goRight);
+	curActor->getCurrentCommand()->setDone(true);
 }
 
 

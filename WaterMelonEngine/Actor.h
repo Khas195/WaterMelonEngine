@@ -28,6 +28,8 @@ public:
 		ATTACK_RIGHT,
 		DIE_ACTION
 	};
+	virtual const sf::Vector2f & getPosition() = 0;
+	virtual void setPosition(sf::Vector2f position) = 0;
 
 	virtual void moveUp() = 0;
 	virtual void moveLeft() = 0;

@@ -18,6 +18,7 @@ public:
 	~WaterMelonEngine();
 
 	static const sf::RenderWindow& getWindow();
+	static bool isDebug;
 
 	void loop();
 };

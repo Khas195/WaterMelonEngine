@@ -5,7 +5,8 @@
 #include "MenuPanel.h"
 #include "HeroObject.h"
 #include "GameDirector.h"
-//#include "MonsterObject.h"
+#include "MonsterObject.h"
+#include <vector>
 
 DungeonScene::DungeonScene()
 {
@@ -14,21 +15,22 @@ DungeonScene::DungeonScene()
 	DungeonMapObject * dungeon = new DungeonMapObject();
 	MenuPanel* menu = new MenuPanel();
 	HeroObject* hero = new HeroObject();
-	//MonsterObject * monster = new MonsterObject("./sprites/darkElf/", "rouge", MONSTER_MOVE_SPD_MIN, hero);
-	hero->setPosition(sf::Vector2f(300, 300));
+	MonsterObject * monster = new MonsterObject("./sprites/darkElf/", "rouge");
+	hero->setPosition(dungeon->getMapPosition(11,7));
+	monster->setPosition(dungeon->getMapPosition(2, 3));
 	GameDirector *director = new GameDirector(this);
 
 
-	//monster->setPosition(sf::Vector2f(100, 64));
 	this->addGameObject(menu);
 	this->addGameObject(dungeon);
 	this->addGameObject(hero);
+	this->addGameObject(monster);
 	this->addGameObject(director);
-	//this->addGameObject(monster);
+
 	this->office->add(dungeon);
 	this->office->add(menu);
 	this->office->add(hero);
-	//this->office->add(monster);
+	this->office->add(monster);
 }
 
 
@@ -50,4 +52,10 @@ void DungeonScene::onReturnToTop()
 
 void DungeonScene::onPressed()
 {
+}
+
+void DungeonScene::update(sf::Event::EventType & type)
+{
+	assert(godObject);
+	godObject->update(type);
 }

@@ -2,20 +2,20 @@
 #include "TextureManager.h"
 #include "Sprite.h"
 #include "ICommand.h"
-#include "IActorState.h"
+#include "NormalState.h"
+#include "KnockBack.h"
+#include "DeadState.h"
 #include "Package.h"
+#include "WaterMelonEngine.h"
 #include <iostream>
 
-int knockBackDirection = -1;
-sf::Vector2f targetPos;
-sf::Clock attackClock, knockbackClock, moveClock;
 bool HeroObject::intersect(GameObject * object)
 {
 	if (object->getCollisionBox())
 	{
-		FOREACH(collisionBox, box)
+		for (int i = 0; i < 2; ++i)
 		{
-			if (box.intersects(*object->getCollisionBox()))
+			if (collisionBox[i].intersects(*object->getCollisionBox()))
 				return true;
 		}
 	}
@@ -23,6 +23,7 @@ bool HeroObject::intersect(GameObject * object)
 }
 HeroObject::HeroObject()
 {
+	enable();
 	int moveID = TextureManager::requestID("./sprites/hero_move.png");
 	int attackID = TextureManager::requestID("./sprites/hero_attack.png");
 	int dieID = TextureManager::requestID("./sprites/hero_die.png");
@@ -53,11 +54,24 @@ HeroObject::HeroObject()
 		attackSprite.setFixedRow(i);
 		moveAnimation->set(MOVE + i + 1, moveSprite);
 		attackAnimation->set(ATTACK + i + 1, attackSprite);
-
-		collisionBox[i] = sf::FloatRect(0, 0, TILE_SIZE, TILE_SIZE);
 	}
 
+	collisionBox[0] = collisionBox[1] = sf::FloatRect(0, 0, TILE_SIZE, TILE_SIZE);
+
+	normalState = std::make_shared<NormalState>(this);
+	knockbackState = std::make_shared<KnockBack>(this);
+	dieState = std::make_shared<DeadState>(this);
+
+	debugBox.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+	debugBox.setFillColor(sf::Color::Transparent);
+	debugBox.setOutlineColor(sf::Color::Red);
+	if(WaterMelonEngine::isDebug)
+		debugBox.setOutlineThickness(1);
+
 	// TODO: change state to NORMAL
+	curActorState = NORMAL;
+	curAction = MOVE;
+	curState = normalState;
 }
 
 
@@ -81,9 +95,9 @@ void HeroObject::setPosition(sf::Vector2f position)
 	moveAnimation->setPosition(position.x, position.y);
 	attackAnimation->setPosition(position.x - 32, position.y - 32);
 	dieAnimation->setPosition(position.x, position.y);
-	FOREACH(collisionBox, box)
+	for (int i = 0; i < 2; ++i)
 	{
-		box.left = position.x, box.top = position.y;
+		collisionBox[i].left = position.x; collisionBox[i].top = position.y;
 	}
 	targetPos = position;
 }
@@ -94,9 +108,9 @@ void HeroObject::moveBy(float x, float y)
 	moveAnimation->move(x, y);
 	attackAnimation->move(x, y);
 	dieAnimation->move(x, y);
-	FOREACH(collisionBox, box)
+	for (int i = 0; i < 2; ++i)
 	{
-		box.left += x, box.top += y;
+		collisionBox[i].left += x, collisionBox[i].top += y;
 	}
 }
 
@@ -104,6 +118,8 @@ void HeroObject::update(sf::Event::EventType & type)
 {
 	if (isEnable && isAwake)
 	{
+		if (!curCommand->isDone())
+			curCommand->execute();
 		curState->update(type);
 	}
 }
@@ -118,6 +134,15 @@ void HeroObject::render(sf::RenderWindow & window)
 			attackAnimation->render(window);
 		else if (curAction == DIE_ACTION)
 			dieAnimation->render(window);
+
+		if (WaterMelonEngine::isDebug)
+		{
+			for (int i = 0; i < 2; ++i)
+			{
+				debugBox.setPosition(sf::Vector2f(collisionBox[i].left, collisionBox[i].top));
+				window.draw(debugBox);
+			}
+		}
 	}
 }
 
@@ -142,11 +167,11 @@ void HeroObject::onCollistion(GameObject * object)
 	{
 		if (knockbackClock.getElapsedTime().asSeconds() > 2)
 		{
-			if (objBox->top > collisionBox[0].top)
+			if (objBox->top > position.y)
 				knockBackDirection = 0;
-			else if (objBox->left > collisionBox[0].left)
+			else if (objBox->left > position.x)
 				knockBackDirection = 1;
-			else if (objBox->top < collisionBox[0].top)
+			else if (objBox->top < position.y)
 				knockBackDirection = 2;
 			else
 				knockBackDirection = 3;
@@ -170,11 +195,11 @@ void HeroObject::onCollistion(GameObject * object)
 			case 3:
 				targetPos.x += KNOCKBACK_DISTANCE * TILE_SIZE;
 			}
-			//TODO: change state to knockback state
+			curState = knockbackState;
 			knockbackClock.restart();
 		}
 	}
-	else if (curAction == ATTACK)
+	else if (curAction >= ATTACK_UP && curAction <= ATTACK_RIGHT)
 	{
 		object->onCollistion(this);
 	}
@@ -187,8 +212,9 @@ void HeroObject::moveUp()
 		curAction = MOVE_UP;
 		moveAnimation->trigger(MOVE_UP);
 		moveBy(0, -HERO_MOVE_SPD);
+		moveClock.restart();
 	}
-	curCommand->finished();
+	curCommand->setDone(true);
 }
 
 void HeroObject::moveLeft()
@@ -198,8 +224,9 @@ void HeroObject::moveLeft()
 		curAction = MOVE_LEFT;
 		moveAnimation->trigger(MOVE_LEFT);
 		moveBy(-HERO_MOVE_SPD, 0);
+		moveClock.restart();
 	}
-	curCommand->finished();
+	curCommand->setDone(true);
 }
 
 void HeroObject::moveDown()
@@ -209,8 +236,9 @@ void HeroObject::moveDown()
 		curAction = MOVE_DOWN;
 		moveAnimation->trigger(MOVE_DOWN);
 		moveBy(0, HERO_MOVE_SPD);
+		moveClock.restart();
 	}
-	curCommand->finished();
+	curCommand->setDone(true);
 }
 
 void HeroObject::moveRight()
@@ -220,8 +248,9 @@ void HeroObject::moveRight()
 		curAction = MOVE_RIGHT;
 		moveAnimation->trigger(MOVE_RIGHT);
 		moveBy(HERO_MOVE_SPD, 0);
+		moveClock.restart();
 	}
-	curCommand->finished();
+	curCommand->setDone(true);
 }
 
 void HeroObject::attack()
@@ -231,26 +260,19 @@ void HeroObject::attack()
 		int currentDirection = getCurrentDirection();
 		curAction = (Actor::UNIT_ACTION) (ATTACK_UP + currentDirection);
 		attackAnimation->trigger(ATTACK_UP + currentDirection);
-		FORI(1, 4, i)
+		switch (currentDirection)
 		{
-			switch (currentDirection)
-			{
-			case 0:
-				collisionBox[i].top += TILE_SIZE;
-				collisionBox[i].left += (i - 2) * TILE_SIZE;
-				break;
-			case 1:
-				collisionBox[i].top += (i - 2) * TILE_SIZE;
-				collisionBox[i].left -= TILE_SIZE;
-				break;
-			case 2:
-				collisionBox[i].top -= TILE_SIZE;
-				collisionBox[i].left += (i - 2) * TILE_SIZE;
-				break;
-			case 3:
-				collisionBox[i].top += (i - 2) * TILE_SIZE;
-				collisionBox[i].left += TILE_SIZE;
-			}
+		case 0:
+			collisionBox[1].top -= TILE_SIZE;
+			break;
+		case 1:
+			collisionBox[1].left -= TILE_SIZE;
+			break;
+		case 2:
+			collisionBox[1].top += TILE_SIZE;
+			break;
+		case 3:
+			collisionBox[1].left += TILE_SIZE;
 		}
 		attackClock.restart();
 	}
@@ -260,11 +282,8 @@ void HeroObject::attack()
 		{
 			curAction = (UNIT_ACTION)moveAnimation->currentTrigger();
 			moveAnimation->reset();
-			FORI(0, 4, i)
-			{
-				collisionBox[i].top = position.y, collisionBox[i].left = position.x;
-			}
-			curCommand->finished();
+			collisionBox[1] = collisionBox[0];
+			curCommand->setDone(true);
 		}
 	}
 }
@@ -277,7 +296,7 @@ void HeroObject::knockBack()
 		moveAnimation->go();
 		knockBackDirection = -1;
 		// TODO: change state to NORMAL
-		curCommand->finished();
+		curCommand->setDone(true);
 	}
 	else
 	{
@@ -298,10 +317,10 @@ void HeroObject::knockBack()
 				moveBy(HERO_MOVE_SPD, 0);
 				break;
 			default:
+				break;
 			}
 			moveClock.restart();
 		}
-
 	}
 }
 
@@ -313,13 +332,25 @@ void HeroObject::die()
 
 void HeroObject::setCurrentState(ACTOR_STATE state)
 {
-	// TODO: need states
 	curActorState = state;
+	switch (state)
+	{
+	case Actor::NORMAL:
+		curState = normalState;
+		break;
+	case Actor::DIE_STATE:
+		curState = dieState;
+		break;
+	case Actor::KNOCKBACK:
+		curState = knockbackState;
+		break;
+	}
 }
 
 void HeroObject::setCurrentCommand(std::shared_ptr<IActorCommand> command)
 {
 	this->curCommand = command;
+	this->curCommand->setDone(false);
 }
 
 void HeroObject::setCurrentAction(UNIT_ACTION action)

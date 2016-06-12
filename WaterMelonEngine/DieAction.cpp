@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include <assert.h>
 
-DieAction::DieAction(std::shared_ptr<Actor> actor)
+DieAction::DieAction(/*std::shared_ptr<Actor>*/ Actor* actor)
 	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -20,7 +20,7 @@ bool DieAction::isDone()
 	return done;
 }
 
-void DieAction::finished()
+void DieAction::setDone(bool done)
 {
-	done = true;
+	this->done = done;
 }

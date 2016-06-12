@@ -1,51 +1,76 @@
 #include "MonsterObject.h"
 #include "TextureManager.h"
+#include "Sprite.h"
+#include "ICommand.h"
+#include "NormalState.h"
+#include "KnockBack.h"
+#include "DeadState.h"
+#include "Package.h"
+#include "WaterMelonEngine.h"
 #include "HeroObject.h"
 #include <iostream>
 
-void MonsterObject::onMove()
+bool MonsterObject::intersect(GameObject * object)
 {
+	if (object->getCollisionBox())
+	{
+		if (collisionBox.intersects(*object->getCollisionBox()))
+			return true;
+	}
+	return false;
 }
-
-void MonsterObject::onDie()
+MonsterObject::MonsterObject(std::string source, std::string name)
 {
-}
-
-MonsterObject::MonsterObject(std::string source, std::string name, float movementSpeed, HeroObject * enemy)
-	: enemy(enemy), movementSpeed(movementSpeed)
-{
-	isDie = false;
+	enable();
 	int moveID = TextureManager::requestID(source + name + "_move.png");
 	int dieID = TextureManager::requestID(source + name + "_die.png");
-	Sprite moveSp(TextureManager::requestTexture(moveID), sf::Vector2f(64, 64), sf::Vector2u(9, 4));
-	Sprite dieSp(TextureManager::requestTexture(dieID), sf::Vector2f(64, 64), sf::Vector2u(6, 4));
 
-	moveSp.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
-	dieSp.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
+	Sprite moveSprite(TextureManager::requestTexture(moveID), sf::Vector2f(64, 64), sf::Vector2u(9, 4));
+	Sprite dieSprite(TextureManager::requestTexture(dieID), sf::Vector2f(64, 64), sf::Vector2u(6, 1));
 
-	moveSp.setTimePerFrame(MOVE_TIME / 1000.f);
+	moveSprite.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
+	dieSprite.setScale(TILE_SIZE / 64.0f, TILE_SIZE / 64.0f);
 
-	move = new Animation();
-	die = new Animation();
-	
-	dieSp.setFixedRow(0);
-	die->set(Actor::DIE_ACTION, dieSp);
+	moveSprite.setTimePerFrame(MOVE_TIME / 1000.0f);
+	dieSprite.setTimePerFrame(DIE_TIME / 1000.0f);
+
+	moveAnimation = std::make_unique<Animation>();
+	dieAnimation = std::make_unique<Animation>();
+
+	dieSprite.setFixedRow(0);
+	dieAnimation->set(DIE_ACTION, dieSprite);
 	FORI(0, 4, i)
 	{
-		moveSp.setFixedRow(i);
-		move->set(Actor::MOVE_UP + i, moveSp);
+		moveSprite.setFixedRow(i);
+		moveAnimation->set(MOVE + i + 1, moveSprite);
 	}
+
+	collisionBox = sf::FloatRect(0, 0, TILE_SIZE, TILE_SIZE);
+
+	normalState = std::make_shared<NormalState>(this);
+	knockbackState = std::make_shared<KnockBack>(this);
+	dieState = std::make_shared<DeadState>(this);
+
+	debugBox.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
+	debugBox.setFillColor(sf::Color::Transparent);
+	debugBox.setOutlineColor(sf::Color::Blue);
+	if(WaterMelonEngine::isDebug)
+		debugBox.setOutlineThickness(1);
+
+	// TODO: change state to NORMAL
+	curActorState = NORMAL;
+	curAction = MOVE;
+	curState = normalState;
 }
+
 
 MonsterObject::~MonsterObject()
 {
-	delete move;
-	delete die;
 }
 
-const sf::FloatRect & MonsterObject::getCollisionBox()
+sf::FloatRect * MonsterObject::getCollisionBox()
 {
-	return collisionBox;
+	return &collisionBox;
 }
 
 const sf::Vector2f & MonsterObject::getPosition()
@@ -56,67 +81,183 @@ const sf::Vector2f & MonsterObject::getPosition()
 void MonsterObject::setPosition(sf::Vector2f position)
 {
 	this->position = position;
-	move->setPosition(position.x, position.y);
-	die->setPosition(position.x, position.y);
+	moveAnimation->setPosition(position.x, position.y);
+	dieAnimation->setPosition(position.x, position.y);
+	collisionBox.left = position.x; collisionBox.top = position.y;
 }
 
 void MonsterObject::moveBy(float x, float y)
 {
-	position.x += x, position.y += y;
-	move->move(x, y);
-	die->move(x, y);
+	position = position + sf::Vector2f(x, y);
+	moveAnimation->move(x, y);
+	dieAnimation->move(x, y);
+	collisionBox.left += x, collisionBox.top += y;
 }
 
 void MonsterObject::update(sf::Event::EventType & type)
 {
-	std::cout << "Monter: " << position.x << " - " << position.y << std::endl;
-	if (isDie)
+	if (isEnable && isAwake)
 	{
-		onDie();
-	}
-	else
-	{
-		sf::Vector2f enemyPos = enemy->getPosition();
-		if (enemyPos.x - position.x < 0)
-		{
-			move->trigger(Actor::MOVE_LEFT);
-			moveBy(-movementSpeed, 0);
-		}
-		else if (enemyPos.x - position.x > 0)
-		{
-			move->trigger(Actor::MOVE_RIGHT);
-			moveBy(movementSpeed, 0);
-		}
-		if (enemyPos.y - position.y < 0)
-		{
-			move->trigger(Actor::MOVE_UP);
-			moveBy(0, -movementSpeed);
-		}
-		else if (enemyPos.y - position.y > 0)
-		{
-			move->trigger(Actor::MOVE_DOWN);
-			moveBy(0, movementSpeed);
-		}
+		if (!curCommand->isDone())
+			curCommand->execute();
+		curState->update(type);
 	}
 }
 
 void MonsterObject::render(sf::RenderWindow & window)
 {
-	if (isDie)
+	if (isEnable)
 	{
-		die->render(window);
-	}
-	else
-	{
-		move->render(window);
+		if (curAction < ATTACK)
+			moveAnimation->render(window);
+		else if (curAction == DIE_ACTION)
+			dieAnimation->render(window);
+
+		if (WaterMelonEngine::isDebug)
+		{
+			debugBox.setPosition(position);
+			window.draw(debugBox);
+		}
 	}
 }
 
 void MonsterObject::receiveMessage(Package * package)
 {
+	if (package)
+	{
+		curState->receiveMessage(package);
+	}
 }
 
 std::string MonsterObject::getName()
 {
-	return std::string();
+	return "Bald Scalp";
+}
+
+void MonsterObject::onCollistion(GameObject * object)
+{
+	HeroObject* temp = dynamic_cast<HeroObject*>(object);
+	if (temp)
+	{
+		setCurrentState(DIE_STATE);
+	}
+}
+
+void MonsterObject::moveUp()
+{
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_UP;
+		moveAnimation->trigger(MOVE_UP);
+		moveBy(0, -HERO_MOVE_SPD);
+		moveClock.restart();
+	}
+	curCommand->setDone(true);
+}
+
+void MonsterObject::moveLeft()
+{
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_LEFT;
+		moveAnimation->trigger(MOVE_LEFT);
+		moveBy(-HERO_MOVE_SPD, 0);
+		moveClock.restart();
+	}
+	curCommand->setDone(true);
+}
+
+void MonsterObject::moveDown()
+{
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_DOWN;
+		moveAnimation->trigger(MOVE_DOWN);
+		moveBy(0, HERO_MOVE_SPD);
+		moveClock.restart();
+	}
+	curCommand->setDone(true);
+}
+
+void MonsterObject::moveRight()
+{
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	{
+		curAction = MOVE_RIGHT;
+		moveAnimation->trigger(MOVE_RIGHT);
+		moveBy(HERO_MOVE_SPD, 0);
+		moveClock.restart();
+	}
+	curCommand->setDone(true);
+}
+
+void MonsterObject::attack()
+{
+}
+
+void MonsterObject::knockBack()
+{
+}
+
+void MonsterObject::die()
+{
+	if (curAction != DIE_ACTION)
+	{
+		curAction = DIE_ACTION;
+		dieAnimation->trigger(DIE_ACTION);
+		moveClock.restart();
+	}
+	else
+	{
+		if (moveClock.getElapsedTime().asMilliseconds() >= DIE_TIME * 6)
+		{
+			curCommand->setDone(true);
+			disable();
+		}
+	}
+}
+
+void MonsterObject::setCurrentState(ACTOR_STATE state)
+{
+	curActorState = state;
+	switch (state)
+	{
+	case Actor::NORMAL:
+		curState = normalState;
+		break;
+	case Actor::DIE_STATE:
+		curState = dieState;
+		break;
+	}
+}
+
+void MonsterObject::setCurrentCommand(std::shared_ptr<IActorCommand> command)
+{
+	this->curCommand = command;
+	this->curCommand->setDone(false);
+}
+
+void MonsterObject::setCurrentAction(UNIT_ACTION action)
+{
+	curAction = action;
+}
+
+int MonsterObject::getCurrentDirection()
+{
+	return moveAnimation->currentTrigger() - MOVE_UP;
+}
+
+Actor::ACTOR_STATE MonsterObject::getCurrentState()
+{
+	return curActorState;
+}
+
+Actor::UNIT_ACTION MonsterObject::getCurrentAction()
+{
+	return curAction;
+}
+
+const std::shared_ptr<IActorCommand> MonsterObject::getCurrentCommand()
+{
+	return curCommand;
 }
