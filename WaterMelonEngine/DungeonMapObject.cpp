@@ -36,6 +36,11 @@ sf::Vector2f DungeonMapObject::getMapPosition(int x, int y)
 	return map->getPosition(x, y);
 }
 
+std::vector<sf::Vector2i> DungeonMapObject::getSpawner()
+{
+	return map->getSpawner();
+}
+
 void DungeonMapObject::update(sf::Event::EventType & type)
 {
 }

@@ -16,6 +16,7 @@ public:
 
 	sf::Vector2f getMapPosition(int x, int y);
 
+	std::vector<sf::Vector2i> getSpawner();
 	// Inherited via GameObject
 	virtual void render(sf::RenderWindow & window) override;
 	virtual void update(sf::Event::EventType& type) override;

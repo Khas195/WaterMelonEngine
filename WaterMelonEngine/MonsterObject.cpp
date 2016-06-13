@@ -2,10 +2,12 @@
 #include "TextureManager.h"
 #include "Sprite.h"
 #include "ICommand.h"
-#include "NormalState.h"
+#include "MonsterNormalState.h"
 #include "KnockBack.h"
 #include "DeadState.h"
+#include "PostOffice.h"
 #include "Package.h"
+#include "PackageManager.h"
 #include "WaterMelonEngine.h"
 #include "HeroObject.h"
 #include <iostream>
@@ -19,7 +21,8 @@ bool MonsterObject::intersect(GameObject * object)
 	}
 	return false;
 }
-MonsterObject::MonsterObject(std::string source, std::string name)
+MonsterObject::MonsterObject(std::string source, std::string name, HeroObject * hero)
+	: hero(hero)
 {
 	enable();
 	int moveID = TextureManager::requestID(source + name + "_move.png");
@@ -47,8 +50,7 @@ MonsterObject::MonsterObject(std::string source, std::string name)
 
 	collisionBox = sf::FloatRect(0, 0, TILE_SIZE, TILE_SIZE);
 
-	normalState = std::make_shared<NormalState>(this);
-	knockbackState = std::make_shared<KnockBack>(this);
+	normalState = std::make_shared<MonsterNormalState>(this);
 	dieState = std::make_shared<DeadState>(this);
 
 	debugBox.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
@@ -58,9 +60,7 @@ MonsterObject::MonsterObject(std::string source, std::string name)
 		debugBox.setOutlineThickness(1);
 
 	// TODO: change state to NORMAL
-	curActorState = NORMAL;
-	curAction = MOVE;
-	curState = normalState;
+	setCurrentState(NORMAL);
 }
 
 
@@ -125,7 +125,9 @@ void MonsterObject::receiveMessage(Package * package)
 {
 	if (package)
 	{
-		curState->receiveMessage(package);
+		if (package->get<bool>("end"))
+			disable();
+		//curState->receiveMessage(package);
 	}
 }
 
@@ -136,16 +138,35 @@ std::string MonsterObject::getName()
 
 void MonsterObject::onCollistion(GameObject * object)
 {
-	HeroObject* temp = dynamic_cast<HeroObject*>(object);
-	if (temp)
+	MonsterObject* temp = dynamic_cast<MonsterObject*>(object);
+	if (dynamic_cast<HeroObject*>(object))
 	{
 		setCurrentState(DIE_STATE);
+	}
+	else if (temp && temp->getCurrentState() != DIE_STATE)
+	{
+		switch (curAction)
+		{
+		case Actor::MOVE_UP:
+			moveBy(0, HERO_MOVE_SPD);
+			break;
+		case Actor::MOVE_LEFT:
+			moveBy(HERO_MOVE_SPD, 0);
+			break;
+		case Actor::MOVE_DOWN:
+			moveBy(0, -HERO_MOVE_SPD);
+			break;
+		case Actor::MOVE_RIGHT:
+			moveBy(-HERO_MOVE_SPD, 0);
+		default:
+			break;
+		}
 	}
 }
 
 void MonsterObject::moveUp()
 {
-	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY * 2)
 	{
 		curAction = MOVE_UP;
 		moveAnimation->trigger(MOVE_UP);
@@ -157,7 +178,7 @@ void MonsterObject::moveUp()
 
 void MonsterObject::moveLeft()
 {
-	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY * 2)
 	{
 		curAction = MOVE_LEFT;
 		moveAnimation->trigger(MOVE_LEFT);
@@ -169,7 +190,7 @@ void MonsterObject::moveLeft()
 
 void MonsterObject::moveDown()
 {
-	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY * 2)
 	{
 		curAction = MOVE_DOWN;
 		moveAnimation->trigger(MOVE_DOWN);
@@ -181,7 +202,7 @@ void MonsterObject::moveDown()
 
 void MonsterObject::moveRight()
 {
-	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY)
+	if (moveClock.getElapsedTime().asMilliseconds() > MOVE_TIME_DELAY * 2)
 	{
 		curAction = MOVE_RIGHT;
 		moveAnimation->trigger(MOVE_RIGHT);
@@ -205,7 +226,14 @@ void MonsterObject::die()
 	{
 		curAction = DIE_ACTION;
 		dieAnimation->trigger(DIE_ACTION);
-		moveClock.restart();
+		moveClock.restart();		
+		PackageManager * pm = PackageManager::getInstance();
+		Package * p = pm->requestPackage();
+		bool dead = true;
+		p->put<bool>("menu", &dead);
+		p->put<bool>("score", &dead);
+		office->notifyAllObserver(p);
+		pm->returnPackage(p);
 	}
 	else
 	{
@@ -260,4 +288,14 @@ Actor::UNIT_ACTION MonsterObject::getCurrentAction()
 const std::shared_ptr<IActorCommand> MonsterObject::getCurrentCommand()
 {
 	return curCommand;
+}
+
+sf::Vector2f MonsterObject::getHeroPosition()
+{
+	return hero->getPosition();
+}
+
+void MonsterObject::onEnable()
+{
+	setCurrentState(NORMAL);
 }

@@ -7,6 +7,7 @@
 
 class HeroObject : public Actor
 {
+	int HP = 14;
 	sf::RectangleShape debugBox;
 	int knockBackDirection = -1;
 	sf::Vector2f targetPos;
@@ -60,5 +61,7 @@ public:
 	virtual ACTOR_STATE getCurrentState() override;
 	virtual UNIT_ACTION getCurrentAction() override;
 	virtual const std::shared_ptr<IActorCommand> getCurrentCommand() override;
+
+	virtual void onEnable() override;
 };
 

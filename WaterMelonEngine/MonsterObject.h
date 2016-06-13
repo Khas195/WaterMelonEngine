@@ -5,8 +5,11 @@
 #include <memory>
 #include <vector>
 
+class HeroObject;
 class MonsterObject : public Actor
 {
+	HeroObject * hero;
+
 	sf::RectangleShape debugBox;
 	sf::Clock moveClock;
 	
@@ -15,7 +18,6 @@ class MonsterObject : public Actor
 	sf::FloatRect collisionBox;
 
 	std::shared_ptr<IActorState> normalState;
-	std::shared_ptr<IActorState> knockbackState;
 	std::shared_ptr<IActorState> dieState;
 
 	std::unique_ptr<Animation> moveAnimation;
@@ -23,7 +25,7 @@ class MonsterObject : public Actor
 protected:
 	virtual bool intersect(GameObject * object) override;
 public:
-	MonsterObject(std::string source, std::string name);
+	MonsterObject(std::string source, std::string name, HeroObject * hero);
 	~MonsterObject();
 
 	virtual sf::FloatRect * getCollisionBox() override;
@@ -57,5 +59,8 @@ public:
 	virtual ACTOR_STATE getCurrentState() override;
 	virtual UNIT_ACTION getCurrentAction() override;
 	virtual const std::shared_ptr<IActorCommand> getCurrentCommand() override;
+
+	sf::Vector2f getHeroPosition();
+	virtual void onEnable() override;
 };
 

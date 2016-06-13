@@ -48,6 +48,52 @@ Map::Map(std::string name, std::string source, sf::Uint32 mapWidth, sf::Uint32 m
 			}
 		}
 	}
+	std::vector<MapTile*> Map::getNeighbour(MapTile * tile)
+	{
+		std::vector<MapTile*> result;
+
+		if (tile->mapGid - mapSize.x >= 0)
+		{
+			result.push_back(layout[tile->mapGid - mapSize.x]);
+		}
+		if (tile->mapGid + mapSize.x < layout.size())
+		{
+			result.push_back(layout[tile->mapGid + mapSize.x]);
+		}
+		if (tile->mapGid % mapSize.x != 0)
+		{
+			result.push_back(layout[tile->mapGid - 1]);
+		}
+		if ((tile->mapGid + 1) % mapSize.x != 0)
+		{
+			result.push_back(layout[tile->mapGid + 1]);
+		}
+
+		return result;
+	}
+	std::vector<sf::Vector2i> Map::getSpawner()
+	{
+		std::vector<sf::Vector2i> result;
+		FORI(0, mapSize.y, h)
+		{
+			FORI(0, mapSize.x, w)
+			{
+				int pos = w + h * mapSize.x;
+				if (layout[pos]->getState() == SPAWN)
+				{
+					if (h == 0)
+						result.push_back(sf::Vector2i(w, 1));
+					else if (h == mapSize.y - 1)
+						result.push_back(sf::Vector2i(w, h - 1));
+					else if (w == 0)
+						result.push_back(sf::Vector2i(1, h));
+					else if (w == mapSize.x - 1)
+						result.push_back(sf::Vector2i(w - 1, h));
+				}
+			}
+		}
+		return result;			 
+	}
 	void Map::addLayer(TileLayer* layer)
 	{
 		this->layerList.push_back(layer);

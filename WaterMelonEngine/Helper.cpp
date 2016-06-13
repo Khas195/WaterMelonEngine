@@ -163,49 +163,47 @@ Map * Helper::LoadMapFromSource(std::string source, std::string name)
 
 	return result;
 }
-
+//
 //class Path
 //{
-//	sf::Uint32 lastStep;
+//	MapTile* lastStep;
 //	Path* previousSteps;
 //	double totalCost, estimatedCost;
 //public:
-//	Path(sf::Uint32 lastStep, Path* previousSteps, double totalCost, double estimate)
+//	Path(MapTile* lastStep, Path* previousSteps, double totalCost, double estimate)
 //	{
 //		this->lastStep = lastStep;
 //		this->previousSteps = previousSteps;
 //		this->totalCost = totalCost;
 //		this->estimatedCost = totalCost + estimate;
 //	}
-//	Path(sf::Uint32 start) : Path(start, NULL, 0, 0) {};
-//	Path* addStep(sf::Uint32 step, double stepCost, double estimate)
+//	Path(MapTile* start) : Path(start, NULL, 0, 0) {};
+//	Path* addStep(MapTile* step, double stepCost, double estimate)
 //	{
 //		return new Path(step, this, totalCost + stepCost, estimate);
 //	}
 //
 //	// get properities
-//	sf::Uint32 getLastStep() { return lastStep; }
+//	MapTile* getLastStep() { return lastStep; }
 //	Path* getPreviousSteps() { return previousSteps; }
 //	double getTotalCost() { return totalCost; }
 //
 //	double operator()() { return estimatedCost; }
 //};
-
 //
-//std::vector<sf::Uint32> Helper::getRoad(Map & map, sf::Uint32 moveWidth, sf::Uint32 start, sf::Uint32 end)
+//int Helper::nextDirection(Map & map, sf::Vector2i startPos, sf::Vector2i endPos)
 //{
-//	std::unordered_map<sf::Uint32, bool> closed;
+//	std::unordered_map<MapTile*, bool> closed;
 //	std::priority_queue<Path*, std::vector<Path*>, std::less<Path>> queue;
-//	TileLayer layer = map.layerList.back();
 //
-//	Tile* start = &layer[s];
-//	Tile* end = &layer[e];
-//	if (end->state == OCCUPIED)
-//		return std::vector<sf::Uint32>();
+//	MapTile start = map.getTile((startPos.x - MAP_OFFSET) / TILE_SIZE, startPos.y / TILE_SIZE);
+//	MapTile end = map.getTile((endPos.x - MAP_OFFSET) / TILE_SIZE, endPos.y / TILE_SIZE);
+//	if (end.state == OCCUPIED)
+//		return -1;
 //
-//	queue.push(new Path(s));
+//	queue.push(new Path(&start));
 //
-//	double ex = end->position.x, ey = end->position.y;
+//	double ex = end.position.x, ey = end.position.y;
 //	while (!queue.empty())
 //	{
 //		Path *p = queue.top();
@@ -213,18 +211,43 @@ Map * Helper::LoadMapFromSource(std::string source, std::string name)
 //
 //		if (closed.count(p->getLastStep()))
 //			continue;
-//		if (e == p->getLastStep())
+//		if (&end == p->getLastStep())
 //		{
 //			Path* cur = p, *temp;
-//			std::vector<sf::Uint32> path;
-//			// TODO generator result
-//			return path;
+//			int gid = 0;
+//			while (cur->getPreviousSteps())
+//			{
+//				if (cur->getPreviousSteps()->getPreviousSteps())
+//				{
+//					temp = cur;
+//					cur = cur->getPreviousSteps();
+//					delete temp;
+//				}
+//				else
+//				{
+//					gid = cur->getLastStep()->mapGid - start.mapGid;
+//					temp = cur;
+//					cur = cur->getPreviousSteps();
+//					delete temp;
+//					delete cur;
+//					break;
+//				}
+//			}
+//
+//			if (gid == -1)
+//				return 1;
+//			else if (gid > 1)
+//				return 2;
+//			else if (gid == 1)
+//				return 3;
+//			return 0;
 //		}
 //		closed[p->getLastStep()] = true;
 //
-//		FORIT(layer[p->getLastStep()].neighbour, n)
+//		std::vector<MapTile*> neighbours = map.getNeighbour(p->getLastStep());
+//		FORIT(neighbours, n)
 //		{
-//			double move = (moveWidth + (*n)->state);
+//			double move = (1 + (*n)->state);
 //			if (move <= 0)
 //				continue;
 //			double distance = move * TILE_SIZE, nx = (*n)->position.x, ny = (*n)->position.y;

@@ -94,6 +94,9 @@
     <ClCompile Include="MonsterObject.cpp">
       <Filter>MonsterKill\Actor</Filter>
     </ClCompile>
+    <ClCompile Include="MonsterNormalState.cpp">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IState.h" />
@@ -204,6 +207,9 @@
     </ClInclude>
     <ClInclude Include="MonsterObject.h">
       <Filter>MonsterKill\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterNormalState.h">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

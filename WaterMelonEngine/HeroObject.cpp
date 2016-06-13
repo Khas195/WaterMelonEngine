@@ -6,6 +6,7 @@
 #include "KnockBack.h"
 #include "DeadState.h"
 #include "Package.h"
+#include "PostOffice.h"
 #include "WaterMelonEngine.h"
 #include <iostream>
 
@@ -69,9 +70,7 @@ HeroObject::HeroObject()
 		debugBox.setOutlineThickness(1);
 
 	// TODO: change state to NORMAL
-	curActorState = NORMAL;
-	curAction = MOVE;
-	curState = normalState;
+	setCurrentState(NORMAL);
 }
 
 
@@ -150,6 +149,12 @@ void HeroObject::receiveMessage(Package * package)
 {
 	if (package)
 	{
+		if (package->get<bool>("restart"))
+		{
+			HP = 14;
+			curActorState = NORMAL;
+			setCurrentState(NORMAL);
+		}
 		curState->receiveMessage(package);
 	}
 }
@@ -167,36 +172,55 @@ void HeroObject::onCollistion(GameObject * object)
 	{
 		if (knockbackClock.getElapsedTime().asSeconds() > 2)
 		{
-			if (objBox->top > position.y)
-				knockBackDirection = 0;
-			else if (objBox->left > position.x)
-				knockBackDirection = 1;
-			else if (objBox->top < position.y)
-				knockBackDirection = 2;
-			else
-				knockBackDirection = 3;
+			//if (objBox->top > position.y)
+			//	knockBackDirection = 0;
+			//else if (objBox->left > position.x)
+			//	knockBackDirection = 1;
+			//else if (objBox->top < position.y)
+			//	knockBackDirection = 2;
+			//else
+			//	knockBackDirection = 3;
 
-			// knock back action
-			curActorState = KNOCKBACK;
-			curAction = (UNIT_ACTION)moveAnimation->currentTrigger();
-			moveAnimation->stop();
-			
-			switch (knockBackDirection)
+			//// knock back action
+			//curAction = (UNIT_ACTION)moveAnimation->currentTrigger();
+			//moveAnimation->stop();
+			//
+			//switch (knockBackDirection)
+			//{
+			//case 0:
+			//	targetPos.y -= KNOCKBACK_DISTANCE * TILE_SIZE;
+			//	break;
+			//case 1:
+			//	targetPos.x -= KNOCKBACK_DISTANCE * TILE_SIZE;
+			//	break;
+			//case 2:
+			//	targetPos.y += KNOCKBACK_DISTANCE * TILE_SIZE;
+			//	break;
+			//case 3:
+			//	targetPos.x += KNOCKBACK_DISTANCE * TILE_SIZE;
+			//}
+
+			//setCurrentState(KNOCKBACK);
+			Actor * temp = dynamic_cast<Actor*>(object);
+			if (temp && temp->getCurrentState() != DIE_STATE)
 			{
-			case 0:
-				targetPos.y -= KNOCKBACK_DISTANCE * TILE_SIZE;
-				break;
-			case 1:
-				targetPos.x -= KNOCKBACK_DISTANCE * TILE_SIZE;
-				break;
-			case 2:
-				targetPos.y += KNOCKBACK_DISTANCE * TILE_SIZE;
-				break;
-			case 3:
-				targetPos.x += KNOCKBACK_DISTANCE * TILE_SIZE;
+				--HP;
+				if (HP < 0)
+				{
+					setCurrentState(DIE_STATE);
+				}
+				else
+				{
+					PackageManager * pm = PackageManager::getInstance();
+					Package * p = pm->requestPackage();
+					bool b = true;
+					p->put<bool>("menu", &b);
+					p->put<bool>("HP", &b);
+					office->notifyAllObserver(p);
+					pm->returnPackage(p);
+					knockbackClock.restart();
+				}
 			}
-			curState = knockbackState;
-			knockbackClock.restart();
 		}
 	}
 	else if (curAction >= ATTACK_UP && curAction <= ATTACK_RIGHT)
@@ -295,8 +319,9 @@ void HeroObject::knockBack()
 		curActorState = NORMAL;
 		moveAnimation->go();
 		knockBackDirection = -1;
-		// TODO: change state to NORMAL
+		setCurrentState(NORMAL);
 		curCommand->setDone(true);
+		knockbackClock.restart();
 	}
 	else
 	{
@@ -326,8 +351,26 @@ void HeroObject::knockBack()
 
 void HeroObject::die()
 {
-	curAction = DIE_ACTION;
-	dieAnimation->trigger(DIE_ACTION);
+	if (curAction != DIE_ACTION)
+	{
+		curAction = DIE_ACTION;
+		dieAnimation->trigger(DIE_ACTION);
+		moveClock.restart();
+	}
+	else
+	{
+		if (moveClock.getElapsedTime().asMilliseconds() > DIE_TIME * 6)
+		{
+			curCommand->setDone(true);
+			dieAnimation->stop();
+			PackageManager * pm = PackageManager::getInstance();
+			Package * p = pm->requestPackage();
+			bool theEnd = true;
+			p->put<bool>("end", &theEnd);
+			office->notifyAllObserver(p);
+			pm->returnPackage(p);
+		}
+	}
 }
 
 void HeroObject::setCurrentState(ACTOR_STATE state)
@@ -378,4 +421,10 @@ Actor::UNIT_ACTION HeroObject::getCurrentAction()
 const std::shared_ptr<IActorCommand> HeroObject::getCurrentCommand()
 {
 	return curCommand;
+}
+
+void HeroObject::onEnable()
+{
+	HP = 14;
+	setCurrentState(NORMAL);
 }
