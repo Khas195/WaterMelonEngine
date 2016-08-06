@@ -6,6 +6,7 @@
 #include "Animation.h"
 class MenuPanel : public GameObject
 {
+	sf::Clock clickDelay;
 	sf::Font font;
 	Sprite* background;
 	Sprite* corner;
@@ -13,9 +14,11 @@ class MenuPanel : public GameObject
 	sf::Vector2f pos;
 	sf::Vector2f size;
 	sf::RectangleShape avatarBox;
+	sf::RectangleShape buttonBox;
 	Animation avatar;
 	StatisticBox* health;
 	StatisticBox* score;
+	StatisticBox* button;
 	std::string HP;
 	int scoreVal;
 public:

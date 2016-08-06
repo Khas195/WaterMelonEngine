@@ -37,11 +37,15 @@ class Helper;
 		Map(std::string name, std::string source, sf::Uint32 mapWidth, sf::Uint32 mapHeight, sf::Uint32 tileWidth, sf::Uint32 tileHeight);
 		Map(std::string name, std::string source, sf::Vector2u mapSize, sf::Vector2u tileSize);
 
+		std::vector<MapTile*> getNeighbour(MapTile* tile);
+		std::vector<sf::Vector2i> getSpawner();
 		void addLayer(TileLayer * layer);
 		void addTileset(TileSet * tileset);
 		const std::vector<MapTile*> & allTiles();
 		const std::vector<TileLayer*> & getLayerList();
 		const std::vector<TileSet*> & getTilesetList();
+
+		sf::Vector2f getPosition(int x, int y);
 
 		// Inherited via GameObject
 		virtual void update(sf::Event::EventType& type) override;

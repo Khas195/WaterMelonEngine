@@ -6,7 +6,7 @@ class DeadState : public IActorState
 {
 	std::shared_ptr<IActorCommand> die;
 public:
-	DeadState(std::shared_ptr<Actor> actor);
+	DeadState(Actor * actor);
 	~DeadState();
 
 	// Inherited via IActorState

@@ -4,7 +4,7 @@
 #include "Actor.h"
 #include <assert.h>
 
-MoveUp::MoveUp(std::shared_ptr<Actor> actor)
+MoveUp::MoveUp(/*std::shared_ptr<Actor>*/ Actor* actor)
 	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -20,13 +20,13 @@ bool MoveUp::isDone()
 	return done;
 }
 
-void MoveUp::finished()
+void MoveUp::setDone(bool done)
 {
-	done = true;
+	this->done = done;
 }
 
 
-MoveLeft::MoveLeft(std::shared_ptr<Actor>actor)
+MoveLeft::MoveLeft(/*std::shared_ptr<Actor>*/ Actor*actor)
 	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -42,12 +42,12 @@ bool MoveLeft::isDone()
 	return done;
 }
 
-void MoveLeft::finished()
+void MoveLeft::setDone(bool done)
 {
-	done = true;
+	this->done = done;
 }
 
-MoveDown::MoveDown(std::shared_ptr<Actor> actor)
+MoveDown::MoveDown(/*std::shared_ptr<Actor>*/ Actor* actor)
 	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -63,12 +63,12 @@ bool MoveDown::isDone()
 	return done;
 }
 
-void MoveDown::finished()
+void MoveDown::setDone(bool done)
 {
-	done = true;
+	this->done = done;
 }
 
-MoveRight::MoveRight(std::shared_ptr<Actor> actor)
+MoveRight::MoveRight(/*std::shared_ptr<Actor>*/ Actor* actor)
 	: IActorCommand(actor)
 {
 	assert(actor != nullptr);
@@ -84,7 +84,7 @@ bool MoveRight::isDone()
 	return done;
 }
 
-void MoveRight::finished()
+void MoveRight::setDone(bool done)
 {
-	done = true;
+	this->done = done;
 }

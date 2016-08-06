@@ -5,7 +5,8 @@ class KnockBack : public IActorState
 {
 	std::shared_ptr<IActorCommand> knockBack;
 public:
-	KnockBack(std::shared_ptr<Actor> actor);
+	//KnockBack(/*std::shared_ptr<Actor>*/ Actor* actor);
+	KnockBack(Actor * actor);
 	~KnockBack();
 
 	// Inherited via IActorState

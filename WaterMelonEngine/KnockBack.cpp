@@ -2,7 +2,7 @@
 #include "Actor.h"
 #include "ICommand.h"
 
-KnockBack::KnockBack(std::shared_ptr<Actor> actor) : IActorState(actor)
+KnockBack::KnockBack(Actor * actor) : IActorState(actor)
 {
 }
 

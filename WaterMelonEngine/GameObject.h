@@ -8,15 +8,17 @@ class GameObject : public  BaseObject, public IObserver
 	sf::Transform* transform;
 	std::vector<GameObject*> childObjects;
 protected:
-	bool isEnable;
-	bool isAwake;
 	virtual void onAwake() {};
 	virtual void onSleep() {};
-	virtual void onEnable() {};
+	//virtual void onEnable() {};
 	virtual void onDisable() {};
 	void updateChildren(sf::Event::EventType& type);
 	void renderChildren(sf::RenderWindow& window);
+	virtual bool intersect(GameObject * object);
 public:
+	bool isEnable;
+	bool isAwake;
+	virtual void onEnable() {};
 	GameObject() = default;
 	virtual ~GameObject();
 	// Inherited via BaseObject
@@ -25,6 +27,8 @@ public:
 	void disable();
 	void sleep();
 	void awake();
+	virtual void onCollistion(GameObject * object);
+	virtual sf::FloatRect * getCollisionBox();
 	void addGameObject(GameObject* gameObject);
 	void removeGameObject(GameObject* target);
 	template <typename T>

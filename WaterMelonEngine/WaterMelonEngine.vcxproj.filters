@@ -70,9 +70,6 @@
     <ClCompile Include="MoveAction.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
-    <ClCompile Include="MonsterObject.cpp">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClCompile>
     <ClCompile Include="ICommand.cpp">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClCompile>
@@ -93,6 +90,12 @@
     </ClCompile>
     <ClCompile Include="StartGame.cpp">
       <Filter>GameObject\GameDirector</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterObject.cpp">
+      <Filter>MonsterKill\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MonsterNormalState.cpp">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -172,9 +175,6 @@
     <ClInclude Include="MoveAction.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
-    <ClInclude Include="MonsterObject.h">
-      <Filter>MonsterKill\DungeonObject</Filter>
-    </ClInclude>
     <ClInclude Include="ICommand.h">
       <Filter>MonsterKill\Actor\Command</Filter>
     </ClInclude>
@@ -204,6 +204,12 @@
     </ClInclude>
     <ClInclude Include="StartGame.h">
       <Filter>GameObject\GameDirector</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterObject.h">
+      <Filter>MonsterKill\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MonsterNormalState.h">
+      <Filter>MonsterKill\Actor\IActorState</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
